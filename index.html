@@ -8,22 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            400: '#38bdf8',
-                            500: '#06b6d4',
-                            600: '#0284c7',
-                            900: '#0b1329',
-                            950: '#030712'
+                        academic: {
+                            bg: '#0a0d14',
+                            card: '#121723',
+                            border: '#1e2638',
+                            accent: '#38bdf8',
+                            muted: '#94a3b8'
                         }
                     }
                 }
@@ -32,394 +32,226 @@
     </script>
     <style>
         body {
-            background-color: #030712;
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
-            background-attachment: fixed;
+            background-color: #0a0d14;
+            color: #cbd5e1;
         }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+        .academic-link {
+            transition: all 0.2s ease;
         }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .glass-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
-            background: rgba(15, 23, 42, 0.75);
-        }
-        .waveform-bar {
-            animation: pulse 1.5s ease-in-out infinite alternate;
-        }
-        @keyframes pulse {
-            0% { transform: scaleY(0.3); }
-            100% { transform: scaleY(1); }
+        .academic-link:hover {
+            color: #38bdf8;
+            border-color: #38bdf8;
         }
     </style>
 </head>
-<body class="text-slate-200 font-sans antialiased selection:bg-sky-500 selection:text-black">
+<body class="font-sans antialiased selection:bg-sky-500 selection:text-black leading-relaxed">
 
-    <!-- Header Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/60">
+    <!-- Top Sticky Header -->
+    <header class="sticky top-0 z-50 bg-[#0a0d14]/90 backdrop-blur-md border-b border-academic-border">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
-                <span class="text-sky-400 font-mono">&lt;MS&gt;</span> Manya Singh
+            <a href="#" class="font-bold text-white tracking-tight text-lg hover:text-sky-400 transition">
+                Manya Singh
             </a>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+            <nav class="flex space-x-6 text-sm font-medium text-slate-400">
                 <a href="#about" class="hover:text-sky-400 transition">About</a>
-                <a href="#research" class="hover:text-sky-400 transition">Research & Labs</a>
+                <a href="#news" class="hover:text-sky-400 transition">News</a>
                 <a href="#publications" class="hover:text-sky-400 transition">Publications</a>
                 <a href="#projects" class="hover:text-sky-400 transition">Projects</a>
+                <a href="#experience" class="hover:text-sky-400 transition">Experience</a>
                 <a href="#contact" class="hover:text-sky-400 transition">Contact</a>
-            </div>
-            <a href="mailto:your.email@example.com" class="px-4 py-2 text-xs font-semibold rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 transition flex items-center gap-2">
-                <i class="fa-regular fa-paper-plane"></i> Get in Touch
-            </a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center pt-28 pb-16 px-6 max-w-6xl mx-auto">
-        <div class="grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel text-sky-400 text-xs font-mono mb-6 border border-sky-500/20">
-                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
-                    Speech Signal Processing • Acoustic Analysis • LLMs & RAG
+    <!-- Main Content Container (Academic 2-Column Sidebar Layout) -->
+    <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left Sidebar: Profile Card & Quick Info -->
+        <aside class="lg:col-span-4">
+            <div class="sticky top-24 space-y-6">
+                <!-- Avatar / Info Box -->
+                <div class="bg-academic-card border border-academic-border p-6 rounded-xl">
+                    <div class="w-32 h-32 mx-auto rounded-full bg-slate-800 border-2 border-academic-accent/40 flex items-center justify-center text-sky-400 text-4xl font-mono mb-4">
+                        MS
+                    </div>
+                    <h1 class="text-2xl font-bold text-white text-center">Manya Singh</h1>
+                    <p class="text-sky-400 text-xs font-mono text-center mt-1">AI/ML & Speech Signal Researcher</p>
+                    <p class="text-slate-400 text-xs text-center mt-2">M.Sc. IT Student @ DA-IICT</p>
+
+                    <hr class="border-academic-border my-5">
+
+                    <!-- Social / Academic Links -->
+                    <div class="space-y-2 text-xs font-mono">
+                        <a href="mailto:your.email@example.com" class="flex items-center gap-3 text-slate-300 hover:text-sky-400 transition p-2 rounded hover:bg-slate-800/50">
+                            <i class="fa-regular fa-envelope text-sky-400 w-4"></i> Email / Contact
+                        </a>
+                        <a href="https://github.com" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-sky-400 transition p-2 rounded hover:bg-slate-800/50">
+                            <i class="fa-brands fa-github text-sky-400 w-4"></i> GitHub
+                        </a>
+                        <a href="https://scholar.google.com" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-sky-400 transition p-2 rounded hover:bg-slate-800/50">
+                            <i class="fa-solid fa-graduation-cap text-sky-400 w-4"></i> Google Scholar
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-sky-400 transition p-2 rounded hover:bg-slate-800/50">
+                            <i class="fa-brands fa-linkedin text-sky-400 w-4"></i> LinkedIn
+                        </a>
+                    </div>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                    Manya Singh
-                </h1>
-                <h2 class="text-xl md:text-3xl font-medium text-slate-400 mt-2">
-                    AI/ML Researcher & Graduate Engineer
+
+                <!-- Research Interests Card -->
+                <div class="bg-academic-card border border-academic-border p-6 rounded-xl">
+                    <h3 class="text-xs font-mono uppercase tracking-wider text-sky-400 mb-3">Research Focus</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 font-light">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-sky-400 text-[10px]"></i> Acoustic Speech Processing ($F_0$, VSA)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-sky-400 text-[10px]"></i> Multilingual Speech Datasets</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-sky-400 text-[10px]"></i> LLM Fine-Tuning & RAG Systems</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-sky-400 text-[10px]"></i> Full-Stack AI Engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Main Column -->
+        <section class="lg:col-span-8 space-y-16">
+            
+            <!-- Biography / About -->
+            <div id="about" class="space-y-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight border-b border-academic-border pb-3">
+                    Biography
                 </h2>
-                <p class="text-slate-300 mt-6 text-base md:text-lg leading-relaxed max-w-2xl font-light">
-                    Focused on computational speech science, acoustic feature extraction, and neural language models. Exploring the intersections of speech signal modeling, multilingual representations, and Retrieval-Augmented Generation (RAG).
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    I am a Master’s student at Dhirubhai Ambani University (DA-IICT) conducting research in speech signal processing, acoustic representations, and natural language processing. My work focuses on computational speech science—specifically automated acoustic segmentation, fundamental frequency ($F_0$) trajectory extraction, and Vowel Space Area (VSA) geometric metrics across multilingual datasets.
                 </p>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Alongside fundamental speech acoustics, I explore applied Generative AI systems, including Retrieval-Augmented Generation (RAG) architectures, vector embeddings, and modular full-stack deployments using PyTorch, React, and Streamlit.
+                </p>
+            </div>
 
-                <!-- Audio Visualizer Decorative Accent -->
-                <div class="mt-8 flex items-center gap-1.5 h-8 opacity-60">
-                    <span class="w-1 bg-sky-400 rounded-full h-full waveform-bar" style="animation-delay: 0.1s"></span>
-                    <span class="w-1 bg-sky-400 rounded-full h-full waveform-bar" style="animation-delay: 0.4s"></span>
-                    <span class="w-1 bg-indigo-400 rounded-full h-full waveform-bar" style="animation-delay: 0.2s"></span>
-                    <span class="w-1 bg-sky-400 rounded-full h-full waveform-bar" style="animation-delay: 0.6s"></span>
-                    <span class="w-1 bg-indigo-500 rounded-full h-full waveform-bar" style="animation-delay: 0.3s"></span>
-                    <span class="w-1 bg-sky-300 rounded-full h-full waveform-bar" style="animation-delay: 0.5s"></span>
-                    <span class="text-xs font-mono text-slate-500 ml-3">Speech Waveform & Acoustic Feature Modeling</span>
-                </div>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#publications" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition text-sm flex items-center gap-2">
-                        View Publications <i class="fa-solid fa-arrow-down"></i>
-                    </a>
-                    <a href="https://github.com" target="_blank" class="px-6 py-3 rounded-lg glass-panel hover:bg-slate-800 text-slate-200 font-medium transition text-sm flex items-center gap-2">
-                        <i class="fa-brands fa-github text-base"></i> GitHub
-                    </a>
-                    <a href="https://scholar.google.com" target="_blank" class="px-6 py-3 rounded-lg glass-panel hover:bg-slate-800 text-slate-200 font-medium transition text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-graduation-cap text-base"></i> Google Scholar
-                    </a>
+            <!-- Recent News & Updates -->
+            <div id="news" class="space-y-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight border-b border-academic-border pb-3">
+                    News & Updates
+                </h2>
+                <div class="space-y-3 font-mono text-xs">
+                    <div class="flex items-start gap-4">
+                        <span class="text-sky-400 font-semibold w-20 shrink-0">[Apr 2026]</span>
+                        <span class="text-slate-300">Formulated automated Vowel Space Area (VSA) shoelace calculation algorithms for continuous speech evaluation.</span>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-sky-400 font-semibold w-20 shrink-0">[Mar 2026]</span>
+                        <span class="text-slate-300">Joined the NLP & Speech Processing Research Lab focusing on computational acoustic representations.</span>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-sky-400 font-semibold w-20 shrink-0">[May 2025]</span>
+                        <span class="text-slate-300">Started AI/ML Internship at Prokraya Tech working on automated field extraction and recommendation algorithms.</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Profile Summary Card -->
-            <div class="lg:col-span-4">
-                <div class="glass-panel p-6 rounded-2xl relative overflow-hidden border border-slate-800">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl"></div>
-                    <div class="text-xs font-mono text-sky-400 uppercase tracking-widest mb-4">Research Overview</div>
-                    <ul class="space-y-4 text-sm text-slate-300">
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-microscope text-sky-400 mt-1"></i>
-                            <div>
-                                <span class="font-semibold text-white block">Focus Domain</span>
-                                Speech Acoustics, Vowel Formants, NLP & LLM Systems
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-graduation-cap text-sky-400 mt-1"></i>
-                            <div>
-                                <span class="font-semibold text-white block">M.Sc. Information Technology</span>
-                                Dhirubhai Ambani University (DA-IICT)
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-laptop-code text-sky-400 mt-1"></i>
-                            <div>
-                                <span class="font-semibold text-white block">Stack</span>
-                                PyTorch, Praat/Parselmouth, Librosa, React, Streamlit
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- Research Publications -->
+            <div id="publications" class="space-y-6">
+                <h2 class="text-2xl font-bold text-white tracking-tight border-b border-academic-border pb-3">
+                    Publications & Manuscripts
+                </h2>
 
-    <!-- About & Core Research Interests -->
-    <section id="about" class="py-20 px-6 border-t border-slate-800/60">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                <span class="text-sky-400 font-mono text-sm">01.</span> About & Domain Focus
-            </h2>
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 text-slate-300 space-y-4 text-base leading-relaxed font-light">
-                    <p>
-                        I am a Master's student specializing in speech processing and artificial intelligence. My primary research explores acoustic signal modeling—specifically fundamental frequency ($F_0$) trajectory tracking, automated acoustic segmentation, and Vowel Space Area (VSA) representation across multilingual speech datasets.
-                    </p>
-                    <p>
-                        Beyond traditional speech signal analysis, I design and deploy deep learning architectures across NLP, Computer Vision, and Generative AI. I focus on bridging classical acoustic features with modern Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) frameworks, and production-ready full-stack interfaces.
-                    </p>
-                </div>
-                
-                <!-- Domain Pillars -->
-                <div class="space-y-3">
-                    <div class="glass-card p-4 rounded-xl">
-                        <div class="text-white font-semibold text-sm flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-wave-square text-sky-400"></i> Speech Processing
-                        </div>
-                        <p class="text-slate-400 text-xs">Formant tracking, pitch analysis, acoustic segmentation, VSA plotting.</p>
+                <!-- Publication Item 1 -->
+                <div class="bg-academic-card border border-academic-border p-5 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-mono bg-sky-500/10 text-sky-400 px-2 py-0.5 rounded border border-sky-500/20">Preprint / In Preparation</span>
+                        <span class="text-xs font-mono text-slate-500">2026</span>
                     </div>
-                    <div class="glass-card p-4 rounded-xl">
-                        <div class="text-white font-semibold text-sm flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-brain text-indigo-400"></i> NLP & LLM Systems
-                        </div>
-                        <p class="text-slate-400 text-xs">RAG pipelines, vector embeddings, fine-tuning, sentiment pipelines.</p>
-                    </div>
-                    <div class="glass-card p-4 rounded-xl">
-                        <div class="text-white font-semibold text-sm flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-layer-group text-teal-400"></i> Full-Stack AI Engineering
-                        </div>
-                        <p class="text-slate-400 text-xs">React, Tailwind CSS, Streamlit, PyMongo, RESTful API architecture.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research & Lab Experience -->
-    <section id="research" class="py-20 px-6 border-t border-slate-800/60 bg-slate-950/40">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-10 flex items-center gap-3">
-                <span class="text-sky-400 font-mono text-sm">02.</span> Research & Lab Experience
-            </h2>
-
-            <div class="space-y-8">
-                <!-- Research Lab Position -->
-                <div class="glass-panel p-6 rounded-2xl relative border-l-4 border-l-sky-400">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                        <div>
-                            <h3 class="text-lg font-bold text-white">NLP & Speech Processing Research Lab</h3>
-                            <p class="text-sky-400 text-sm font-medium">Graduate Research Assistant</p>
-                        </div>
-                        <span class="text-xs font-mono text-slate-400 mt-2 md:mt-0">2026 – Present</span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-300 text-sm space-y-2 leading-relaxed font-light">
-                        <li>Conducting acoustic signal analysis on speech datasets, focusing on vowel formant trajectories ($F_1, F_2$) and acoustic vowel space area (VSA) metrics.</li>
-                        <li>Developing automated audio segmentation and fundamental frequency ($F_0$) extraction pipelines for multilingual speech evaluation.</li>
-                        <li>Collaborating with research advisors to formulate computational models comparing acoustic variations across speaker demographics.</li>
-                    </ul>
-                </div>
-
-                <!-- Industry AI Research Internship -->
-                <div class="glass-panel p-6 rounded-2xl relative border-l-4 border-l-indigo-500">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                        <div>
-                            <h3 class="text-lg font-bold text-white">Prokraya Tech</h3>
-                            <p class="text-indigo-400 text-sm font-medium">AI/ML Intern</p>
-                        </div>
-                        <span class="text-xs font-mono text-slate-400 mt-2 md:mt-0">May 2025 – July 2025</span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-300 text-sm space-y-2 leading-relaxed font-light">
-                        <li>Engineered automated field extraction systems using natural language processing and computer vision models.</li>
-                        <li>Designed recommendation architectures and optimized multi-stage data processing pipelines for production workflows.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications & Preprints -->
-    <section id="publications" class="py-20 px-6 border-t border-slate-800/60">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                <span class="text-sky-400 font-mono text-sm">03.</span> Publications & Manuscripts
-            </h2>
-            <p class="text-slate-400 text-sm mb-10">Selected peer-reviewed articles, conference papers, and active preprints.</p>
-
-            <div class="space-y-6">
-                <!-- Publication 1 -->
-                <div class="glass-card p-6 rounded-xl relative group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                        <span class="inline-block px-2.5 py-1 text-xs font-mono rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 w-max">In Preparation / Preprint</span>
-                        <span class="text-xs font-mono text-slate-400">2026</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-sky-400 transition">
-                        Acoustic Formant Trajectory Analysis and Vowel Space Area Dynamics in Multilingual Speech
+                    <h3 class="text-base font-semibold text-white">
+                        Automated Formant Trajectory Analysis and Vowel Space Area Dynamics in Multilingual Speech
                     </h3>
-                    <p class="text-slate-400 text-xs font-mono mt-1">
-                        <span class="text-white font-semibold underline">Manya Singh</span>, Research Guide
+                    <p class="text-xs text-slate-400 font-mono">
+                        <strong class="text-slate-200">Manya Singh</strong>, Research Guide
                     </p>
-                    <p class="text-slate-300 text-sm mt-3 font-light leading-relaxed">
-                        Presents an automated framework for tracking formant frequencies ($F_1, F_2$) and computing Euclidean Vowel Space Area (VSA) using shoelace geometric formulations on continuous speech audio.
+                    <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                        Presents a Praat/Parselmouth computational pipeline calculating fundamental frequencies ($F_1, F_2$) and Euclidean Vowel Space Area (VSA) metrics over continuous acoustic signals.
                     </p>
-                    <div class="mt-4 flex gap-4 text-xs font-mono">
-                        <a href="#" class="text-sky-400 hover:underline flex items-center gap-1"><i class="fa-regular fa-file-pdf"></i> [PDF]</a>
-                        <a href="#" class="text-slate-400 hover:text-white flex items-center gap-1"><i class="fa-solid fa-code"></i> [Code]</a>
-                        <a href="#" class="text-slate-400 hover:text-white flex items-center gap-1"><i class="fa-solid fa-quote-right"></i> [BibTeX]</a>
+                    <div class="flex gap-4 text-xs font-mono pt-2">
+                        <a href="#" class="text-sky-400 hover:underline"><i class="fa-regular fa-file-pdf"></i> [PDF]</a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fa-solid fa-code"></i> [Code]</a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fa-solid fa-quote-right"></i> [BibTeX]</a>
                     </div>
                 </div>
 
-                <!-- Publication 2 -->
-                <div class="glass-card p-6 rounded-xl relative group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                        <span class="inline-block px-2.5 py-1 text-xs font-mono rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 w-max">Conference Paper</span>
-                        <span class="text-xs font-mono text-slate-400">2025</span>
+                <!-- Publication Item 2 -->
+                <div class="bg-academic-card border border-academic-border p-5 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-mono bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/20">Conference Paper</span>
+                        <span class="text-xs font-mono text-slate-500">2025</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-sky-400 transition">
-                        Socio-Economic News Sentiment Extraction via Automated NLP & Mongo Pipelines
+                    <h3 class="text-base font-semibold text-white">
+                        Socio-Economic News Sentiment Analysis via Automated PyMongo Pipelines
                     </h3>
-                    <p class="text-slate-400 text-xs font-mono mt-1">
-                        <span class="text-white font-semibold underline">Manya Singh</span>, Co-Author
+                    <p class="text-xs text-slate-400 font-mono">
+                        <strong class="text-slate-200">Manya Singh</strong>, Co-Author
                     </p>
-                    <p class="text-slate-300 text-sm mt-3 font-light leading-relaxed">
-                        Evaluates computational sentiment analysis models applied to news feeds with real-time indexing in MongoDB for trend forecasting.
+                    <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                        Evaluates natural language processing sentiment pipelines indexing socio-economic news data in real-time through MongoDB.
                     </p>
-                    <div class="mt-4 flex gap-4 text-xs font-mono">
-                        <a href="#" class="text-sky-400 hover:underline flex items-center gap-1"><i class="fa-regular fa-file-pdf"></i> [PDF]</a>
-                        <a href="#" class="text-slate-400 hover:text-white flex items-center gap-1"><i class="fa-solid fa-code"></i> [Code]</a>
+                    <div class="flex gap-4 text-xs font-mono pt-2">
+                        <a href="#" class="text-sky-400 hover:underline"><i class="fa-regular fa-file-pdf"></i> [PDF]</a>
+                        <a href="#" class="text-slate-400 hover:text-white"><i class="fa-solid fa-code"></i> [Code]</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Selected AI & Engineering Projects -->
-    <section id="projects" class="py-20 px-6 border-t border-slate-800/60 bg-slate-950/40">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-10 flex items-center gap-3">
-                <span class="text-sky-400 font-mono text-sm">04.</span> Selected Projects
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Project Card 1 -->
-                <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">Speech / Audio</span>
-                            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+            <!-- Featured Projects -->
+            <div id="projects" class="space-y-6">
+                <h2 class="text-2xl font-bold text-white tracking-tight border-b border-academic-border pb-3">
+                    Featured Projects
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <div class="bg-academic-card border border-academic-border p-5 rounded-xl flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="text-sm font-bold text-white">Formant & VSA Plotter</h3>
+                                <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-sm"></i></a>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Automated speech processing scripts calculating $F_0$, formant contours, and geometric Vowel Space Areas.
+                            </p>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Formant & VSA Acoustic Plotter</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4 font-light">
-                            Automated Praat/Parselmouth pipeline calculating fundamental frequencies, formant trajectories, and Vowel Space Area metrics.
-                        </p>
+                        <div class="text-[11px] font-mono text-sky-400">Python • Praat • Librosa</div>
                     </div>
-                    <div class="text-xs font-mono text-slate-400">Python • Praat • Librosa • Matplotlib</div>
-                </div>
 
-                <!-- Project Card 2 -->
-                <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">GenAI & RAG</span>
-                            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+                    <div class="bg-academic-card border border-academic-border p-5 rounded-xl flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="text-sm font-bold text-white">AI Story Generator</h3>
+                                <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-sm"></i></a>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                LLM-driven narrative application built with Gemini API, customizable parameters, and Streamlit.
+                            </p>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Personalized AI Story Engine</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4 font-light">
-                            LLM-driven narrative generator featuring multi-parameter prompts, dynamic context retrieval, and a Streamlit UI.
-                        </p>
+                        <div class="text-[11px] font-mono text-sky-400">Python • Gemini API • Streamlit</div>
                     </div>
-                    <div class="text-xs font-mono text-slate-400">Python • Gemini API • Streamlit</div>
-                </div>
 
-                <!-- Project Card 3 -->
-                <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">Time-Series</span>
-                            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Stock Market LSTM Forecaster</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4 font-light">
-                            Modular LSTM deep learning pipeline structured for modular, production-ready time-series forecasting.
-                        </p>
-                    </div>
-                    <div class="text-xs font-mono text-slate-400">PyTorch • Pandas • Modular Architecture</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Technical Stack Section -->
-    <section class="py-20 px-6 border-t border-slate-800/60">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-10 flex items-center gap-3">
-                <span class="text-sky-400 font-mono text-sm">05.</span> Technical Capabilities
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-panel p-4 rounded-xl border border-slate-800">
-                    <div class="text-sky-400 text-xs font-mono mb-2">SPEECH & SIGNAL</div>
-                    <ul class="text-slate-300 text-xs space-y-1 font-light">
-                        <li>Praat / Parselmouth</li>
-                        <li>Librosa & SciPy</li>
-                        <li>Formant Extraction</li>
-                        <li>F0 / Pitch Analysis</li>
-                    </ul>
-                </div>
-                <div class="glass-panel p-4 rounded-xl border border-slate-800">
-                    <div class="text-sky-400 text-xs font-mono mb-2">AI / NLP & VISION</div>
-                    <ul class="text-slate-300 text-xs space-y-1 font-light">
-                        <li>PyTorch & TensorFlow</li>
-                        <li>RAG & Vector Embeddings</li>
-                        <li>LLM Fine-Tuning</li>
-                        <li>OpenCV & TextBlob</li>
-                    </ul>
-                </div>
-                <div class="glass-panel p-4 rounded-xl border border-slate-800">
-                    <div class="text-sky-400 text-xs font-mono mb-2">FULL STACK & WEB</div>
-                    <ul class="text-slate-300 text-xs space-y-1 font-light">
-                        <li>React.js</li>
-                        <li>Tailwind CSS</li>
-                        <li>Streamlit</li>
-                        <li>Node.js / Express</li>
-                    </ul>
-                </div>
-                <div class="glass-panel p-4 rounded-xl border border-slate-800">
-                    <div class="text-sky-400 text-xs font-mono mb-2">DATA & DEPLOYMENT</div>
-                    <ul class="text-slate-300 text-xs space-y-1 font-light">
-                        <li>MongoDB / PyMongo</li>
-                        <li>PostgreSQL</li>
-                        <li>Git & GitHub Actions</li>
-                        <li>Docker</li>
-                    </ul>
+            <!-- Contact -->
+            <div id="contact" class="space-y-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight border-b border-academic-border pb-3">
+                    Contact
+                </h2>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    I am always open to research collaborations, acoustic dataset discussions, and academic inquiries.
+                </p>
+                <div class="p-4 bg-academic-card border border-academic-border rounded-xl inline-block text-xs font-mono">
+                    <span class="text-slate-400">Email:</span> <a href="mailto:your.email@example.com" class="text-sky-400 hover:underline">your.email@example.com</a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 border-t border-slate-800/60 text-center">
-        <div class="max-w-2xl mx-auto">
-            <p class="text-sky-400 font-mono text-xs uppercase tracking-widest mb-2">06. Connect</p>
-            <h2 class="text-3xl font-bold text-white mb-4">Let's Collaborate</h2>
-            <p class="text-slate-400 text-sm mb-8 font-light leading-relaxed">
-                Open to research discussions, acoustic dataset collaborations, and opportunities in AI/ML speech and NLP systems.
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="mailto:your.email@example.com" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition text-sm">
-                    Send an Email
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="px-6 py-3 rounded-lg glass-panel hover:bg-slate-800 text-slate-200 font-medium transition text-sm">
-                    LinkedIn
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Minimalist Footer -->
-    <footer class="py-6 border-t border-slate-800/60 text-center text-xs text-slate-500 font-mono">
-        <p>Manya Singh • Hosted on GitHub Pages</p>
+    <!-- Footer -->
+    <footer class="border-t border-academic-border py-6 text-center text-xs font-mono text-slate-500">
+        <p>© 2026 Manya Singh. Built with HTML & Tailwind CSS.</p>
     </footer>
 
 </body>
