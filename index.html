@@ -1,346 +1,806 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manya Singh · AI/ML & Speech Researcher</title>
-  <!-- Tailwind + Fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    * { scroll-behavior: smooth; }
-    body {
-      background: #060b14;
-      color: #d6e0f0;
-      font-family: 'Inter', sans-serif;
-    }
-    /* glassmorphism & glow */
-    .glass-card {
-      background: rgba(18, 25, 40, 0.65);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(56, 189, 248, 0.15);
-      box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
-      transition: all 0.25s ease;
-    }
-    .glass-card:hover {
-      border-color: rgba(56, 189, 248, 0.5);
-      box-shadow: 0 10px 35px -10px rgba(56, 189, 248, 0.25);
-      transform: translateY(-3px);
-    }
-    .accent-glow {
-      background: linear-gradient(145deg, #0b1a2e, #09101e);
-      border-left: 2px solid #38bdf8;
-    }
-    .link-hover {
-      transition: all 0.2s;
-    }
-    .link-hover:hover {
-      color: #7dd3fc;
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
-    }
-    .chip {
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      color: #b8e2ff;
-      font-size: 0.65rem;
-      letter-spacing: 0.02em;
-    }
-    .wave-bg {
-      background: radial-gradient(circle at 0% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 70%);
-    }
-    /* interactive pulse */
-    .pulse-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: #38bdf8;
-      border-radius: 50%;
-      animation: pulse 1.8s infinite;
-      box-shadow: 0 0 12px #38bdf8;
-    }
-    @keyframes pulse {
-      0% { opacity: 0.6; transform: scale(0.95); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0.6; transform: scale(0.95); }
-    }
-    .publication-badge {
-      background: linear-gradient(135deg, #0f2840, #0a1a2e);
-      border: 1px solid #1e3a5a;
-    }
-    ::selection { background: #38bdf8; color: #0b0f1a; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manya Singh · AI/ML Researcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    /* Smooth section transitions */
-    section {
-      animation: fadeIn 0.6s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0e1a;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            color: #e2e8f0;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 20% 80%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Floating Particles */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(16, 24, 44, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 15px 45px rgba(56, 189, 248, 0.15);
+        }
+
+        /* Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+        }
+
+        .glow-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #38bdf8, #8b5cf6, #ec4899, #38bdf8);
+            background-size: 400% 400%;
+            border-radius: inherit;
+            z-index: -1;
+            animation: gradientBorder 6s ease infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Typing Animation */
+        .typing-container {
+            display: inline-block;
+        }
+
+        .typing-text {
+            border-right: 3px solid #38bdf8;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: #38bdf8; }
+            50% { border-color: transparent; }
+        }
+
+        /* Skill Bars */
+        .skill-bar {
+            height: 6px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Interactive 3D Tilt */
+        .tilt-card {
+            transition: transform 0.3s ease-out;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .tilt-card:hover {
+            transform: rotateX(5deg) rotateY(5deg) scale(1.02);
+        }
+
+        /* Counter Animation */
+        .counter {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Project Card Flip */
+        .flip-card {
+            perspective: 1000px;
+            height: 280px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .flip-card-front {
+            background: rgba(16, 24, 44, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* Navigation dots */
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-dot.active {
+            background: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transform: scale(1.3);
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .flip-card {
+                height: 220px;
+            }
+        }
+    </style>
 </head>
-<body class="wave-bg antialiased selection:bg-sky-400 selection:text-[#0b0f1a]">
+<body>
 
-  <!-- STICKY HEADER (glass) -->
-  <header class="sticky top-0 z-50 bg-[#060b14]/80 backdrop-blur-xl border-b border-[#1e2a3a]">
-    <div class="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between">
-      <a href="#" class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-        <span class="text-sky-400">✦</span> Manya Singh
-      </a>
-      <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300">
-        <a href="#about" class="hover:text-sky-300 transition-colors">About</a>
-        <a href="#news" class="hover:text-sky-300 transition-colors">News</a>
-        <a href="#publications" class="hover:text-sky-300 transition-colors">Publications</a>
-        <a href="#projects" class="hover:text-sky-300 transition-colors">Projects</a>
-        <a href="#domains" class="hover:text-sky-300 transition-colors">Domains</a>
-        <a href="#contact" class="hover:text-sky-300 transition-colors">Contact</a>
-      </nav>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Particles -->
+    <div class="particle-container" id="particles"></div>
+
+    <!-- Navigation Dots (Fixed) -->
+    <div class="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 space-y-4 hidden lg:block">
+        <div class="nav-dot active" data-target="hero"></div>
+        <div class="nav-dot" data-target="about"></div>
+        <div class="nav-dot" data-target="skills"></div>
+        <div class="nav-dot" data-target="publications"></div>
+        <div class="nav-dot" data-target="projects"></div>
+        <div class="nav-dot" data-target="contact"></div>
     </div>
-  </header>
 
-  <!-- MAIN 2-COLUMN LAYOUT -->
-  <main class="max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
-
-    <!-- SIDEBAR (sticky) -->
-    <aside class="lg:col-span-4 space-y-6">
-      <div class="sticky top-24 space-y-6">
-
-        <!-- profile card glass -->
-        <div class="glass-card p-6 rounded-2xl text-center">
-          <div class="relative w-32 h-32 mx-auto mb-4">
-            <div class="w-32 h-32 rounded-full bg-gradient-to-br from-sky-400/20 to-indigo-400/20 border-2 border-sky-400/40 flex items-center justify-center text-5xl font-mono text-sky-300 shadow-2xl shadow-sky-500/10">
-              MS
-            </div>
-            <span class="absolute bottom-1 right-1"><span class="pulse-dot"></span></span>
-          </div>
-          <h1 class="text-2xl font-bold text-white">Manya Singh</h1>
-          <p class="text-sm font-mono text-sky-300 mt-1 tracking-wide">AI/ML · Speech Signal</p>
-          <p class="text-xs text-slate-400 mt-1">M.Sc. IT @ DA-IICT</p>
-          <hr class="border-[#1e2a3a] my-5">
-          <!-- links -->
-          <div class="grid grid-cols-2 gap-2 text-left text-xs font-mono">
-            <a href="#" class="flex items-center gap-2 p-2 rounded-lg bg-[#101a2a] hover:bg-[#1a2a40] transition-colors text-slate-300 hover:text-sky-300">
-              <i class="fa-regular fa-envelope text-sky-400 w-4"></i> Email
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-[#1e2a3a]">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center gap-2">
+                <span class="text-sky-400">✦</span> Manya Singh
             </a>
-            <a href="#" class="flex items-center gap-2 p-2 rounded-lg bg-[#101a2a] hover:bg-[#1a2a40] transition-colors text-slate-300 hover:text-sky-300">
-              <i class="fa-brands fa-github text-sky-400 w-4"></i> GitHub
-            </a>
-            <a href="#" class="flex items-center gap-2 p-2 rounded-lg bg-[#101a2a] hover:bg-[#1a2a40] transition-colors text-slate-300 hover:text-sky-300">
-              <i class="fa-solid fa-graduation-cap text-sky-400 w-4"></i> Scholar
-            </a>
-            <a href="#" class="flex items-center gap-2 p-2 rounded-lg bg-[#101a2a] hover:bg-[#1a2a40] transition-colors text-slate-300 hover:text-sky-300">
-              <i class="fa-brands fa-linkedin text-sky-400 w-4"></i> LinkedIn
-            </a>
-          </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-sky-400 transition">About</a>
+                <a href="#skills" class="text-slate-300 hover:text-sky-400 transition">Skills</a>
+                <a href="#publications" class="text-slate-300 hover:text-sky-400 transition">Research</a>
+                <a href="#projects" class="text-slate-300 hover:text-sky-400 transition">Projects</a>
+                <a href="#contact" class="text-slate-300 hover:text-sky-400 transition">Contact</a>
+            </nav>
+            <button class="md:hidden text-white text-xl" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </header>
 
-        <!-- research focus card -->
-        <div class="glass-card p-6 rounded-2xl">
-          <h3 class="text-xs font-mono uppercase tracking-widest text-sky-300 mb-3 flex items-center gap-2">
-            <i class="fa-solid fa-microchip"></i> Research Focus
-          </h3>
-          <ul class="space-y-2.5 text-sm text-slate-300">
-            <li class="flex items-start gap-3"><span class="text-sky-400 text-xs mt-1">▹</span> Acoustic Speech &amp; <span class="font-mono text-sky-200">F₀</span> trajectories</li>
-            <li class="flex items-start gap-3"><span class="text-sky-400 text-xs mt-1">▹</span> Vowel Space Area (VSA) metrics</li>
-            <li class="flex items-start gap-3"><span class="text-sky-400 text-xs mt-1">▹</span> Multilingual speech datasets</li>
-            <li class="flex items-start gap-3"><span class="text-sky-400 text-xs mt-1">▹</span> LLM fine-tuning · RAG systems</li>
-            <li class="flex items-start gap-3"><span class="text-sky-400 text-xs mt-1">▹</span> Full-stack AI engineering</li>
-          </ul>
-        </div>
-
-        <!-- interactive domain mini -->
-        <div class="glass-card p-5 rounded-2xl hidden lg:block">
-          <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
-            <i class="fa-solid fa-wave-square text-sky-400"></i> <span>speech·nlp·vision</span>
-          </div>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <span class="chip px-3 py-1 rounded-full">Praat</span>
-            <span class="chip px-3 py-1 rounded-full">Librosa</span>
-            <span class="chip px-3 py-1 rounded-full">PyTorch</span>
-            <span class="chip px-3 py-1 rounded-full">HuggingFace</span>
-            <span class="chip px-3 py-1 rounded-full">OpenCV</span>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT (right column) -->
-    <section class="lg:col-span-8 space-y-14">
-
-      <!-- ABOUT -->
-      <div id="about" class="space-y-4">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-regular fa-address-card text-sky-400 text-2xl"></i> Biography
-        </h2>
-        <div class="glass-card p-6 rounded-2xl space-y-3 text-sm leading-relaxed text-slate-200">
-          <p>
-            I'm a Master's researcher at DA-IICT, working at the intersection of <span class="text-sky-300 font-medium">speech signal processing</span>, acoustic phonetics, and natural language understanding. My current work focuses on automated formant extraction, fundamental frequency (<span class="font-mono text-sky-300">F₀</span>) dynamics, and geometric Vowel Space Area (VSA) metrics across multilingual corpora.
-          </p>
-          <p>
-            Beyond speech, I build generative AI systems — from <span class="text-indigo-300">Retrieval-Augmented Generation (RAG)</span> pipelines and vector databases to full-stack deployments with PyTorch, React, and Streamlit. I'm passionate about making acoustic analysis reproducible and interpretable.
-          </p>
-        </div>
-      </div>
-
-      <!-- NEWS -->
-      <div id="news" class="space-y-4">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-regular fa-newspaper text-sky-400 text-2xl"></i> News &amp; Updates
-        </h2>
-        <div class="space-y-3 font-mono text-xs">
-          <div class="glass-card p-4 rounded-xl flex flex-wrap items-start gap-3">
-            <span class="text-sky-300 font-semibold w-20 shrink-0">[Apr 2026]</span>
-            <span class="text-slate-200">Released automated VSA shoelace algorithm for continuous speech evaluation · <span class="text-sky-400">#acoustics</span></span>
-          </div>
-          <div class="glass-card p-4 rounded-xl flex flex-wrap items-start gap-3">
-            <span class="text-sky-300 font-semibold w-20 shrink-0">[Mar 2026]</span>
-            <span class="text-slate-200">Joined <span class="text-sky-200">NLP &amp; Speech Processing Lab</span> · computational acoustic representations</span>
-          </div>
-          <div class="glass-card p-4 rounded-xl flex flex-wrap items-start gap-3">
-            <span class="text-sky-300 font-semibold w-20 shrink-0">[May 2025]</span>
-            <span class="text-slate-200">AI/ML Intern @ Prokraya Tech · field extraction &amp; recommendation algorithms</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PUBLICATIONS -->
-      <div id="publications" class="space-y-5">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-regular fa-file-lines text-sky-400 text-2xl"></i> Publications
-        </h2>
-
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="flex flex-wrap justify-between items-center">
-            <span class="chip px-3 py-1 rounded-full">preprint · 2026</span>
-            <span class="text-xs text-slate-400 font-mono"><i class="fa-regular fa-clock"></i> in preparation</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white">Automated Formant Trajectory &amp; Vowel Space Area Dynamics in Multilingual Speech</h3>
-          <p class="text-sm text-slate-300 font-mono"><span class="text-sky-300">Manya Singh</span> · Research Guide</p>
-          <p class="text-sm text-slate-300 leading-relaxed">Praat/Parselmouth pipeline for <span class="text-sky-200">F₁, F₂</span> extraction and Euclidean VSA metrics over continuous acoustic signals.</p>
-          <div class="flex flex-wrap gap-4 text-xs font-mono pt-2">
-            <a href="#" class="text-sky-300 hover:text-white transition"><i class="fa-regular fa-file-pdf"></i> PDF</a>
-            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-code"></i> Code</a>
-            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-quote-right"></i> BibTeX</a>
-          </div>
-        </div>
-
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="flex flex-wrap justify-between items-center">
-            <span class="chip px-3 py-1 rounded-full">conference · 2025</span>
-            <span class="text-xs text-slate-400 font-mono"><i class="fa-regular fa-calendar"></i> presented</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white">Socio-Economic News Sentiment Analysis via Automated PyMongo Pipelines</h3>
-          <p class="text-sm text-slate-300 font-mono"><span class="text-sky-300">Manya Singh</span> · Co-author</p>
-          <p class="text-sm text-slate-300 leading-relaxed">NLP sentiment pipelines indexing real-time socio-economic news with MongoDB &amp; Transformers.</p>
-          <div class="flex flex-wrap gap-4 text-xs font-mono pt-2">
-            <a href="#" class="text-sky-300 hover:text-white transition"><i class="fa-regular fa-file-pdf"></i> PDF</a>
-            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-code"></i> Code</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROJECTS -->
-      <div id="projects" class="space-y-5">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-solid fa-diagram-project text-sky-400 text-2xl"></i> Featured Projects
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <h3 class="text-base font-bold text-white">Formant &amp; VSA Plotter</h3>
-                <i class="fa-brands fa-github text-slate-400 hover:text-white text-lg transition"></i>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed">Automated speech processing for <span class="text-sky-200">F₀</span>, formant contours, and geometric VSA extraction.</p>
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+            <div class="inline-block mb-6 px-4 py-2 rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-400 text-sm font-mono">
+                <i class="fas fa-circle text-[6px] text-green-400 mr-2 animate-pulse"></i>
+                Available for collaborations
             </div>
-            <div class="mt-3 flex flex-wrap gap-2 text-[10px] font-mono text-sky-300">
-              <span class="chip px-2 py-0.5">Python</span>
-              <span class="chip px-2 py-0.5">Praat</span>
-              <span class="chip px-2 py-0.5">Librosa</span>
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                <span class="typing-container">
+                    <span class="typing-text">Manya Singh</span>
+                </span>
+                <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400">
+                    AI/ML & Speech Researcher
+                </span>
+            </h1>
+            
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
+                Pushing boundaries in <span class="text-sky-400 font-semibold">Speech Acoustics</span>, 
+                <span class="text-purple-400 font-semibold">NLP</span>, and 
+                <span class="text-pink-400 font-semibold">Generative AI</span>
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="px-8 py-3 rounded-full bg-gradient-to-r from-sky-500 to-purple-600 text-white font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all transform hover:scale-105">
+                    <i class="fas fa-paper-plane mr-2"></i> Get in Touch
+                </a>
+                <a href="#publications" class="px-8 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-sky-400 hover:text-sky-400 transition-all">
+                    <i class="fas fa-file-alt mr-2"></i> View Research
+                </a>
             </div>
-          </div>
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <h3 class="text-base font-bold text-white">AI Story Generator</h3>
-                <i class="fa-brands fa-github text-slate-400 hover:text-white text-lg transition"></i>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed">LLM-driven narrative with Gemini API, custom params, and Streamlit interface.</p>
-            </div>
-            <div class="mt-3 flex flex-wrap gap-2 text-[10px] font-mono text-sky-300">
-              <span class="chip px-2 py-0.5">Python</span>
-              <span class="chip px-2 py-0.5">Gemini</span>
-              <span class="chip px-2 py-0.5">Streamlit</span>
-            </div>
-          </div>
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between sm:col-span-2">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <h3 class="text-base font-bold text-white">Multilingual Acoustic Corpus Builder</h3>
-                <i class="fa-brands fa-github text-slate-400 hover:text-white text-lg transition"></i>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed">Pipeline for aligning, segmenting, and extracting acoustic features (F1/F2, VSA) from multilingual speech datasets.</p>
-            </div>
-            <div class="mt-3 flex flex-wrap gap-2 text-[10px] font-mono text-sky-300">
-              <span class="chip px-2 py-0.5">Parselmouth</span>
-              <span class="chip px-2 py-0.5">pandas</span>
-              <span class="chip px-2 py-0.5">NumPy</span>
-              <span class="chip px-2 py-0.5">matplotlib</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- DOMAINS (speech, nlp, vision) -->
-      <div id="domains" class="space-y-5">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-solid fa-cube text-sky-400 text-2xl"></i> Research Domains
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="glass-card p-5 rounded-2xl text-center hover:border-sky-400/50 transition-all">
-            <i class="fa-solid fa-waveform text-4xl text-sky-300 mb-3"></i>
-            <h4 class="font-bold text-white text-sm">Speech Acoustics</h4>
-            <p class="text-xs text-slate-400 mt-1">F₀, formants, VSA, prosody</p>
-          </div>
-          <div class="glass-card p-5 rounded-2xl text-center hover:border-sky-400/50 transition-all">
-            <i class="fa-solid fa-language text-4xl text-indigo-300 mb-3"></i>
-            <h4 class="font-bold text-white text-sm">NLP &amp; LLMs</h4>
-            <p class="text-xs text-slate-400 mt-1">RAG, fine-tuning, embeddings</p>
-          </div>
-          <div class="glass-card p-5 rounded-2xl text-center hover:border-sky-400/50 transition-all">
-            <i class="fa-solid fa-eye text-4xl text-purple-300 mb-3"></i>
-            <h4 class="font-bold text-white text-sm">Computer Vision</h4>
-            <p class="text-xs text-slate-400 mt-1">multimodal · vision-language</p>
-          </div>
+            <!-- Social Icons -->
+            <div class="flex justify-center gap-6 mt-12">
+                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
+                    <i class="fas fa-graduation-cap text-xl"></i>
+                </a>
+            </div>
         </div>
-      </div>
-
-      <!-- CONTACT -->
-      <div id="contact" class="space-y-4 pt-4">
-        <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3 border-b border-[#1e2a3a] pb-3">
-          <i class="fa-regular fa-paper-plane text-sky-400 text-2xl"></i> Contact
-        </h2>
-        <div class="glass-card p-6 rounded-2xl flex flex-wrap items-center justify-between gap-4">
-          <span class="text-sm text-slate-300">Open for collaborations &amp; academic inquiries</span>
-          <a href="mailto:your.email@example.com" class="font-mono text-sky-300 hover:text-white transition text-sm bg-[#0f1f30] px-4 py-2 rounded-full border border-sky-400/20">
-            <i class="fa-regular fa-envelope mr-2"></i> your.email@example.com
-          </a>
-        </div>
-      </div>
-
     </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-[#1e2a3a] py-6 text-center text-xs font-mono text-slate-500 mt-10">
-    <p class="flex items-center justify-center gap-2">
-      <i class="fa-regular fa-copyright"></i> 2026 Manya Singh · built with <span class="text-sky-400">✦</span> HTML &amp; Tailwind
-    </p>
-  </footer>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-white mb-6">
+                        <span class="text-sky-400">About</span> Me
+                    </h2>
+                    <p class="text-slate-300 text-lg leading-relaxed mb-6">
+                        I'm a Master's researcher at DA-IICT, diving deep into the intersection of 
+                        <span class="text-sky-400">speech signal processing</span> and 
+                        <span class="text-purple-400">artificial intelligence</span>.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        My work focuses on automated acoustic analysis, formant extraction, and 
+                        geometric Vowel Space Area metrics. Beyond speech, I build 
+                        <span class="text-sky-400">RAG systems</span>, fine-tune LLMs, and 
+                        engineer full-stack AI applications.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 mt-8">
+                        <div class="glass-card p-4 rounded-xl text-center">
+                            <div class="counter" data-target="3">0</div>
+                            <p class="text-xs text-slate-400 mt-1">Publications</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl text-center">
+                            <div class="counter" data-target="5">0</div>
+                            <p class="text-xs text-slate-400 mt-1">Projects</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl text-center">
+                            <div class="counter" data-target="2">0</div>
+                            <p class="text-xs text-slate-400 mt-1">Years Research</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl glow-border">
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Stats</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300">Speech Processing</span>
+                                <span class="text-sky-400 font-mono">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300">Machine Learning</span>
+                                <span class="text-sky-400 font-mono">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300">NLP / LLMs</span>
+                                <span class="text-sky-400 font-mono">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-300">Full-Stack AI</span>
+                                <span class="text-sky-400 font-mono">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- SKILLS / DOMAINS SECTION -->
+    <section id="skills" class="py-20 bg-[#0d1225]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                Research <span class="text-sky-400">Domains</span>
+            </h2>
+            <p class="text-slate-400 text-center mb-12">Areas where I'm pushing the boundaries</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-sky-400 transition-all">
+                    <div class="w-20 h-20 rounded-full bg-sky-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-sky-400/20 transition-all">
+                        <i class="fas fa-waveform text-3xl text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Speech Acoustics</h3>
+                    <p class="text-slate-400 text-sm">
+                        F₀ trajectories, formant analysis, Vowel Space Area metrics, and prosodic features extraction from multilingual speech.
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center mt-4">
+                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Praat</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Librosa</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Parselmouth</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-purple-400 transition-all">
+                    <div class="w-20 h-20 rounded-full bg-purple-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-400/20 transition-all">
+                        <i class="fas fa-language text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">NLP &amp; LLMs</h3>
+                    <p class="text-slate-400 text-sm">
+                        RAG architectures, vector embeddings, fine-tuning, sentiment analysis, and generative storytelling systems.
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center mt-4">
+                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">PyTorch</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">HuggingFace</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">Gemini</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-pink-400 transition-all">
+                    <div class="w-20 h-20 rounded-full bg-pink-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-400/20 transition-all">
+                        <i class="fas fa-eye text-3xl text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Computer Vision</h3>
+                    <p class="text-slate-400 text-sm">
+                        Multimodal learning, vision-language models, and integrating visual understanding with speech and text.
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center mt-4">
+                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">OpenCV</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">CLIP</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">ViT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                Recent <span class="text-sky-400">Publications</span>
+            </h2>
+            <p class="text-slate-400 text-center mb-12">Research contributions to the field</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 rounded-2xl hover:border-sky-400/30 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Preprint</span>
+                        <span class="text-xs text-slate-500">2026</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Automated Formant Trajectory &amp; VSA Dynamics in Multilingual Speech</h3>
+                    <p class="text-sm text-slate-400 font-mono mb-3"><span class="text-sky-400">Manya Singh</span> · Research Guide</p>
+                    <p class="text-sm text-slate-300 mb-4">Praat/Parselmouth pipeline for F₁, F₂ extraction and Euclidean VSA metrics over continuous acoustic signals.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-xs text-sky-400 hover:text-white transition"><i class="fas fa-file-pdf mr-1"></i> PDF</a>
+                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-code mr-1"></i> Code</a>
+                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-quote-right mr-1"></i> Cite</a>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl hover:border-purple-400/30 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">Conference</span>
+                        <span class="text-xs text-slate-500">2025</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Socio-Economic News Sentiment Analysis via PyMongo Pipelines</h3>
+                    <p class="text-sm text-slate-400 font-mono mb-3"><span class="text-sky-400">Manya Singh</span> · Co-author</p>
+                    <p class="text-sm text-slate-300 mb-4">NLP sentiment pipelines indexing real-time socio-economic news with MongoDB &amp; Transformers.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-xs text-sky-400 hover:text-white transition"><i class="fas fa-file-pdf mr-1"></i> PDF</a>
+                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-code mr-1"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS (Interactive Flip Cards) -->
+    <section id="projects" class="py-20 bg-[#0d1225]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                Featured <span class="text-sky-400">Projects</span>
+            </h2>
+            <p class="text-slate-400 text-center mb-12">Hover to flip and learn more</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-waveform text-3xl text-sky-400 mb-3"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">Formant &amp; VSA Plotter</h3>
+                            <p class="text-sm text-slate-400">Automated speech processing for F₀, formant contours, and VSA extraction.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="text-xs px-2 py-1 rounded bg-sky-400/10 text-sky-400">Python</span>
+                                <span class="text-xs px-2 py-1 rounded bg-sky-400/10 text-sky-400">Praat</span>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-code text-4xl text-sky-400 mb-3"></i>
+                            <p class="text-center text-sm text-white">Interactive dashboard for acoustic analysis with real-time visualization</p>
+                            <a href="#" class="mt-4 text-sky-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-robot text-3xl text-purple-400 mb-3"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">AI Story Generator</h3>
+                            <p class="text-sm text-slate-400">LLM-driven narrative with Gemini API and Streamlit interface.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="text-xs px-2 py-1 rounded bg-purple-400/10 text-purple-400">Python</span>
+                                <span class="text-xs px-2 py-1 rounded bg-purple-400/10 text-purple-400">Gemini</span>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-pen-fancy text-4xl text-purple-400 mb-3"></i>
+                            <p class="text-center text-sm text-white">Customizable story generation with style control and interactive UI</p>
+                            <a href="#" class="mt-4 text-purple-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-database text-3xl text-pink-400 mb-3"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">Multilingual Acoustic Corpus</h3>
+                            <p class="text-sm text-slate-400">Pipeline for aligning and extracting features from multilingual speech.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="text-xs px-2 py-1 rounded bg-pink-400/10 text-pink-400">Parselmouth</span>
+                                <span class="text-xs px-2 py-1 rounded bg-pink-400/10 text-pink-400">NumPy</span>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-microphone text-4xl text-pink-400 mb-3"></i>
+                            <p class="text-center text-sm text-white">End-to-end feature extraction for cross-lingual acoustic analysis</p>
+                            <a href="#" class="mt-4 text-pink-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE TIMELINE / NEWS -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                Latest <span class="text-sky-400">Updates</span>
+            </h2>
+            <p class="text-slate-400 text-center mb-12">What's happening in my research journey</p>
+            
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-sky-400/30 transition-all">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-sky-400/10 flex items-center justify-center">
+                        <i class="fas fa-flask text-sky-400"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-sky-400 font-mono">April 2026</span>
+                        <h4 class="text-white font-semibold mt-1">Automated VSA Shoelace Algorithm</h4>
+                        <p class="text-sm text-slate-400">Formulated continuous speech evaluation metrics for Vowel Space Area analysis.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-purple-400/30 transition-all">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-400/10 flex items-center justify-center">
+                        <i class="fas fa-flask text-purple-400"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-purple-400 font-mono">March 2026</span>
+                        <h4 class="text-white font-semibold mt-1">NLP &amp; Speech Processing Lab</h4>
+                        <p class="text-sm text-slate-400">Joined the research lab focusing on computational acoustic representations.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-pink-400/30 transition-all">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-pink-400/10 flex items-center justify-center">
+                        <i class="fas fa-briefcase text-pink-400"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-pink-400 font-mono">May 2025</span>
+                        <h4 class="text-white font-semibold mt-1">AI/ML Internship @ Prokraya Tech</h4>
+                        <p class="text-sm text-slate-400">Worked on automated field extraction and recommendation algorithms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-[#0d1225]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-4">
+                Let's <span class="text-sky-400">Connect</span>
+            </h2>
+            <p class="text-slate-400 mb-8 max-w-md mx-auto">
+                Open to collaborations, research discussions, and academic inquiries.
+            </p>
+            
+            <div class="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
+                <a href="mailto:your.email@example.com" class="text-xl text-sky-400 hover:text-white transition font-mono">
+                    <i class="fas fa-envelope mr-3"></i> your.email@example.com
+                </a>
+                <div class="flex justify-center gap-6 mt-6">
+                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
+                        <i class="fab fa-google-scholar"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-[#1e2a3a] py-8 text-center text-sm text-slate-500">
+        <p>© 2026 Manya Singh. Built with <i class="fas fa-heart text-sky-400"></i> and interactive design.</p>
+    </footer>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        // 1. Generate Particles
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(particle);
+            }
+        })();
+
+        // 2. Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        });
+
+        // 3. Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 30;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // 4. Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('counter')) {
+                        animateCounters();
+                    }
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe counters
+        document.querySelectorAll('.counter').forEach(el => observer.observe(el));
+
+        // 5. Smooth navigation dots
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const target = dot.getAttribute('data-target');
+                document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 6. Update active nav dot on scroll
+        const sections = ['hero', 'about', 'skills', 'publications', 'projects', 'contact'];
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100) {
+                        current = section;
+                    }
+                }
+            });
+
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-target') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        // 7. Mobile Menu Toggle (simple)
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.classList.toggle('hidden');
+                nav.classList.toggle('flex');
+                nav.classList.toggle('flex-col');
+                nav.classList.toggle('absolute');
+                nav.classList.toggle('top-16');
+                nav.classList.toggle('left-0');
+                nav.classList.toggle('right-0');
+                nav.classList.toggle('bg-[#0a0e1a]/95');
+                nav.classList.toggle('p-6');
+                nav.classList.toggle('gap-4');
+            }
+        });
+
+        // 8. Trigger counter animation on load
+        setTimeout(animateCounters, 500);
+
+        console.log('🚀 Portfolio loaded! Interactive features enabled.');
+    </script>
 </body>
 </html>
