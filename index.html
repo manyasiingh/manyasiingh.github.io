@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Developer & Data Science Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            900: '#0f172a',
+                            950: '#020617'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-brand-950/80 backdrop-blur-md z-50 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider text-brand-500">DevPortfolio<span class="text-slate-100">.</span></a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-brand-500 transition">About</a>
+                <a href="#skills" class="hover:text-brand-500 transition">Skills</a>
+                <a href="#projects" class="hover:text-brand-500 transition">Projects</a>
+                <a href="#experience" class="hover:text-brand-500 transition">Experience</a>
+                <a href="#contact" class="hover:text-brand-500 transition">Contact</a>
+            </div>
+            <a href="#contact" class="px-4 py-2 text-sm font-semibold rounded-lg bg-brand-500 hover:bg-brand-600 text-brand-950 transition">Get in Touch</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-24 pb-12 px-6 max-w-6xl mx-auto">
+        <div>
+            <span class="text-brand-500 text-sm font-semibold tracking-widest uppercase">Hi, my name is</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mt-3 tracking-tight">Your Name.</h1>
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-400 mt-2">AI/ML Engineer & Full Stack Developer</h2>
+            <p class="text-slate-400 mt-6 max-w-2xl text-lg leading-relaxed">
+                Specializing in building intelligent systems, data science pipelines, and full-stack web applications. Passionate about machine learning, acoustic processing, and scalable Web systems.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="#projects" class="px-6 py-3 rounded-lg bg-brand-500 hover:bg-brand-600 text-brand-950 font-bold transition flex items-center gap-2">
+                    View Projects <i class="fa-solid fa-arrow-down text-sm"></i>
+                </a>
+                <a href="https://github.com" target="_blank" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold transition flex items-center gap-2 border border-slate-700">
+                    <i class="fa-brands fa-github text-lg"></i> GitHub Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 border-t border-slate-800/80">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                <span class="text-brand-500 font-mono text-xl">01.</span> About Me
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2 text-slate-300 space-y-4 leading-relaxed">
+                    <p>
+                        I am an IT graduate student passionate about solving real-world challenges through data-driven models and intuitive web solutions.
+                    </p>
+                    <p>
+                        My current focus spans machine learning engineering, acoustic signal analysis, and building full-stack web products with modern frameworks like React, Python, and Tailwind CSS.
+                    </p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-brand-500/20 text-brand-500 flex items-center justify-center text-4xl mb-4">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Focus Areas</h3>
+                    <p class="text-slate-400 text-sm mt-2">Machine Learning • Full Stack Dev • Speech & Acoustic Processing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 border-t border-slate-800/80 bg-slate-900/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                <span class="text-brand-500 font-mono text-xl">02.</span> Technical Skills
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl">
+                    <h3 class="text-brand-500 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-laptop-code"></i> Frontend</h3>
+                    <ul class="text-slate-300 text-sm space-y-2">
+                        <li>React.js</li>
+                        <li>Tailwind CSS</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>HTML5 / CSS3</li>
+                    </ul>
+                </div>
+                <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl">
+                    <h3 class="text-brand-500 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-server"></i> Backend</h3>
+                    <ul class="text-slate-300 text-sm space-y-2">
+                        <li>Python</li>
+                        <li>Node.js / Express</li>
+                        <li>RESTful APIs</li>
+                        <li>Streamlit</li>
+                    </ul>
+                </div>
+                <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl">
+                    <h3 class="text-brand-500 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-brain"></i> AI & Data Science</h3>
+                    <ul class="text-slate-300 text-sm space-y-2">
+                        <li>PyTorch / TensorFlow</li>
+                        <li>RAG & LLM Integration</li>
+                        <li>Pandas / NumPy</li>
+                        <li>Speech Processing</li>
+                    </ul>
+                </div>
+                <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl">
+                    <h3 class="text-brand-500 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-database"></i> Databases & Tools</h3>
+                    <ul class="text-slate-300 text-sm space-y-2">
+                        <li>MongoDB</li>
+                        <li>PostgreSQL</li>
+                        <li>Git / GitHub</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 border-t border-slate-800/80">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                <span class="text-brand-500 font-mono text-xl">03.</span> Featured Projects
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-regular fa-folder-open text-3xl text-brand-500"></i>
+                            <div class="flex gap-3 text-slate-400">
+                                <a href="#" class="hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+                                <a href="#" class="hover:text-white"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Personalized Story Generator</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            An AI-powered application utilizing LLM APIs and Streamlit to create personalized interactive narratives based on user preferences.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-brand-500">
+                        <span>Python</span> • <span>Gemini API</span> • <span>Streamlit</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-regular fa-folder-open text-3xl text-brand-500"></i>
+                            <div class="flex gap-3 text-slate-400">
+                                <a href="#" class="hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+                                <a href="#" class="hover:text-white"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Stock Market LSTM Forecaster</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            A deep learning time-series forecasting pipeline using Long Short-Term Memory networks to predict market trends in real-time.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-brand-500">
+                        <span>PyTorch</span> • <span>Pandas</span> • <span>FastAPI</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-regular fa-folder-open text-3xl text-brand-500"></i>
+                            <div class="flex gap-3 text-slate-400">
+                                <a href="#" class="hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+                                <a href="#" class="hover:text-white"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">News Sentiment Pipeline</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Automated NLP pipeline extracting socio-economic news articles, processing sentiment metrics, and storing insights in MongoDB.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-brand-500">
+                        <span>MongoDB</span> • <span>TextBlob</span> • <span>Python</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 border-t border-slate-800/80 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                <span class="text-brand-500 font-mono text-xl">04.</span> Experience
+            </h2>
+            <div class="space-y-8">
+                <div class="border-l-2 border-brand-500 pl-6">
+                    <h3 class="text-lg font-bold text-white">AI/ML Intern <span class="text-brand-500">@ Tech Company</span></h3>
+                    <p class="text-xs font-mono text-slate-400 mb-3">May 2025 – July 2025</p>
+                    <ul class="list-disc list-inside text-slate-300 text-sm space-y-1">
+                        <li>Developed field extraction models and recommendation algorithms.</li>
+                        <li>Optimized data pipelines for automated processing.</li>
+                    </ul>
+                </div>
+                <div class="border-l-2 border-slate-700 pl-6">
+                    <h3 class="text-lg font-bold text-white">Business Analyst Intern <span class="text-brand-500">@ Analytics Firm</span></h3>
+                    <p class="text-xs font-mono text-slate-400 mb-3">Dec 2023 – Jun 2024</p>
+                    <ul class="list-disc list-inside text-slate-300 text-sm space-y-1">
+                        <li>Executed market research and structured exploratory data analysis using Python and Tableau.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 border-t border-slate-800/80 text-center">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-brand-500 font-mono text-sm uppercase tracking-wider mb-2">05. What's Next?</h2>
+            <h3 class="text-4xl font-extrabold text-white mb-4">Get In Touch</h3>
+            <p class="text-slate-400 mb-8 leading-relaxed">
+                Whether you have a question, want to collaborate on a research project, or simply want to say hi, my inbox is open!
+            </p>
+            <a href="mailto:your.email@example.com" class="px-8 py-4 rounded-lg bg-brand-500 hover:bg-brand-600 text-brand-950 font-bold text-lg inline-block transition">
+                Say Hello
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t border-slate-800/80 text-center text-xs text-slate-500">
+        <p>Built with HTML & Tailwind CSS. Hosted on GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
