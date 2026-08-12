@@ -1,806 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manya Singh · AI/ML Researcher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: #0a0e1a;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            color: #e2e8f0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manya Singh — AI & ML Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0e1a'/%3E%3Ctext x='32' y='43' font-family='Space Grotesk, Arial, sans-serif' font-weight='700' font-size='28' fill='%233d8f7a' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Portfolio of Manya Singh — Data Science, Speech Signal Processing, and ML Engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --surface:#0f1524;
+    --surface-2:#121a2c;
+    --text-headline:#f5f7fb;
+    --text-body:#c8d0e0;
+    --text-muted:#4a5a80;
+    --accent:#3d8f7a;
+    --line:#1c2740;
+    --danger:#b5533f;
+  }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-                        radial-gradient(ellipse at 20% 80%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite alternate;
-        }
+  [data-theme="light"]{
+    --bg:#fafaf9;
+    --surface:#ffffff;
+    --surface-2:#f3f3f1;
+    --text-headline:#14161c;
+    --text-body:#40434d;
+    --text-muted:#9a9a94;
+    --accent:#2f7a68;
+    --line:#e5e4e0;
+  }
 
-        @keyframes bgPulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text-body);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    transition:background .3s ease, color .3s ease;
+  }
+  ::selection{background:var(--accent);color:var(--bg);}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono', monospace;}
 
-        /* Floating Particles */
-        .particle-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 48px;
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:0 32px;
+  }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(56, 189, 248, 0.3);
-            border-radius: 50%;
-            animation: float linear infinite;
-        }
+  .rail{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text-muted);
+    letter-spacing:0.05em;
+    padding-top:6px;
+    position:sticky;
+    top:48px;
+    align-self:start;
+    height:0;
+  }
+  .rail span{display:block;}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
-        }
+  header{padding:80px 0 60px;}
 
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(16, 24, 44, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+  .top-meta{
+    grid-column:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-muted);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:64px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .top-meta .status{display:flex;align-items:center;gap:8px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
 
-        .glass-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 15px 45px rgba(56, 189, 248, 0.15);
-        }
+  .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(48px, 7vw, 96px);
+    line-height:0.98;
+    letter-spacing:-0.02em;
+    color:var(--text-headline);
+    margin-bottom:20px;
+    white-space:pre-line;
+  }
+  .name .accent-dot{color:var(--accent);}
 
-        /* Glow Effects */
-        .glow-text {
-            text-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
-        }
+  .role-line{display:flex;flex-wrap:wrap;gap:10px 0;align-items:baseline;margin-bottom:40px;}
+  .role-line .role{font-family:'Space Grotesk', sans-serif;font-size:20px;font-weight:500;color:var(--text-body);}
+  .role-line .sep{color:var(--text-muted);margin:0 14px;font-family:'JetBrains Mono', monospace;font-size:14px;}
 
-        .glow-border {
-            position: relative;
-            overflow: hidden;
-        }
+  .tagline{font-size:17px;font-weight:300;color:var(--text-body);max-width:620px;margin-bottom:36px;}
+  .tagline strong{color:var(--text-headline);font-weight:500;}
 
-        .glow-border::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #38bdf8, #8b5cf6, #ec4899, #38bdf8);
-            background-size: 400% 400%;
-            border-radius: inherit;
-            z-index: -1;
-            animation: gradientBorder 6s ease infinite;
-            opacity: 0.3;
-        }
+  article{padding:64px 0;border-bottom:1px solid var(--line);}
+  article:last-of-type{border-bottom:none;}
 
-        @keyframes gradientBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+  .section-head{grid-column:2;display:flex;align-items:baseline;gap:16px;margin-bottom:40px;}
+  .section-num{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--accent);letter-spacing:0.05em;}
+  .section-title{font-family:'Space Grotesk', sans-serif;font-size:28px;font-weight:600;color:var(--text-headline);letter-spacing:-0.01em;}
+  .section-body{grid-column:2;}
 
-        /* Typing Animation */
-        .typing-container {
-            display: inline-block;
-        }
+  .about-text{font-size:16px;font-weight:300;color:var(--text-body);max-width:680px;line-height:1.85;white-space:pre-line;}
+  .about-text p + p{margin-top:18px;}
 
-        .typing-text {
-            border-right: 3px solid #38bdf8;
-            animation: blink 0.8s step-end infinite;
-        }
+  .stack-list{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px;}
+  .stack-item{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--text-body);border:1px solid var(--line);padding:6px 12px;border-radius:2px;letter-spacing:0.02em;}
 
-        @keyframes blink {
-            0%, 100% { border-color: #38bdf8; }
-            50% { border-color: transparent; }
-        }
+  .xp{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:32px 0;border-top:1px solid var(--line);}
+  .xp:first-child{border-top:none;}
+  .xp-meta{padding-top:2px;}
+  .xp-role{font-family:'Space Grotesk', sans-serif;font-size:15px;font-weight:600;color:var(--text-headline);margin-bottom:4px;}
+  .xp-org{font-size:13px;color:var(--text-body);margin-bottom:8px;}
+  .xp-dates{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--text-muted);letter-spacing:0.02em;}
+  .xp-body h4{font-family:'Space Grotesk', sans-serif;font-size:15px;font-weight:600;color:var(--text-headline);margin-bottom:10px;margin-top:22px;}
+  .xp-body h4:first-child{margin-top:0;}
+  .xp-body ul{list-style:none;padding:0;}
+  .xp-body li{position:relative;padding-left:20px;font-size:14px;font-weight:300;color:var(--text-body);line-height:1.7;margin-bottom:10px;white-space:pre-line;}
+  .xp-body li::before{content:"—";position:absolute;left:0;color:var(--text-muted);}
 
-        /* Skill Bars */
-        .skill-bar {
-            height: 6px;
-            background: rgba(56, 189, 248, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
+  .project{display:grid;grid-template-columns:100px 1fr auto;gap:24px;align-items:start;padding:28px 0;border-top:1px solid var(--line);}
+  .project:first-child{border-top:none;}
+  .project-year{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--text-muted);padding-top:4px;}
+  .project-main h3{font-family:'Space Grotesk', sans-serif;font-size:20px;font-weight:600;color:var(--text-headline);margin-bottom:8px;}
+  .project-main p{font-size:14.5px;font-weight:300;color:var(--text-body);max-width:560px;margin-bottom:12px;}
+  .project-tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .project-tags span{font-family:'JetBrains Mono', monospace;font-size:10.5px;color:var(--accent);letter-spacing:0.04em;text-transform:uppercase;}
+  .project-tags span::after{content:"·";color:var(--text-muted);margin-left:8px;}
+  .project-tags span:last-child::after{content:"";}
 
-        .skill-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
-            border-radius: 10px;
-            transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
+  .pub{padding:20px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;}
+  .pub:first-child{border-top:none;}
+  .pub-title{font-size:15px;font-weight:400;color:var(--text-headline);}
+  .pub-venue{font-family:'JetBrains Mono', monospace;font-size:11.5px;color:var(--text-muted);margin-top:4px;}
 
-        .skill-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 2s infinite;
-        }
+  .contact-title{font-family:'Space Grotesk', sans-serif;font-size:clamp(32px, 5vw, 52px);font-weight:600;color:var(--text-headline);max-width:640px;line-height:1.2;margin-bottom:28px;}
+  .contact-title .accent-dot{color:var(--accent);}
+  
+  footer{grid-column:2;padding:40px 0 60px;font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;letter-spacing:0.04em;}
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Interactive 3D Tilt */
-        .tilt-card {
-            transition: transform 0.3s ease-out;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .tilt-card:hover {
-            transform: rotateX(5deg) rotateY(5deg) scale(1.02);
-        }
-
-        /* Counter Animation */
-        .counter {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Project Card Flip */
-        .flip-card {
-            perspective: 1000px;
-            height: 280px;
-            cursor: pointer;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            padding: 1.5rem;
-        }
-
-        .flip-card-front {
-            background: rgba(16, 24, 44, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.1);
-        }
-
-        .flip-card-back {
-            transform: rotateY(180deg);
-            background: rgba(56, 189, 248, 0.15);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        /* Scroll Progress */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
-            z-index: 9999;
-            transition: width 0.1s;
-        }
-
-        /* Navigation dots */
-        .nav-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(56, 189, 248, 0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-dot.active {
-            background: #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-            transform: scale(1.3);
-        }
-
-        /* Responsive tweaks */
-        @media (max-width: 768px) {
-            .flip-card {
-                height: 220px;
-            }
-        }
-    </style>
+  @media (max-width:780px){
+    .wrap{grid-template-columns:1fr;padding:0 24px;}
+    .rail{display:none;}
+    .top-meta, .section-head, .section-body, footer{grid-column:1;}
+    header{padding:48px 0 40px;}
+    .project{grid-template-columns:1fr;gap:8px;}
+    .xp{grid-template-columns:1fr;gap:10px;}
+    .pub{grid-template-columns:1fr;gap:6px;}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+</style>
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-
-    <!-- Particles -->
-    <div class="particle-container" id="particles"></div>
-
-    <!-- Navigation Dots (Fixed) -->
-    <div class="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 space-y-4 hidden lg:block">
-        <div class="nav-dot active" data-target="hero"></div>
-        <div class="nav-dot" data-target="about"></div>
-        <div class="nav-dot" data-target="skills"></div>
-        <div class="nav-dot" data-target="publications"></div>
-        <div class="nav-dot" data-target="projects"></div>
-        <div class="nav-dot" data-target="contact"></div>
+<div class="wrap">
+  <div class="top-meta">
+    <span class="status"><span class="dot"></span><span>Open to research & ML roles</span></span>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <span>Gandhinagar, IN · UTC+5:30</span>
     </div>
+  </div>
+</div>
 
-    <!-- HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-40 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-[#1e2a3a]">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white flex items-center gap-2">
-                <span class="text-sky-400">✦</span> Manya Singh
-            </a>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#about" class="text-slate-300 hover:text-sky-400 transition">About</a>
-                <a href="#skills" class="text-slate-300 hover:text-sky-400 transition">Skills</a>
-                <a href="#publications" class="text-slate-300 hover:text-sky-400 transition">Research</a>
-                <a href="#projects" class="text-slate-300 hover:text-sky-400 transition">Projects</a>
-                <a href="#contact" class="text-slate-300 hover:text-sky-400 transition">Contact</a>
-            </nav>
-            <button class="md:hidden text-white text-xl" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+<header>
+  <div class="wrap">
+    <div class="rail"><span>§ 00</span></div>
+    <div>
+      <h1 class="name">Manya<br>Singh<span class="accent-dot">.</span></h1>
+      <div class="role-line">
+        <span class="role">MSc IT Student</span><span class="sep">/</span><span class="role">ML & Data Science</span>
+      </div>
+      <p class="tagline">
+        I am deeply interested in <strong>speech signal processing</strong> and <strong>generative AI</strong> — currently building end-to-end applications integrating LLMs, vector embeddings, and full-stack architecture.
+      </p>
+    </div>
+  </div>
+</header>
+
+<article id="about">
+  <div class="wrap">
+    <div class="rail"><span>§ 01</span></div>
+    <div class="section-head"><span class="section-num">01</span><h2 class="section-title">About</h2></div>
+    <div class="section-body">
+      <div class="about-text">
+        <p>I am a graduate student pursuing a Master of Science in Information Technology at Dhirubhai Ambani University (DAIICT), having previously earned my BSc in Data Science from Navrachna University.</p>
+        <p>My technical focus spans acoustic research (analyzing vowel formants and VSA), developing modular machine learning pipelines, and deploying robust full-stack applications using modern frameworks.</p>
+      </div>
+      <div class="stack-list">
+        <span class="stack-item">Python</span>
+        <span class="stack-item">React.js</span>
+        <span class="stack-item">Tailwind CSS</span>
+        <span class="stack-item">Streamlit</span>
+        <span class="stack-item">LLMs & RAG</span>
+        <span class="stack-item">PyMongo</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article id="experience">
+  <div class="wrap">
+    <div class="rail"><span>§ 02</span></div>
+    <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Experience</h2></div>
+    <div class="section-body">
+      <div class="xp">
+        <div class="xp-meta">
+          <div class="xp-role">AI/ML Intern</div>
+          <div class="xp-org">Prokraya Tech Pvt. Ltd.</div>
+          <div class="xp-dates">May 2025 — Jul 2025 · Hyderabad</div>
         </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
-        <div class="max-w-7xl mx-auto px-6 py-20 text-center">
-            <div class="inline-block mb-6 px-4 py-2 rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-400 text-sm font-mono">
-                <i class="fas fa-circle text-[6px] text-green-400 mr-2 animate-pulse"></i>
-                Available for collaborations
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                <span class="typing-container">
-                    <span class="typing-text">Manya Singh</span>
-                </span>
-                <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400">
-                    AI/ML & Speech Researcher
-                </span>
-            </h1>
-            
-            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
-                Pushing boundaries in <span class="text-sky-400 font-semibold">Speech Acoustics</span>, 
-                <span class="text-purple-400 font-semibold">NLP</span>, and 
-                <span class="text-pink-400 font-semibold">Generative AI</span>
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#contact" class="px-8 py-3 rounded-full bg-gradient-to-r from-sky-500 to-purple-600 text-white font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all transform hover:scale-105">
-                    <i class="fas fa-paper-plane mr-2"></i> Get in Touch
-                </a>
-                <a href="#publications" class="px-8 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-sky-400 hover:text-sky-400 transition-all">
-                    <i class="fas fa-file-alt mr-2"></i> View Research
-                </a>
-            </div>
-
-            <!-- Social Icons -->
-            <div class="flex justify-center gap-6 mt-12">
-                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
-                    <i class="fab fa-github text-xl"></i>
-                </a>
-                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
-                    <i class="fab fa-linkedin-in text-xl"></i>
-                </a>
-                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
-                    <i class="fab fa-twitter text-xl"></i>
-                </a>
-                <a href="#" class="w-12 h-12 rounded-full bg-[#1a2236] flex items-center justify-center text-slate-400 hover:text-sky-400 hover:bg-sky-400/10 transition-all transform hover:scale-110">
-                    <i class="fas fa-graduation-cap text-xl"></i>
-                </a>
-            </div>
+        <div class="xp-body">
+          <ul>
+            <li>Engineered automated field extraction systems and machine learning recommendation engines.</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- ABOUT SECTION -->
-    <section id="about" class="py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold text-white mb-6">
-                        <span class="text-sky-400">About</span> Me
-                    </h2>
-                    <p class="text-slate-300 text-lg leading-relaxed mb-6">
-                        I'm a Master's researcher at DA-IICT, diving deep into the intersection of 
-                        <span class="text-sky-400">speech signal processing</span> and 
-                        <span class="text-purple-400">artificial intelligence</span>.
-                    </p>
-                    <p class="text-slate-400 leading-relaxed">
-                        My work focuses on automated acoustic analysis, formant extraction, and 
-                        geometric Vowel Space Area metrics. Beyond speech, I build 
-                        <span class="text-sky-400">RAG systems</span>, fine-tune LLMs, and 
-                        engineer full-stack AI applications.
-                    </p>
-                    
-                    <div class="grid grid-cols-3 gap-4 mt-8">
-                        <div class="glass-card p-4 rounded-xl text-center">
-                            <div class="counter" data-target="3">0</div>
-                            <p class="text-xs text-slate-400 mt-1">Publications</p>
-                        </div>
-                        <div class="glass-card p-4 rounded-xl text-center">
-                            <div class="counter" data-target="5">0</div>
-                            <p class="text-xs text-slate-400 mt-1">Projects</p>
-                        </div>
-                        <div class="glass-card p-4 rounded-xl text-center">
-                            <div class="counter" data-target="2">0</div>
-                            <p class="text-xs text-slate-400 mt-1">Years Research</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-8 rounded-2xl glow-border">
-                    <h3 class="text-xl font-bold text-white mb-4">Quick Stats</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span class="text-slate-300">Speech Processing</span>
-                                <span class="text-sky-400 font-mono">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span class="text-slate-300">Machine Learning</span>
-                                <span class="text-sky-400 font-mono">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span class="text-slate-300">NLP / LLMs</span>
-                                <span class="text-sky-400 font-mono">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span class="text-slate-300">Full-Stack AI</span>
-                                <span class="text-sky-400 font-mono">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="xp">
+        <div class="xp-meta">
+          <div class="xp-role">Business Analyst Intern</div>
+          <div class="xp-org">Centurion Remedies Pvt. Ltd.</div>
+          <div class="xp-dates">Dec 2023 — Jun 2024</div>
         </div>
-    </section>
-
-    <!-- SKILLS / DOMAINS SECTION -->
-    <section id="skills" class="py-20 bg-[#0d1225]">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-white text-center mb-4">
-                Research <span class="text-sky-400">Domains</span>
-            </h2>
-            <p class="text-slate-400 text-center mb-12">Areas where I'm pushing the boundaries</p>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-sky-400 transition-all">
-                    <div class="w-20 h-20 rounded-full bg-sky-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-sky-400/20 transition-all">
-                        <i class="fas fa-waveform text-3xl text-sky-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Speech Acoustics</h3>
-                    <p class="text-slate-400 text-sm">
-                        F₀ trajectories, formant analysis, Vowel Space Area metrics, and prosodic features extraction from multilingual speech.
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center mt-4">
-                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Praat</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Librosa</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Parselmouth</span>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-purple-400 transition-all">
-                    <div class="w-20 h-20 rounded-full bg-purple-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-400/20 transition-all">
-                        <i class="fas fa-language text-3xl text-purple-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">NLP &amp; LLMs</h3>
-                    <p class="text-slate-400 text-sm">
-                        RAG architectures, vector embeddings, fine-tuning, sentiment analysis, and generative storytelling systems.
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center mt-4">
-                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">PyTorch</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">HuggingFace</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">Gemini</span>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-pink-400 transition-all">
-                    <div class="w-20 h-20 rounded-full bg-pink-400/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-400/20 transition-all">
-                        <i class="fas fa-eye text-3xl text-pink-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Computer Vision</h3>
-                    <p class="text-slate-400 text-sm">
-                        Multimodal learning, vision-language models, and integrating visual understanding with speech and text.
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center mt-4">
-                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">OpenCV</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">CLIP</span>
-                        <span class="text-xs px-3 py-1 rounded-full bg-pink-400/10 text-pink-400 border border-pink-400/20">ViT</span>
-                    </div>
-                </div>
-            </div>
+        <div class="xp-body">
+          <ul>
+            <li>Conducted market research and data visualization utilizing Python, Tableau, and R.</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</article>
 
-    <!-- PUBLICATIONS -->
-    <section id="publications" class="py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-white text-center mb-4">
-                Recent <span class="text-sky-400">Publications</span>
-            </h2>
-            <p class="text-slate-400 text-center mb-12">Research contributions to the field</p>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="glass-card p-6 rounded-2xl hover:border-sky-400/30 transition-all">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-xs px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 border border-sky-400/20">Preprint</span>
-                        <span class="text-xs text-slate-500">2026</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Automated Formant Trajectory &amp; VSA Dynamics in Multilingual Speech</h3>
-                    <p class="text-sm text-slate-400 font-mono mb-3"><span class="text-sky-400">Manya Singh</span> · Research Guide</p>
-                    <p class="text-sm text-slate-300 mb-4">Praat/Parselmouth pipeline for F₁, F₂ extraction and Euclidean VSA metrics over continuous acoustic signals.</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-xs text-sky-400 hover:text-white transition"><i class="fas fa-file-pdf mr-1"></i> PDF</a>
-                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-code mr-1"></i> Code</a>
-                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-quote-right mr-1"></i> Cite</a>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-6 rounded-2xl hover:border-purple-400/30 transition-all">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">Conference</span>
-                        <span class="text-xs text-slate-500">2025</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Socio-Economic News Sentiment Analysis via PyMongo Pipelines</h3>
-                    <p class="text-sm text-slate-400 font-mono mb-3"><span class="text-sky-400">Manya Singh</span> · Co-author</p>
-                    <p class="text-sm text-slate-300 mb-4">NLP sentiment pipelines indexing real-time socio-economic news with MongoDB &amp; Transformers.</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-xs text-sky-400 hover:text-white transition"><i class="fas fa-file-pdf mr-1"></i> PDF</a>
-                        <a href="#" class="text-xs text-slate-400 hover:text-white transition"><i class="fas fa-code mr-1"></i> Code</a>
-                    </div>
-                </div>
-            </div>
+<article id="work">
+  <div class="wrap">
+    <div class="rail"><span>§ 03</span></div>
+    <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Projects</h2></div>
+    <div class="section-body">
+      <div class="project">
+        <div class="project-year mono">2026</div>
+        <div class="project-main">
+          <h3>Stock LSTM Forecaster</h3>
+          <p>Constructed a production-ready stock market forecasting system utilizing Long Short-Term Memory (LSTM) networks for real-time time-series analysis.</p>
+          <div class="project-tags"><span>Python</span><span>LSTM</span><span>Time-Series</span></div>
         </div>
-    </section>
-
-    <!-- PROJECTS (Interactive Flip Cards) -->
-    <section id="projects" class="py-20 bg-[#0d1225]">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-white text-center mb-4">
-                Featured <span class="text-sky-400">Projects</span>
-            </h2>
-            <p class="text-slate-400 text-center mb-12">Hover to flip and learn more</p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i class="fas fa-waveform text-3xl text-sky-400 mb-3"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">Formant &amp; VSA Plotter</h3>
-                            <p class="text-sm text-slate-400">Automated speech processing for F₀, formant contours, and VSA extraction.</p>
-                            <div class="flex flex-wrap gap-2 mt-4">
-                                <span class="text-xs px-2 py-1 rounded bg-sky-400/10 text-sky-400">Python</span>
-                                <span class="text-xs px-2 py-1 rounded bg-sky-400/10 text-sky-400">Praat</span>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-code text-4xl text-sky-400 mb-3"></i>
-                            <p class="text-center text-sm text-white">Interactive dashboard for acoustic analysis with real-time visualization</p>
-                            <a href="#" class="mt-4 text-sky-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i class="fas fa-robot text-3xl text-purple-400 mb-3"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">AI Story Generator</h3>
-                            <p class="text-sm text-slate-400">LLM-driven narrative with Gemini API and Streamlit interface.</p>
-                            <div class="flex flex-wrap gap-2 mt-4">
-                                <span class="text-xs px-2 py-1 rounded bg-purple-400/10 text-purple-400">Python</span>
-                                <span class="text-xs px-2 py-1 rounded bg-purple-400/10 text-purple-400">Gemini</span>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-pen-fancy text-4xl text-purple-400 mb-3"></i>
-                            <p class="text-center text-sm text-white">Customizable story generation with style control and interactive UI</p>
-                            <a href="#" class="mt-4 text-purple-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i class="fas fa-database text-3xl text-pink-400 mb-3"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">Multilingual Acoustic Corpus</h3>
-                            <p class="text-sm text-slate-400">Pipeline for aligning and extracting features from multilingual speech.</p>
-                            <div class="flex flex-wrap gap-2 mt-4">
-                                <span class="text-xs px-2 py-1 rounded bg-pink-400/10 text-pink-400">Parselmouth</span>
-                                <span class="text-xs px-2 py-1 rounded bg-pink-400/10 text-pink-400">NumPy</span>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-microphone text-4xl text-pink-400 mb-3"></i>
-                            <p class="text-center text-sm text-white">End-to-end feature extraction for cross-lingual acoustic analysis</p>
-                            <a href="#" class="mt-4 text-pink-400 hover:text-white transition"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="project">
+        <div class="project-year mono">2025</div>
+        <div class="project-main">
+          <h3>Personalised Story Maker</h3>
+          <p>Developed an interactive web application utilizing the Gemini LLM API and Streamlit to generate dynamic narrative content based on user parameters.</p>
+          <div class="project-tags"><span>Gemini API</span><span>Streamlit</span><span>GenAI</span></div>
         </div>
-    </section>
-
-    <!-- INTERACTIVE TIMELINE / NEWS -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-white text-center mb-4">
-                Latest <span class="text-sky-400">Updates</span>
-            </h2>
-            <p class="text-slate-400 text-center mb-12">What's happening in my research journey</p>
-            
-            <div class="space-y-4 max-w-3xl mx-auto">
-                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-sky-400/30 transition-all">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-sky-400/10 flex items-center justify-center">
-                        <i class="fas fa-flask text-sky-400"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-sky-400 font-mono">April 2026</span>
-                        <h4 class="text-white font-semibold mt-1">Automated VSA Shoelace Algorithm</h4>
-                        <p class="text-sm text-slate-400">Formulated continuous speech evaluation metrics for Vowel Space Area analysis.</p>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-purple-400/30 transition-all">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-400/10 flex items-center justify-center">
-                        <i class="fas fa-flask text-purple-400"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-purple-400 font-mono">March 2026</span>
-                        <h4 class="text-white font-semibold mt-1">NLP &amp; Speech Processing Lab</h4>
-                        <p class="text-sm text-slate-400">Joined the research lab focusing on computational acoustic representations.</p>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 hover:border-pink-400/30 transition-all">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-pink-400/10 flex items-center justify-center">
-                        <i class="fas fa-briefcase text-pink-400"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-pink-400 font-mono">May 2025</span>
-                        <h4 class="text-white font-semibold mt-1">AI/ML Internship @ Prokraya Tech</h4>
-                        <p class="text-sm text-slate-400">Worked on automated field extraction and recommendation algorithms.</p>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="project">
+        <div class="project-year mono">2025</div>
+        <div class="project-main">
+          <h3>Socio-Economic Sentiment Pipeline</h3>
+          <p>Engineered a sentiment analysis pipeline for news articles integrating PyMongo, TextBlob, and the Google News API.</p>
+          <div class="project-tags"><span>PyMongo</span><span>TextBlob</span><span>NLP</span></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</article>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-20 bg-[#0d1225]">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold text-white mb-4">
-                Let's <span class="text-sky-400">Connect</span>
-            </h2>
-            <p class="text-slate-400 mb-8 max-w-md mx-auto">
-                Open to collaborations, research discussions, and academic inquiries.
-            </p>
-            
-            <div class="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
-                <a href="mailto:your.email@example.com" class="text-xl text-sky-400 hover:text-white transition font-mono">
-                    <i class="fas fa-envelope mr-3"></i> your.email@example.com
-                </a>
-                <div class="flex justify-center gap-6 mt-6">
-                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-slate-400 hover:text-sky-400 transition text-2xl transform hover:scale-110">
-                        <i class="fab fa-google-scholar"></i>
-                    </a>
-                </div>
-            </div>
+<article id="research">
+  <div class="wrap">
+    <div class="rail"><span>§ 04</span></div>
+    <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Research</h2></div>
+    <div class="section-body">
+      <div class="pub">
+        <div>
+          <div class="pub-title">Acoustic Signal Analysis & Vowel Space Area (VSA)</div>
+          <div class="pub-venue mono">Research Project · Apr 2026</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</article>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-[#1e2a3a] py-8 text-center text-sm text-slate-500">
-        <p>© 2026 Manya Singh. Built with <i class="fas fa-heart text-sky-400"></i> and interactive design.</p>
-    </footer>
+<article id="contact">
+  <div class="wrap">
+    <div class="rail"><span>§ 05</span></div>
+    <div class="section-body" style="grid-column:1 / -1;">
+      <h2 class="contact-title">Building something interesting? Let's talk<span class="accent-dot">.</span></h2>
+      <p class="mono" style="font-size:12.5px; color:var(--text-muted); margin-bottom:24px;">
+        MSc IT, DAIICT (2024–Present) · BSc Data Science, Navrachna University (2024)
+      </p>
+    </div>
+  </div>
+</article>
 
-    <!-- JavaScript for Interactions -->
-    <script>
-        // 1. Generate Particles
-        (function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = (Math.random() * 4 + 2) + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-                particle.style.animationDelay = (Math.random() * 10) + 's';
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                container.appendChild(particle);
-            }
-        })();
+<div class="wrap">
+  <footer>
+    <span id="v-footer-left">Made by Manya & Monika</span>
+    <span id="v-footer-right"></span>
+  </footer>
+</div>
 
-        // 2. Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            document.getElementById('scrollProgress').style.width = progress + '%';
-        });
-
-        // 3. Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                let current = 0;
-                const increment = target / 30;
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.ceil(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                updateCounter();
-            });
-        }
-
-        // 4. Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (entry.target.classList.contains('counter')) {
-                        animateCounters();
-                    }
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, observerOptions);
-
-        // Observe counters
-        document.querySelectorAll('.counter').forEach(el => observer.observe(el));
-
-        // 5. Smooth navigation dots
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.addEventListener('click', () => {
-                const target = dot.getAttribute('data-target');
-                document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // 6. Update active nav dot on scroll
-        const sections = ['hero', 'about', 'skills', 'publications', 'projects', 'contact'];
-        const navDots = document.querySelectorAll('.nav-dot');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= 100) {
-                        current = section;
-                    }
-                }
-            });
-
-            navDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-target') === current) {
-                    dot.classList.add('active');
-                }
-            });
-        });
-
-        // 7. Mobile Menu Toggle (simple)
-        document.getElementById('menuToggle')?.addEventListener('click', function() {
-            const nav = document.querySelector('nav');
-            if (nav) {
-                nav.classList.toggle('hidden');
-                nav.classList.toggle('flex');
-                nav.classList.toggle('flex-col');
-                nav.classList.toggle('absolute');
-                nav.classList.toggle('top-16');
-                nav.classList.toggle('left-0');
-                nav.classList.toggle('right-0');
-                nav.classList.toggle('bg-[#0a0e1a]/95');
-                nav.classList.toggle('p-6');
-                nav.classList.toggle('gap-4');
-            }
-        });
-
-        // 8. Trigger counter animation on load
-        setTimeout(animateCounters, 500);
-
-        console.log('🚀 Portfolio loaded! Interactive features enabled.');
-    </script>
 </body>
 </html>
