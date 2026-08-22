@@ -80,11 +80,21 @@
   .links-row{
     margin-top:28px;
     display:flex;gap:22px;flex-wrap:wrap;
+    align-items:center;
     font-family:'JetBrains Mono', monospace;
     font-size:12.5px;
   }
   .links-row a{border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s, color .2s;}
   .links-row a:hover{color:var(--accent);border-color:var(--accent);}
+  .cv-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--ink)!important;
+    background:var(--ink);color:var(--paper)!important;
+    padding:8px 14px;border-radius:2px;
+    letter-spacing:.03em;
+  }
+  .cv-btn:hover{background:var(--accent);border-color:var(--accent)!important;color:var(--paper)!important;}
+  .cv-btn svg{width:12px;height:12px;}
 
   /* signature: annotated waveform */
   .waveform-block{margin:44px 0 8px;}
@@ -213,6 +223,10 @@
       <a href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">linkedin</a>
       <a href="https://github.com/manyasiingh" target="_blank" rel="noopener">github</a>
       <a href="https://leetcode.com/manyaasingh" target="_blank" rel="noopener">leetcode</a>
+      <a class="cv-btn" href="Manya_Singh_Resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        Download CV
+      </a>
     </div>
 
     <div class="waveform-block">
@@ -267,7 +281,7 @@
       <div>
         <div class="xp-role">Research Intern</div>
         <div class="xp-org">Speech Research Lab @ DAIICT</div>
-        <div class="xp-dates">JUL 2025 – PRESENT · GANDHINAGAR, IN</div>
+        <div class="xp-dates">APR 2026 – PRESENT · GANDHINAGAR, IN</div>
       </div>
       <div class="xp-body">
         <ul>
@@ -283,7 +297,7 @@
       <div>
         <div class="xp-role">AI/ML Engineer Intern</div>
         <div class="xp-org">Prokraya Tech Pvt. Ltd</div>
-        <div class="xp-dates">JAN 2025 – JUN 2025 · HYDERABAD, IN</div>
+        <div class="xp-dates">MAY 2025 – JUL 2025 · HYDERABAD, IN</div>
       </div>
       <div class="xp-body">
         <ul>
