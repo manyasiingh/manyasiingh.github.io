@@ -4,261 +4,292 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manya Singh — Research Profile</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0e1a'/%3E%3Ctext x='32' y='43' font-family='Space Grotesk, Arial, sans-serif' font-weight='700' font-size='28' fill='%233d8f7a' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
-<meta name="description" content="Research profile of Manya Singh. Focus on Speech Processing, Dysarthric Speech Analysis, and Multilingual Reasoning in LLMs.">
+<meta name="description" content="Research profile of Manya Singh. Speech processing, dysarthric speech analysis, SSL representations, and multilingual reasoning in LLMs.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0e1a;
-    --surface:#0f1524;
-    --surface-2:#121a2c;
-    --text-headline:#f5f7fb;
-    --text-body:#c8d0e0;
-    --text-muted:#4a5a80;
-    --accent:#3d8f7a;
-    --line:#1c2740;
-    --danger:#b5533f;
+    --paper:#eef0e9;
+    --paper-2:#e6e9df;
+    --ink:#1b211d;
+    --body:#3d453f;
+    --muted:#848d84;
+    --line:#d3d8cb;
+    --accent:#a83c2e;   /* clinical annotation red, brick not terracotta */
+    --accent-soft:#c98e83;
+    --sage:#48645a;     /* deep sage-teal, secondary marker */
   }
-
-  [data-theme="light"]{
-    --bg:#fafaf9;
-    --surface:#ffffff;
-    --surface-2:#f3f3f1;
-    --text-headline:#14161c;
-    --text-body:#40434d;
-    --text-muted:#9a9a94;
-    --accent:#2f7a68;
-    --line:#e5e4e0;
-  }
-
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--text-body);
+    background:var(--paper);
+    color:var(--body);
     font-family:'Inter', sans-serif;
     font-weight:300;
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    transition:background .3s ease, color .3s ease;
   }
-  ::selection{background:var(--accent);color:var(--bg);}
   a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:var(--paper);}
   .mono{font-family:'JetBrains Mono', monospace;}
+  em{font-style:italic;}
 
-  .wrap{
-    max-width:1180px;
-    margin:0 auto;
-    padding:0 48px;
-    display:grid;
-    grid-template-columns:64px 1fr;
-    gap:0 32px;
-  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 40px;}
 
-  .rail{
+  /* running header, journal-style */
+  .masthead{
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
     font-family:'JetBrains Mono', monospace;
     font-size:11px;
-    color:var(--text-muted);
-    letter-spacing:0.05em;
-    padding-top:6px;
-    position:sticky;
-    top:48px;
-    align-self:start;
-    height:0;
-  }
-  .rail span{display:block;}
-
-  header{padding:80px 0 60px;}
-
-  .top-meta{
-    grid-column:2;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--text-muted);
-    letter-spacing:0.08em;
+    letter-spacing:.06em;
     text-transform:uppercase;
-    margin-bottom:64px;
-    padding-bottom:20px;
-    border-bottom:1px solid var(--line);
-    flex-wrap:wrap;
-    gap:12px;
+    color:var(--muted);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
   }
-  .top-meta .status{display:flex;align-items:center;gap:8px;}
-  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .masthead .tick{color:var(--accent);}
 
+  /* hero */
+  header{padding:76px 0 40px;}
   .name{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:clamp(48px, 7vw, 96px);
-    line-height:0.98;
-    letter-spacing:-0.02em;
-    color:var(--text-headline);
-    margin-bottom:20px;
-    white-space:pre-line;
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:clamp(42px,7vw,74px);
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    line-height:1.05;
   }
-  .name .accent-dot{color:var(--accent);}
+  .name i{font-style:italic;font-weight:400;color:var(--accent);}
+  .role-line{
+    margin-top:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.02em;
+    color:var(--sage);
+  }
+  .tagline{
+    margin-top:26px;
+    font-size:17px;
+    font-weight:300;
+    max-width:620px;
+    color:var(--body);
+  }
+  .tagline strong{color:var(--ink);font-weight:500;}
 
-  .role-line{display:flex;flex-wrap:wrap;gap:10px 0;align-items:baseline;margin-bottom:40px;}
-  .role-line .role{font-family:'Space Grotesk', sans-serif;font-size:20px;font-weight:500;color:var(--text-body);}
-  .role-line .sep{color:var(--text-muted);margin:0 14px;font-family:'JetBrains Mono', monospace;font-size:14px;}
-
-  .tagline{font-size:17px;font-weight:300;color:var(--text-body);max-width:720px;margin-bottom:36px;}
-  .tagline strong{color:var(--text-headline);font-weight:500;}
-
-  .links-row{display:flex;gap:28px;flex-wrap:wrap;font-family:'JetBrains Mono', monospace;font-size:13px;}
-  .links-row a{color:var(--text-body);border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s ease, border-color .2s ease;}
+  .links-row{
+    margin-top:28px;
+    display:flex;gap:22px;flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+  }
+  .links-row a{border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s, color .2s;}
   .links-row a:hover{color:var(--accent);border-color:var(--accent);}
 
-  article{padding:64px 0;border-bottom:1px solid var(--line);}
-  article:last-of-type{border-bottom:none;}
+  /* signature: annotated waveform */
+  .waveform-block{margin:44px 0 8px;}
+  .waveform-caption{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-top:8px;
+  }
 
-  .section-head{grid-column:2;display:flex;align-items:baseline;gap:16px;margin-bottom:40px;}
-  .section-num{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--accent);letter-spacing:0.05em;}
-  .section-title{font-family:'Space Grotesk', sans-serif;font-size:28px;font-weight:600;color:var(--text-headline);letter-spacing:-0.01em;}
-  .section-body{grid-column:2;}
+  article{padding:52px 0;border-top:1px solid var(--line);}
 
-  .about-text{font-size:16px;font-weight:300;color:var(--text-body);max-width:680px;line-height:1.85;white-space:pre-line;}
-  .about-text p + p{margin-top:18px;}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:32px;}
+  .section-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--accent);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .section-tag::before{content:"§ ";}
+  .section-title{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:26px;
+    color:var(--ink);
+  }
 
-  .stack-list{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px;}
-  .stack-item{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--text-body);border:1px solid var(--line);padding:6px 12px;border-radius:2px;letter-spacing:0.02em;}
+  .about-text{font-size:16px;max-width:640px;}
+  .about-text p + p{margin-top:16px;}
 
-  .xp{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:32px 0;border-top:1px solid var(--line);}
-  .xp:first-child{border-top:none;}
-  .xp-meta{padding-top:2px;}
-  .xp-role{font-family:'Space Grotesk', sans-serif;font-size:15px;font-weight:600;color:var(--text-headline);margin-bottom:4px;}
-  .xp-org{font-size:13px;color:var(--text-body);margin-bottom:8px;}
-  .xp-dates{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--text-muted);letter-spacing:0.02em;}
-  .xp-body h4{font-family:'Space Grotesk', sans-serif;font-size:15px;font-weight:600;color:var(--text-headline);margin-bottom:10px;margin-top:22px;}
-  .xp-body h4:first-child{margin-top:0;}
-  .xp-body ul{list-style:none;padding:0;}
-  .xp-body li{position:relative;padding-left:20px;font-size:14px;font-weight:300;color:var(--text-body);line-height:1.7;margin-bottom:10px;white-space:pre-line;}
-  .xp-body li::before{content:"—";position:absolute;left:0;color:var(--text-muted);}
+  .stack-list{margin-top:30px;display:flex;flex-wrap:wrap;gap:9px;}
+  .stack-item{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--body);
+    border:1px solid var(--line);
+    background:var(--paper-2);
+    padding:6px 11px;
+    border-radius:2px;
+  }
 
-  .project{display:grid;grid-template-columns:100px 1fr auto;gap:24px;align-items:start;padding:28px 0;border-top:1px solid var(--line);}
-  .project:first-child{border-top:none;}
-  .project-year{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--text-muted);padding-top:4px;}
-  .project-main h3{font-family:'Space Grotesk', sans-serif;font-size:20px;font-weight:600;color:var(--text-headline);margin-bottom:8px;}
-  .project-main p{font-size:14.5px;font-weight:300;color:var(--text-body);max-width:560px;margin-bottom:12px;}
-  .project-tags{display:flex;gap:8px;flex-wrap:wrap;}
-  .project-tags span{font-family:'JetBrains Mono', monospace;font-size:10.5px;color:var(--accent);letter-spacing:0.04em;text-transform:uppercase;}
-  .project-tags span::after{content:"·";color:var(--text-muted);margin-left:8px;}
+  .xp{display:grid;grid-template-columns:190px 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--line);}
+  .xp:first-child{border-top:none;padding-top:0;}
+  .xp-role{font-family:'Newsreader', serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+  .xp-org{font-size:13px;color:var(--body);margin-bottom:6px;}
+  .xp-dates{font-family:'JetBrains Mono', monospace;font-size:10.5px;color:var(--muted);}
+  .xp-body ul{list-style:none;}
+  .xp-body li{position:relative;padding-left:18px;font-size:13.5px;font-weight:300;color:var(--body);line-height:1.7;margin-bottom:9px;}
+  .xp-body li::before{content:"–";position:absolute;left:0;color:var(--accent);}
+
+  .project{padding:24px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:12px 24px;align-items:start;}
+  .project:first-child{border-top:none;padding-top:0;}
+  .project-status{
+    font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--sage);
+    letter-spacing:.06em;text-transform:uppercase;
+    border:1px solid var(--sage);border-radius:2px;padding:3px 8px;height:fit-content;
+  }
+  .project-main h3{font-family:'Newsreader', serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:7px;grid-column:1;}
+  .project-main p{font-size:14px;font-weight:300;max-width:600px;margin-bottom:10px;grid-column:1;}
+  .project-tags{grid-column:1;display:flex;gap:8px;flex-wrap:wrap;}
+  .project-tags span{font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;}
+  .project-tags span::after{content:"·";color:var(--muted);margin-left:8px;}
   .project-tags span:last-child::after{content:"";}
 
-  .pub{padding:20px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;}
-  .pub:first-child{border-top:none;}
-  .pub-title{font-size:15px;font-weight:400;color:var(--text-headline);}
-  .pub-venue{font-family:'JetBrains Mono', monospace;font-size:11.5px;color:var(--text-muted);margin-top:4px;}
-  .pub-link{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--accent);}
-
-  .contact-title{font-family:'Space Grotesk', sans-serif;font-size:clamp(32px, 5vw, 52px);font-weight:600;color:var(--text-headline);max-width:640px;line-height:1.2;margin-bottom:28px;}
-  .contact-title .accent-dot{color:var(--accent);}
-  
-  footer{grid-column:2;padding:40px 0 60px;font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;letter-spacing:0.04em;}
-
-  @media (max-width:780px){
-    .wrap{grid-template-columns:1fr;padding:0 24px;}
-    .rail{display:none;}
-    .top-meta, .section-head, .section-body, footer{grid-column:1;}
-    header{padding:48px 0 40px;}
-    .project{grid-template-columns:1fr;gap:8px;}
-    .xp{grid-template-columns:1fr;gap:10px;}
-    .pub{grid-template-columns:1fr;gap:6px;}
+  .pub{padding:20px 0;border-top:1px solid var(--line);}
+  .pub:first-child{border-top:none;padding-top:0;}
+  .pub-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
+  .pub-title{font-family:'Newsreader', serif;font-size:16px;font-weight:500;color:var(--ink);max-width:600px;}
+  .pub-venue{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);white-space:nowrap;}
+  .pub-status{
+    display:inline-block;margin-top:8px;
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+    padding:3px 8px;border-radius:2px;
   }
-  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+  .pub-status.accepted{color:var(--sage);border:1px solid var(--sage);}
+  .pub-status.review{color:var(--accent);border:1px solid var(--accent-soft);}
+  .pub-note{font-size:12.5px;color:var(--body);margin-top:8px;max-width:600px;}
+
+  .edu{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--line);flex-wrap:wrap;}
+  .edu:first-child{border-top:none;padding-top:0;}
+  .edu-school{font-family:'Newsreader', serif;font-size:16px;color:var(--ink);}
+  .edu-degree{font-size:13px;color:var(--body);margin-top:2px;}
+  .edu-meta{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);text-align:right;}
+
+  .contact-title{
+    font-family:'Newsreader', serif;font-style:italic;font-weight:500;
+    font-size:clamp(28px,4.5vw,42px);color:var(--ink);max-width:600px;line-height:1.25;margin-bottom:20px;
+  }
+  .contact-sub{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);}
+
+  footer{padding:36px 0;border-top:1px solid var(--line);font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:700px){
+    .xp{grid-template-columns:1fr;gap:8px;}
+    .pub-top{flex-direction:column;align-items:flex-start;}
+    .edu{flex-direction:column;gap:4px;}
+    .edu-meta{text-align:left;}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <div class="top-meta">
-    <span class="status"><span class="dot"></span><span>Open to research & ML roles</span></span>
-    <div style="display:flex;align-items:center;gap:20px;">
-      <span>Gandhinagar, IN · UTC+5:30</span>
-    </div>
+  <div class="masthead">
+    <span><span class="tick">●</span>&nbsp; Open to research &amp; ML roles</span>
+    <span>Gandhinagar, IN · UTC+5:30</span>
   </div>
 </div>
 
 <header>
   <div class="wrap">
-    <div class="rail"><span>§ 00</span></div>
-    <div>
-      <h1 class="name">Manya<br>Singh<span class="accent-dot">.</span></h1>
-      <div class="role-line">
-        <span class="role">AI/ML Researcher</span><span class="sep">/</span><span class="role">AI/ML Engineer</span>
-      </div>
-      <p class="tagline">
-        Interested in developing clinically interpretable and linguistically-aware speech models, with a focus on low-resource languages and atypical speech. Currently investigating articulatory feature preservation in SSL models and reproducibility of activation-steering methods for multilingual reasoning.
-      </p>
-      <div class="links-row">
-        <a href="mailto:manya230702@gmail.com">manya230702@gmail.com</a>
-        <a href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">linkedin.com/in/manyasiingh</a>
-        <a href="https://github.com/manyasiingh" target="_blank" rel="noopener">github.com/manyasiingh</a>
-        <a href="https://leetcode.com/manyaasingh" target="_blank" rel="noopener">leetcode.com/manyaasingh</a>
-      </div>
+    <h1 class="name">Manya Singh<i>.</i></h1>
+    <div class="role-line">AI/ML RESEARCHER — SPEECH &amp; LANGUAGE</div>
+    <p class="tagline">
+      I build <strong>clinically interpretable, linguistically-aware</strong> speech models for low-resource languages and atypical speech. Right now: articulatory feature preservation in self-supervised models, and the reproducibility of activation-steering methods for multilingual LLM reasoning.
+    </p>
+    <div class="links-row">
+      <a href="mailto:manya230702@gmail.com">manya230702@gmail.com</a>
+      <a href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">linkedin</a>
+      <a href="https://github.com/manyasiingh" target="_blank" rel="noopener">github</a>
+      <a href="https://leetcode.com/manyaasingh" target="_blank" rel="noopener">leetcode</a>
+    </div>
+
+    <div class="waveform-block">
+      <svg viewBox="0 0 900 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Annotated speech waveform, styled to reflect articulatory feature analysis">
+        <line x1="0" y1="65" x2="900" y2="65" stroke="#d3d8cb" stroke-width="1"/>
+        <path d="M0,65 L14,60 L28,72 L42,50 L56,80 L70,58 L84,66 L98,40 L112,90 L126,62 L140,68
+                 L154,48 L168,78 L182,55 L196,72 L210,60 L224,88 L238,45 L252,66 L266,70
+                 L280,52 L294,74 L308,62 L322,40 L336,92 L350,58 L364,66 L378,50 L392,80
+                 L406,60 L420,68 L434,44 L448,86 L462,62 L476,70 L490,54 L504,76 L518,60
+                 L532,66 L546,42 L560,88 L574,58 L588,70 L602,64 L616,50 L630,80 L644,60
+                 L658,68 L672,46 L686,84 L700,62 L714,66 L728,52 L742,74 L756,60 L770,68
+                 L784,44 L798,86 L812,62 L826,70 L840,58 L854,66 L868,50 L882,78 L896,64"
+              fill="none" stroke="#48645a" stroke-width="1.3" opacity="0.85"/>
+        <rect x="98" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="100" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">PLACE / MANNER</text>
+        <rect x="322" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="324" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">VOICING</text>
+        <rect x="546" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="548" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">ASPIRATION</text>
+        <rect x="770" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="772" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">RETROFLEX/DENTAL</text>
+      </svg>
+      <div class="waveform-caption">fig. — articulatory contrasts probed across SSL representations, Hindi dysarthric speech</div>
     </div>
   </div>
 </header>
 
 <article id="about">
   <div class="wrap">
-    <div class="rail"><span>§ 01</span></div>
-    <div class="section-head"><span class="section-num">01</span><h2 class="section-title">About</h2></div>
-    <div class="section-body">
-      <div class="about-text">
-        <p>I am an MSc Information Technology candidate at Dhirubhai Ambani University (DAIICT). My research focus encompasses Speech Processing, Dysarthric Speech Analysis, Self-Supervised Learning (SSL) Representations, Multilingual Reasoning in LLMs, and Interpretable Machine Learning for Clinical Applications.</p>
-        <p>Prior to this, I completed my BSc in Data Science at Navrachna University.</p>
-      </div>
-      <div class="stack-list">
-        <span class="stack-item">Python</span>
-        <span class="stack-item">PyTorch</span>
-        <span class="stack-item">HuggingFace</span>
-        <span class="stack-item">XGBoost</span>
-        <span class="stack-item">AWS / Azure</span>
-        <span class="stack-item">React.js</span>
-      </div>
+    <div class="section-head"><span class="section-tag">01</span><h2 class="section-title">About</h2></div>
+    <div class="about-text">
+      <p>I'm an MSc student at DAIICT, working as a research intern at the Speech Research Lab, where I study how self-supervised speech models represent — and lose — articulatory information under dysarthria. Most of my work sits at the intersection of clinical speech-language pathology and representation learning: building features that a speech-language pathologist could actually use, not just a benchmark number.</p>
+      <p>Alongside this, I've been reproducing recent activation-steering work for multilingual LLM reasoning, tracking down the bugs that reproducibility studies tend to surface. Before DAIICT, I completed my BSc in Data Science at Navrachna University.</p>
+    </div>
+    <div class="stack-list">
+      <span class="stack-item">Python</span>
+      <span class="stack-item">PyTorch</span>
+      <span class="stack-item">HuggingFace</span>
+      <span class="stack-item">TensorFlow</span>
+      <span class="stack-item">Scikit-learn / XGBoost</span>
+      <span class="stack-item">AWS / Azure</span>
+      <span class="stack-item">React.js</span>
     </div>
   </div>
 </article>
 
 <article id="experience">
   <div class="wrap">
-    <div class="rail"><span>§ 02</span></div>
-    <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Experience</h2></div>
-    <div class="section-body">
-      <div class="xp">
-        <div class="xp-meta">
-          <div class="xp-role">Research Intern</div>
-          <div class="xp-org">Speech Research Lab @DAU</div>
-          <div class="xp-dates">Jul 2025 – Present · Gandhinagar, IN</div>
-        </div>
-        <div class="xp-body">
-          <ul>
-            <li>Conducted research on dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features (place/manner, voicing, aspiration) for Hindi speech.</li>
-            <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) for normal vs. dysarthric speech identification.</li>
-            <li>Developed novel DTW-based features over phoneme-posterior grams for clinically interpretable dysarthria classification.</li>
-          </ul>
-        </div>
+    <div class="section-head"><span class="section-tag">02</span><h2 class="section-title">Experience</h2></div>
+
+    <div class="xp">
+      <div>
+        <div class="xp-role">Research Intern</div>
+        <div class="xp-org">Speech Research Lab @ DAIICT</div>
+        <div class="xp-dates">JUL 2025 – PRESENT · GANDHINAGAR, IN</div>
       </div>
-      <div class="xp">
-        <div class="xp-meta">
-          <div class="xp-role">AI/ML Engineer Intern</div>
-          <div class="xp-org">Prokraya Tech Pvt. Ltd</div>
-          <div class="xp-dates">Jan 2025 – Jun 2025 · Hyderabad, IN</div>
-        </div>
-        <div class="xp-body">
-          <ul>
-            <li>Engineered automated invoice extraction using Azure Document Intelligence achieving 90% accuracy; designed RESTful APIs for seamless integration.</li>
-            <li>Built AI-powered bid insight system for supplier recommendation, achieving 86.4% accuracy using XGBoost.</li>
-          </ul>
-        </div>
+      <div class="xp-body">
+        <ul>
+          <li>Research dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features — place/manner, voicing, aspiration — for Hindi speech.</li>
+          <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) distinguishing normal from dysarthric speech.</li>
+          <li>Developed novel DTW-based features over phoneme-posterior grams for clinically interpretable dysarthria classification.</li>
+          <li>Authored four research papers (one accepted, three under review) at SPECOM, SLT, ISCSLP, and TMLR.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xp">
+      <div>
+        <div class="xp-role">AI/ML Engineer Intern</div>
+        <div class="xp-org">Prokraya Tech Pvt. Ltd</div>
+        <div class="xp-dates">JAN 2025 – JUN 2025 · HYDERABAD, IN</div>
+      </div>
+      <div class="xp-body">
+        <ul>
+          <li>Engineered automated invoice extraction with Azure Document Intelligence at 90% accuracy; designed the RESTful APIs behind it.</li>
+          <li>Built an AI-powered supplier-recommendation system for bid insights, reaching 86.4% accuracy with XGBoost.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -266,86 +297,121 @@
 
 <article id="work">
   <div class="wrap">
-    <div class="rail"><span>§ 03</span></div>
-    <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Research Projects</h2></div>
-    <div class="section-body">
-      <div class="project">
-        <div class="project-year mono">Active</div>
-        <div class="project-main">
-          <h3>SSL Articulatory Feature Probing for Hindi Dysarthria</h3>
-          <p>Probed frozen SSL representations (WavLM, XLS-R, IndicWav2Vec) for Hindi articulatory features using linear probing and leave-one-speaker-out validation. Showed that Hindi-specific phonological contrasts degrade measurably under dysarthria.</p>
-          <div class="project-tags"><span>SSL Models</span><span>Linear Probing</span></div>
-        </div>
+    <div class="section-head"><span class="section-tag">03</span><h2 class="section-title">Research Projects</h2></div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>SSL Articulatory Feature Probing for Hindi Dysarthria</h3>
+        <p>Probed frozen SSL representations (WavLM, XLS-R, IndicWav2Vec) for Hindi articulatory features using linear probing and leave-one-speaker-out validation. Found that Hindi-specific contrasts — retroflex/dental, four-way aspiration — degrade measurably under dysarthria; Hindi-aware pretraining (IndicWav2Vec) raises the ceiling but doesn't confer immunity.</p>
+        <div class="project-tags"><span>SSL Models</span><span>Linear Probing</span><span>Clinical AI</span></div>
       </div>
-      <div class="project">
-        <div class="project-year mono">Active</div>
-        <div class="project-main">
-          <h3>Activation Steering for Multilingual Reasoning</h3>
-          <p>Replicated Zhao et al. (2025)’s language-reasoning disentanglement method on 2 models, 11 languages, 3 benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed token-budget bug; demonstrated benchmark-dependent steering benefits.</p>
-          <div class="project-tags"><span>LLMs</span><span>Reproducibility</span></div>
-        </div>
+      <span class="project-status">Active</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Activation Steering for Multilingual Reasoning</h3>
+        <p>Reproduced Zhao et al. (2025)'s language–reasoning disentanglement method on two models, eleven languages, and three benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a token-budget bug, and showed steering benefits are benchmark-dependent.</p>
+        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span></div>
       </div>
-      <div class="project">
-        <div class="project-year mono">Project</div>
-        <div class="project-main">
-          <h3>News Classification with PyTorch</h3>
-          <p>Built custom neural architecture for text classification (AG News, 90% accuracy) with embedding layers, ReLU, and Adam optimizer.</p>
-          <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
-        </div>
+      <span class="project-status">Active</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>News Classification with PyTorch</h3>
+        <p>Custom neural architecture for text classification on AG News (90% accuracy), with embedding layers, ReLU activations, Adam optimizer, and HuggingFace tokenizers for sub-word handling.</p>
+        <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
       </div>
+      <span class="project-status">Project</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Multi-Disease Prediction System</h3>
+        <p>Deployed a multi-model prediction system spanning diabetes, heart disease, and Parkinson's, served through Streamlit — an end-to-end pass through the ML deployment lifecycle.</p>
+        <div class="project-tags"><span>Streamlit</span><span>Deployment</span></div>
+      </div>
+      <span class="project-status">Project</span>
     </div>
   </div>
 </article>
 
 <article id="research">
   <div class="wrap">
-    <div class="rail"><span>§ 04</span></div>
-    <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Publications</h2></div>
-    <div class="section-body">
-      <div class="pub">
-        <div>
-          <div class="pub-title">Prosodic Features for Classification of Normal vs. Dysarthric Speech</div>
-          <div class="pub-venue mono">Accepted at SPECOM 2026, Ohrid, North Macedonia</div>
-        </div>
+    <div class="section-head"><span class="section-tag">04</span><h2 class="section-title">Publications</h2></div>
+
+    <div class="pub">
+      <div class="pub-top">
+        <div class="pub-title">Prosodic Features for Classification of Normal vs. Dysarthric Speech</div>
+        <div class="pub-venue mono">SPECOM 2026 · Ohrid, North Macedonia</div>
       </div>
-      <div class="pub">
-        <div>
-          <div class="pub-title">DTW-based Phoneme-Posterior Gram Features for Dysarthria Classification</div>
-          <div class="pub-venue mono">Under Review at SLT 2026</div>
-        </div>
+      <span class="pub-status accepted">Accepted</span>
+      <p class="pub-note">First author. Phoneme-level prosodic analysis (pitch, energy, duration, VSA) with a Random Forest / XGBoost pipeline, 84% accuracy and 0.92 AUC. Supported by MeitY, Government of India, under BHASHINI.</p>
+    </div>
+
+    <div class="pub">
+      <div class="pub-top">
+        <div class="pub-title">DTW-based Phoneme-Posterior Gram Features for Dysarthria Classification</div>
+        <div class="pub-venue mono">SLT 2026</div>
       </div>
-      <div class="pub">
-        <div>
-          <div class="pub-title">Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech</div>
-          <div class="pub-venue mono">Under Review at ISCSLP 2026</div>
-        </div>
+      <span class="pub-status review">Under Review</span>
+      <p class="pub-note">First author. Clinically interpretable features built over Dynamic Time Warping on phoneme-posterior grams, designed for use by speech-language pathologists.</p>
+    </div>
+
+    <div class="pub">
+      <div class="pub-top">
+        <div class="pub-title">Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech</div>
+        <div class="pub-venue mono">ISCSLP 2026 · Penang, Malaysia</div>
       </div>
-      <div class="pub">
-        <div>
-          <div class="pub-title">Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study</div>
-          <div class="pub-venue mono">Under Review at TMLR (MLRC Challenge 2026)</div>
-        </div>
+      <span class="pub-status accepted">Accepted</span>
+      <p class="pub-note">First author. Probed WavLM, XLS-R, and IndicWav2Vec for articulatory encoding in Hindi dysarthric speech; voicing survives dysarthria best, place/manner carry more residual signal. Supported by MeitY, Government of India, under BHASHINI.</p>
+    </div>
+
+    <div class="pub">
+      <div class="pub-top">
+        <div class="pub-title">Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study</div>
+        <div class="pub-venue mono">TMLR · MLRC Challenge 2026</div>
       </div>
+      <span class="pub-status review">Under Review</span>
+      <p class="pub-note">Co-author. Independent reproduction of activation-steering for multilingual reasoning on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages.</p>
+    </div>
+  </div>
+</article>
+
+<article id="education">
+  <div class="wrap">
+    <div class="section-head"><span class="section-tag">05</span><h2 class="section-title">Education</h2></div>
+
+    <div class="edu">
+      <div>
+        <div class="edu-school">Dhirubhai Ambani University (DAIICT)</div>
+        <div class="edu-degree">MSc, Information Technology · CPI 7.8</div>
+      </div>
+      <div class="edu-meta">Jul 2024 – Jun 2026<br>Gandhinagar, IN</div>
+    </div>
+
+    <div class="edu">
+      <div>
+        <div class="edu-school">Navrachna University</div>
+        <div class="edu-degree">BSc, Data Science · CPI 8.42</div>
+      </div>
+      <div class="edu-meta">Jul 2021 – Jun 2024<br>Vadodara, IN</div>
     </div>
   </div>
 </article>
 
 <article id="contact">
   <div class="wrap">
-    <div class="rail"><span>§ 05</span></div>
-    <div class="section-body" style="grid-column:1 / -1;">
-      <h2 class="contact-title">Building something interesting? Let's talk<span class="accent-dot">.</span></h2>
-      <p class="mono" style="font-size:12.5px; color:var(--text-muted); margin-bottom:24px;">
-        MSc IT, DAIICT (CPI: 7.8) · BSc Data Science, Navrachna University (CPI: 8.42)
-      </p>
-    </div>
+    <h2 class="contact-title">Building something at the edge of speech, language, and interpretability? Let's talk<i>.</i></h2>
+    <p class="contact-sub">manya230702@gmail.com</p>
   </div>
 </article>
 
 <div class="wrap">
   <footer>
-    <span id="v-footer-left">Made by Manya</span>
-    <span id="v-footer-right"></span>
+    <span>Manya Singh</span>
+    <span>Updated Aug 2026</span>
   </footer>
 </div>
 
