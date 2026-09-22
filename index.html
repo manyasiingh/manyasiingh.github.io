@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manya Singh — Research Profile</title>
-<meta name="description" content="Research profile of Manya Singh. Speech processing, dysarthric speech analysis, SSL representations, and multilingual reasoning in LLMs.">
+<meta name="description" content="Research profile of Manya Singh. Speech processing, dysarthric speech analysis, SSL representations, interpretable PPG-DTW biomarkers, and multilingual reasoning in LLMs.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -154,10 +154,12 @@
   .project:first-child{border-top:none;padding-top:0;}
   .project-status{
     font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--sage);
-    letter-spacing:.06em;text-transform:uppercase;
+    letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
     border:1px solid var(--sage);border-radius:2px;padding:3px 8px;height:fit-content;
   }
+  .project-status.review{color:var(--accent);border-color:var(--accent-soft);}
   .project-main h3{font-family:'Newsreader', serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:7px;grid-column:1;}
+  .project-paper{font-family:'Newsreader', serif;font-style:italic;font-size:14px;color:var(--muted);margin-bottom:8px;max-width:600px;}
   .project-main p{font-size:14px;font-weight:300;max-width:600px;margin-bottom:10px;grid-column:1;}
   .project-tags{grid-column:1;display:flex;gap:8px;flex-wrap:wrap;}
   .project-tags span{font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;}
@@ -169,13 +171,13 @@
   .pub-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
   .pub-title{font-family:'Newsreader', serif;font-size:16px;font-weight:500;color:var(--ink);max-width:600px;}
   .pub-venue{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);white-space:nowrap;}
+  .pub-authors{font-size:13px;color:var(--body);margin-top:4px;}
   .pub-status{
     display:inline-block;margin-top:8px;
     font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
     padding:3px 8px;border-radius:2px;
   }
   .pub-status.accepted{color:var(--sage);border:1px solid var(--sage);}
-  .pub-status.review{color:var(--accent);border:1px solid var(--accent-soft);}
   .pub-note{font-size:12.5px;color:var(--body);margin-top:8px;max-width:600px;}
 
   .edu{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--line);flex-wrap:wrap;}
@@ -194,6 +196,8 @@
 
   @media (max-width:700px){
     .xp{grid-template-columns:1fr;gap:8px;}
+    .project{grid-template-columns:1fr;}
+    .project-status{justify-self:start;order:-1;}
     .pub-top{flex-direction:column;align-items:flex-start;}
     .edu{flex-direction:column;gap:4px;}
     .edu-meta{text-align:left;}
@@ -216,13 +220,12 @@
     <h1 class="name">Manya Singh<i>.</i></h1>
     <div class="role-line">AI/ML RESEARCHER — SPEECH &amp; LANGUAGE</div>
     <p class="tagline">
-      I build <strong>clinically interpretable, linguistically-aware</strong> speech models for low-resource languages and atypical speech. Right now: articulatory feature preservation in self-supervised models, and the reproducibility of activation-steering methods for multilingual LLM reasoning.
+      I build <strong>clinically interpretable, linguistically-aware</strong> speech models for low-resource languages and atypical speech. Right now: interpretable PPG-DTW biomarkers for dysarthria, articulatory feature preservation in self-supervised models, and probing what frozen foundation models do and don't encode.
     </p>
     <div class="links-row">
       <a href="mailto:manya230702@gmail.com">manya230702@gmail.com</a>
       <a href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">linkedin</a>
       <a href="https://github.com/manyasiingh" target="_blank" rel="noopener">github</a>
-      <a href="https://leetcode.com/manyaasingh" target="_blank" rel="noopener">leetcode</a>
       <a class="cv-btn" href="Manya_Singh_Resume.pdf" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
         Download CV
@@ -258,17 +261,19 @@
   <div class="wrap">
     <div class="section-head"><span class="section-tag">01</span><h2 class="section-title">About</h2></div>
     <div class="about-text">
-      <p>I'm an MSc IT graduate at DAIICT, working as a research intern at the Speech Research Lab, where I study how self-supervised speech models represent and lose articulatory information under dysarthria. Most of my work sits at the intersection of clinical speech-language pathology and representation learning: building features that a speech-language pathologist could actually use, not just a benchmark number.</p>
-      <p>Alongside this, I've been reproducing recent activation-steering work for multilingual LLM reasoning, tracking down the bugs that reproducibility studies tend to surface. Before DAIICT, I completed my BSc in Data Science at Navrachna University.</p>
+      <p>I'm an MSc IT graduate at Dhirubhai Ambani University (DAU), working as a research intern at the Speech Research Lab, where I study how dysarthric speech can be represented in ways a clinician can actually interpret, from articulatory information in self-supervised models to biomarkers read directly off phoneme-posterior alignment paths. Most of my work sits at the intersection of clinical speech-language pathology and representation learning: building features that a speech-language pathologist could actually use, not just a benchmark number.</p>
+      <p>Alongside this, I probe what general-purpose pretrained models do and don't encode, from steganographic signal in frozen vision encoders to reproducing recent activation-steering work for multilingual LLM reasoning and tracking down the bugs that reproducibility studies tend to surface. Before DAU, I completed my BSc in Data Science at Navrachna University.</p>
     </div>
     <div class="stack-list">
       <span class="stack-item">Python</span>
+      <span class="stack-item">R</span>
       <span class="stack-item">PyTorch</span>
       <span class="stack-item">HuggingFace</span>
       <span class="stack-item">TensorFlow</span>
       <span class="stack-item">Scikit-learn / XGBoost</span>
+      <span class="stack-item">NumPy / Pandas</span>
       <span class="stack-item">AWS / Azure</span>
-      <span class="stack-item">React.js</span>
+      <span class="stack-item">MongoDB / MySQL / PostgreSQL</span>
     </div>
   </div>
 </article>
@@ -280,29 +285,30 @@
     <div class="xp">
       <div>
         <div class="xp-role">Research Intern</div>
-        <div class="xp-org">Speech Research Lab @ DAIICT</div>
+        <div class="xp-org">Speech Research Lab, DAU</div>
         <div class="xp-dates">APR 2026 – PRESENT · GANDHINAGAR, IN</div>
       </div>
       <div class="xp-body">
         <ul>
-          <li>Research dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features — place/manner, voicing, aspiration — for Hindi speech.</li>
-          <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) distinguishing normal from dysarthric speech.</li>
-          <li>Developed novel DTW-based features over phoneme-posterior grams for clinically interpretable dysarthria classification.</li>
-          <li>Authored four research papers (two accepted, two under review).</li>
+          <li>Researched dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features — place, manner, voicing, aspiration — in Hindi speech.</li>
+          <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) for normal vs. dysarthric speech, reaching 84% accuracy and 0.92 AUC.</li>
+          <li>Developed DTW-based biomarkers over wav2vec2 phonetic posteriorgrams for interpretable dysarthria detection (submitted to ICASSP 2027).</li>
+          <li>Authored five research papers (two accepted, three under review) across various conferences.</li>
         </ul>
       </div>
     </div>
 
     <div class="xp">
       <div>
-        <div class="xp-role">AI/ML Engineer Intern</div>
+        <div class="xp-role">AI/ML Intern</div>
         <div class="xp-org">Prokraya Tech Pvt. Ltd</div>
         <div class="xp-dates">MAY 2025 – JUL 2025 · HYDERABAD, IN</div>
       </div>
       <div class="xp-body">
         <ul>
-          <li>Engineered automated invoice extraction with Azure Document Intelligence at 90% accuracy; designed the RESTful APIs behind it.</li>
-          <li>Built an AI-powered supplier-recommendation system for bid insights, reaching 86.4% accuracy with XGBoost.</li>
+          <li>Engineered automated invoice extraction with Azure Document Intelligence (90% accuracy) and designed RESTful APIs for integration.</li>
+          <li>Built an AI-powered bid insight system for supplier recommendation using XGBoost (86.4% accuracy).</li>
+          <li>Technologies: Python, React.js, Azure, XGBoost, MSSQL.</li>
         </ul>
       </div>
     </div>
@@ -315,38 +321,41 @@
 
     <div class="project">
       <div class="project-main">
-        <h3>SSL Articulatory Feature Probing for Hindi Dysarthria</h3>
-        <p>Probed frozen SSL representations (WavLM, XLS-R, IndicWav2Vec) for Hindi articulatory features using linear probing and leave-one-speaker-out validation. Found that Hindi-specific contrasts — retroflex/dental, four-way aspiration — degrade measurably under dysarthria; Hindi-aware pretraining (IndicWav2Vec) raises the ceiling but doesn't confer immunity.</p>
-        <div class="project-tags"><span>SSL Models</span><span>Linear Probing</span><span>Clinical AI</span></div>
+        <h3>Interpretable Dysarthria Representation from PPG-DTW Paths</h3>
+        <div class="project-paper">“Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths”</div>
+        <p>A novel approach that treats the frame-level DTW path over wav2vec2 phonetic posteriorgrams as the representation itself, deriving five interpretable temporal, topological, and phonetic biomarkers for dysarthria on the UA-Speech corpus. Achieved AUC 0.952, competitive with a 1024-d wav2vec2 embedding (0.970) and above an MFCC-SVM baseline (0.917), and showed the non-duration biomarkers retain duration-independent signal after controlling for stretch ratio. Against the Montreal Forced Aligner, duration agrees at the speaker level (r = 0.95) with a larger group-separation effect (d = 1.25 vs. 0.74).</p>
+        <div class="project-tags"><span>Dysarthria</span><span>Phonetic Posteriorgrams</span><span>DTW</span><span>Interpretable ML</span></div>
       </div>
-      <span class="project-status">Active</span>
+      <span class="project-status">Submitted · ICASSP 2027</span>
     </div>
 
     <div class="project">
       <div class="project-main">
-        <h3>Activation Steering for Multilingual Reasoning</h3>
-        <p>Reproduced Zhao et al. (2025)'s language–reasoning disentanglement method on two models, eleven languages, and three benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a token-budget bug, and showed steering benefits are benchmark-dependent.</p>
-        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span></div>
+        <h3>Steganographic Detectability in Frozen Vision Encoders</h3>
+        <div class="project-paper">“Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability”</div>
+        <p>Linear-probed five frozen vision encoders (CLIP ViT-B/32 and ViT-L/14, SigLIP, DINOv2, ResNet-50) for implicit sensitivity to LSB replacement and LSB matching, with a Gaussian-noise control and SPAM / chi-square classical baselines. Embedding shift tracks perturbation magnitude, not message structure, while detectability varies with training objective (AUC 0.99–1.00 for language-aligned encoders vs. 0.62 for DINOv2 at 4-bit full payload); all encoders stay near chance at realistic 1-bit payloads. Replicated on CIFAR-10 using leakage-free grouped cross-validation.</p>
+        <div class="project-tags"><span>Vision Encoders</span><span>Linear Probing</span><span>Steganalysis</span></div>
       </div>
-      <span class="project-status">Active</span>
+      <span class="project-status review">Under review · ICVGIP 2026</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Activation Steering for Multilingual Reasoning (Reproducibility Study)</h3>
+        <div class="project-paper">“Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study”</div>
+        <p>Reproduced activation-steering (Zhao et al., 2025) on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages and 3 benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a generation token-budget bug and regenerated missing steering vectors; steering benefits turned out to be benchmark-dependent, with XWinograd and M-MMLU improving and MGSM not.</p>
+        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span><span>Multilingual</span></div>
+      </div>
+      <span class="project-status review">Under review · TMLR (MLRC 2026)</span>
     </div>
 
     <div class="project">
       <div class="project-main">
         <h3>News Classification with PyTorch</h3>
-        <p>Custom neural architecture for text classification on AG News (90% accuracy), with embedding layers, ReLU activations, Adam optimizer, and HuggingFace tokenizers for sub-word handling.</p>
+        <p>Built a custom neural text classifier on AG News (90% accuracy) with embedding layers, ReLU activations, and the Adam optimizer, and integrated Hugging Face tokenizers.</p>
         <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
       </div>
-      <span class="project-status">Project</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Multi-Disease Prediction System</h3>
-        <p>Deployed a multi-model prediction system spanning diabetes, heart disease, and Parkinson's, served through Streamlit — an end-to-end pass through the ML deployment lifecycle.</p>
-        <div class="project-tags"><span>Streamlit</span><span>Deployment</span></div>
-      </div>
-      <span class="project-status">Project</span>
+      <a class="project-status" href="https://github.com/manyasiingh/Pytorch_Text_Classification" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </article>
@@ -360,35 +369,19 @@
         <div class="pub-title">Prosodic Features for Classification of Normal vs. Dysarthric Speech</div>
         <div class="pub-venue mono">SPECOM 2026 · Ohrid, North Macedonia</div>
       </div>
+      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
       <span class="pub-status accepted">Accepted</span>
-      <p class="pub-note">First author. Phoneme-level prosodic analysis (pitch, energy, duration, VSA) with a Random Forest / XGBoost pipeline, 84% accuracy and 0.92 AUC. Supported by MeitY, Government of India, under BHASHINI.</p>
-    </div>
-
-    <div class="pub">
-      <div class="pub-top">
-        <div class="pub-title">DTW-based Phoneme-Posterior Gram Features for Dysarthria Classification</div>
-        <div class="pub-venue mono">SLT 2026</div>
-      </div>
-      <span class="pub-status review">Under Review</span>
-      <p class="pub-note">First author. Clinically interpretable features built over Dynamic Time Warping on phoneme-posterior grams, designed for use by speech-language pathologists.</p>
+      <p class="pub-note">Phoneme-level prosodic analysis (pitch, energy, duration, VSA) with a Random Forest / XGBoost pipeline, reaching 84% accuracy and 0.92 AUC. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission).</p>
     </div>
 
     <div class="pub">
       <div class="pub-top">
         <div class="pub-title">Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech</div>
-        <div class="pub-venue mono">ISCSLP 2026 · Penang, Malaysia</div>
+        <div class="pub-venue mono">IEEE ISCSLP 2026 · Penang, Malaysia</div>
       </div>
+      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
       <span class="pub-status accepted">Accepted</span>
-      <p class="pub-note">First author. Probed WavLM, XLS-R, and IndicWav2Vec for articulatory encoding in Hindi dysarthric speech; voicing survives dysarthria best, place/manner carry more residual signal. Supported by MeitY, Government of India, under BHASHINI.</p>
-    </div>
-
-    <div class="pub">
-      <div class="pub-top">
-        <div class="pub-title">Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study</div>
-        <div class="pub-venue mono">TMLR · MLRC Challenge 2026</div>
-      </div>
-      <span class="pub-status review">Under Review</span>
-      <p class="pub-note">Co-author. Independent reproduction of activation-steering for multilingual reasoning on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages.</p>
+      <p class="pub-note">Probed WavLM, XLS-R, and IndicWav2Vec for articulatory feature encoding in Hindi dysarthric speech; voicing survives dysarthria best, while Hindi-specific contrasts (retroflex/dental, four-way aspiration) degrade measurably under pathology. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission). Extended work accepted at the Women in Machine Learning (WiML) Workshop at NeurIPS 2026, Sydney, Australia.</p>
     </div>
   </div>
 </article>
@@ -399,7 +392,7 @@
 
     <div class="edu">
       <div>
-        <div class="edu-school">Dhirubhai Ambani University (DAIICT)</div>
+        <div class="edu-school">Dhirubhai Ambani University (DAU)</div>
         <div class="edu-degree">MSc, Information Technology · CPI 7.8</div>
       </div>
       <div class="edu-meta">Jul 2024 – Jun 2026<br>Gandhinagar, IN</div>
@@ -425,7 +418,7 @@
 <div class="wrap">
   <footer>
     <span>Manya Singh</span>
-    <span>Updated Aug 2026</span>
+    <span>Updated Sep 2026</span>
   </footer>
 </div>
 
