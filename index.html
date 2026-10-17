@@ -268,12 +268,16 @@
       <span class="stack-item">Python</span>
       <span class="stack-item">R</span>
       <span class="stack-item">PyTorch</span>
-      <span class="stack-item">HuggingFace</span>
+      <span class="stack-item">Hugging Face Transformers</span>
       <span class="stack-item">TensorFlow</span>
       <span class="stack-item">Scikit-learn / XGBoost</span>
       <span class="stack-item">NumPy / Pandas</span>
+      <span class="stack-item">LoRA / PEFT</span>
+      <span class="stack-item">Linear Probing</span>
+      <span class="stack-item">DTW / Phonetic Posteriorgrams</span>
       <span class="stack-item">AWS / Azure</span>
       <span class="stack-item">MongoDB / MySQL / PostgreSQL</span>
+      <span class="stack-item">Git</span>
     </div>
   </div>
 </article>
@@ -292,8 +296,8 @@
         <ul>
           <li>Researched dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features — place, manner, voicing, aspiration — in Hindi speech.</li>
           <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) for normal vs. dysarthric speech, reaching 84% accuracy and 0.92 AUC.</li>
-          <li>Developed DTW-based biomarkers over wav2vec2 phonetic posteriorgrams for interpretable dysarthria detection (submitted to ICASSP 2027).</li>
-          <li>Authored five research papers (two accepted, three under review) across various conferences.</li>
+          <li>Developed DTW-based biomarkers over wav2vec2 phonetic posteriorgrams for interpretable dysarthria detection (under review at ICASSP 2027).</li>
+          <li>Authored five research papers (three accepted, two under review) across various conferences.</li>
         </ul>
       </div>
     </div>
@@ -315,54 +319,9 @@
   </div>
 </article>
 
-<article id="work">
-  <div class="wrap">
-    <div class="section-head"><span class="section-tag">03</span><h2 class="section-title">Research Projects</h2></div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Interpretable Dysarthria Representation from PPG-DTW Paths</h3>
-        <div class="project-paper">“Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths”</div>
-        <p>A novel approach that treats the frame-level DTW path over wav2vec2 phonetic posteriorgrams as the representation itself, deriving five interpretable temporal, topological, and phonetic biomarkers for dysarthria on the UA-Speech corpus. Achieved AUC 0.952, competitive with a 1024-d wav2vec2 embedding (0.970) and above an MFCC-SVM baseline (0.917), and showed the non-duration biomarkers retain duration-independent signal after controlling for stretch ratio. Against the Montreal Forced Aligner, duration agrees at the speaker level (r = 0.95) with a larger group-separation effect (d = 1.25 vs. 0.74).</p>
-        <div class="project-tags"><span>Dysarthria</span><span>Phonetic Posteriorgrams</span><span>DTW</span><span>Interpretable ML</span></div>
-      </div>
-      <span class="project-status">Submitted · ICASSP 2027</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Steganographic Detectability in Frozen Vision Encoders</h3>
-        <div class="project-paper">“Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability”</div>
-        <p>Linear-probed five frozen vision encoders (CLIP ViT-B/32 and ViT-L/14, SigLIP, DINOv2, ResNet-50) for implicit sensitivity to LSB replacement and LSB matching, with a Gaussian-noise control and SPAM / chi-square classical baselines. Embedding shift tracks perturbation magnitude, not message structure, while detectability varies with training objective (AUC 0.99–1.00 for language-aligned encoders vs. 0.62 for DINOv2 at 4-bit full payload); all encoders stay near chance at realistic 1-bit payloads. Replicated on CIFAR-10 using leakage-free grouped cross-validation.</p>
-        <div class="project-tags"><span>Vision Encoders</span><span>Linear Probing</span><span>Steganalysis</span></div>
-      </div>
-      <span class="project-status review">Under review · ICVGIP 2026</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Activation Steering for Multilingual Reasoning (Reproducibility Study)</h3>
-        <div class="project-paper">“Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study”</div>
-        <p>Reproduced activation-steering (Zhao et al., 2025) on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages and 3 benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a generation token-budget bug and regenerated missing steering vectors; steering benefits turned out to be benchmark-dependent, with XWinograd and M-MMLU improving and MGSM not.</p>
-        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span><span>Multilingual</span></div>
-      </div>
-      <span class="project-status review">Under review · TMLR (MLRC 2026)</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>News Classification with PyTorch</h3>
-        <p>Built a custom neural text classifier on AG News (90% accuracy) with embedding layers, ReLU activations, and the Adam optimizer, and integrated Hugging Face tokenizers.</p>
-        <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
-      </div>
-      <a class="project-status" href="https://github.com/manyasiingh/Pytorch_Text_Classification" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-  </div>
-</article>
-
 <article id="research">
   <div class="wrap">
-    <div class="section-head"><span class="section-tag">04</span><h2 class="section-title">Publications</h2></div>
+    <div class="section-head"><span class="section-tag">03</span><h2 class="section-title">Publications</h2></div>
 
     <div class="pub">
       <div class="pub-top">
@@ -382,6 +341,61 @@
       <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
       <span class="pub-status accepted">Accepted</span>
       <p class="pub-note">Probed WavLM, XLS-R, and IndicWav2Vec for articulatory feature encoding in Hindi dysarthric speech; voicing survives dysarthria best, while Hindi-specific contrasts (retroflex/dental, four-way aspiration) degrade measurably under pathology. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission). Extended work accepted at the Women in Machine Learning (WiML) Workshop at NeurIPS 2026, Sydney, Australia.</p>
+    </div>
+
+    <div class="pub">
+      <div class="pub-top">
+        <div class="pub-title">Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability</div>
+        <div class="pub-venue mono">ICVGIP 2026 · Kolkata, India</div>
+      </div>
+      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
+      <span class="pub-status accepted">Accepted</span>
+      <p class="pub-note">Linear-probed five frozen vision encoders (CLIP ViT-B/32 and ViT-L/14, SigLIP, DINOv2, ResNet-50) for implicit sensitivity to LSB replacement and LSB matching, with a Gaussian-noise control and SPAM / chi-square classical baselines. Embedding shift tracks perturbation magnitude, not message structure, while detectability varies with training objective (AUC 0.99–1.00 for language-aligned encoders vs. 0.62 for DINOv2 at 4-bit full payload); all encoders stay near chance at realistic 1-bit payloads. Replicated on CIFAR-10 using leakage-free grouped cross-validation.</p>
+    </div>
+  </div>
+</article>
+
+<article id="work">
+  <div class="wrap">
+    <div class="section-head"><span class="section-tag">04</span><h2 class="section-title">Research Projects</h2></div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Hindi ASR Fine-Tuning and Articulatory Error Analysis</h3>
+        <div class="project-paper">Whisper-small, LoRA, PyTorch</div>
+        <p>Fine-tuned Whisper-small for Hindi automatic speech recognition using LoRA and mixed-precision training, reducing WER from 78.07% to 26.47% and CER from 44.33% to 9.52% on the FLEURS Hindi test split — adapting only 7.08M parameters (2.84%) via FP16 mixed precision and gradient checkpointing. Built a character-alignment-based error analysis to investigate Hindi aspiration, voicing, retroflex–dental, and vowel-length confusions before and after fine-tuning.</p>
+        <div class="project-tags"><span>Whisper</span><span>LoRA</span><span>Hindi ASR</span></div>
+      </div>
+      <a class="project-status" href="https://github.com/manyasiingh/Whisper_Hindi_Articulatory" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Interpretable Dysarthria Representation from PPG-DTW Paths</h3>
+        <div class="project-paper">“Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths”</div>
+        <p>A novel approach that treats the frame-level DTW path over wav2vec2 phonetic posteriorgrams as the representation itself, deriving five interpretable temporal, topological, and phonetic biomarkers for dysarthria on the UA-Speech corpus. Achieved AUC 0.952, competitive with a 1024-d wav2vec2 embedding (0.970) and above an MFCC-SVM baseline (0.917), and showed the non-duration biomarkers retain duration-independent signal after controlling for stretch ratio. Against the Montreal Forced Aligner, duration agrees at the speaker level (r = 0.95) with a larger group-separation effect (d = 1.25 vs. 0.74).</p>
+        <div class="project-tags"><span>Dysarthria</span><span>Phonetic Posteriorgrams</span><span>DTW</span><span>Interpretable ML</span></div>
+      </div>
+      <span class="project-status review">Under review · ICASSP 2027</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>Activation Steering for Multilingual Reasoning (Reproducibility Study)</h3>
+        <div class="project-paper">“Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study”</div>
+        <p>Reproduced activation-steering (Zhao et al., 2025) on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages and 3 benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a generation token-budget bug and regenerated missing steering vectors; steering benefits turned out to be benchmark-dependent, with XWinograd and M-MMLU improving and MGSM not.</p>
+        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span><span>Multilingual</span></div>
+      </div>
+      <span class="project-status review">Under review · TMLR (MLRC 2026)</span>
+    </div>
+
+    <div class="project">
+      <div class="project-main">
+        <h3>News Classification with PyTorch</h3>
+        <p>Built a custom neural text classifier on AG News (90% accuracy) with embedding layers, ReLU activations, and the Adam optimizer, and integrated Hugging Face tokenizers.</p>
+        <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
+      </div>
+      <a class="project-status" href="https://github.com/manyasiingh/Pytorch_Text_Classification" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </article>
@@ -418,7 +432,7 @@
 <div class="wrap">
   <footer>
     <span>Manya Singh</span>
-    <span>Updated Sep 2026</span>
+    <span>Updated Oct 2026</span>
   </footer>
 </div>
 
