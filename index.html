@@ -10,431 +10,976 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#eef0e9;
-    --paper-2:#e6e9df;
-    --ink:#1b211d;
-    --body:#3d453f;
-    --muted:#848d84;
-    --line:#d3d8cb;
-    --accent:#a83c2e;   /* clinical annotation red, brick not terracotta */
-    --accent-soft:#c98e83;
-    --sage:#48645a;     /* deep sage-teal, secondary marker */
+    --paper:#eef0e9; --paper-2:#e6e9df; --card:#f4f5f0;
+    --ink:#1b211d; --body:#3d453f; --muted:#7c857c; --line:#d3d8cb;
+    --accent:#a83c2e; --accent-soft:#c98e83; --accent-bg:rgba(168,60,46,.08);
+    --sage:#48645a; --sage-bg:rgba(72,100,90,.10);
+    --shadow:0 1px 0 rgba(27,33,29,.04), 0 12px 32px -18px rgba(27,33,29,.25);
   }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#131714; --paper-2:#1a1f1b; --card:#181d19;
+      --ink:#eef0e9; --body:#bfc6bc; --muted:#838c83; --line:#2b322d;
+      --accent:#e0705f; --accent-soft:#9c5a50; --accent-bg:rgba(224,112,95,.10);
+      --sage:#8fb5a6; --sage-bg:rgba(143,181,166,.10);
+      --shadow:0 12px 32px -18px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131714; --paper-2:#1a1f1b; --card:#181d19;
+    --ink:#eef0e9; --body:#bfc6bc; --muted:#838c83; --line:#2b322d;
+    --accent:#e0705f; --accent-soft:#9c5a50; --accent-bg:rgba(224,112,95,.10);
+    --sage:#8fb5a6; --sage-bg:rgba(143,181,166,.10);
+    --shadow:0 12px 32px -18px rgba(0,0,0,.7);
+  }
+
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--paper);
-    color:var(--body);
-    font-family:'Inter', sans-serif;
-    font-weight:300;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
+  html{scroll-behavior:smooth;scroll-padding-top:70px;overflow-x:clip;}
+  body{background:var(--paper);color:var(--body);font-family:'Inter',sans-serif;font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden;}
   a{color:inherit;text-decoration:none;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
   ::selection{background:var(--accent);color:var(--paper);}
-  .mono{font-family:'JetBrains Mono', monospace;}
-  em{font-style:italic;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 40px;}
 
-  .wrap{max-width:960px;margin:0 auto;padding:0 40px;}
+  /* ---------- nav ---------- */
+  nav.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px;}
+  .logo{font-family:'Newsreader',serif;font-size:20px;font-weight:600;color:var(--ink);}
+  .logo i{color:var(--accent);}
+  .nav-links{display:flex;gap:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;}
+  .nav-links a{padding:6px 10px;border-radius:2px;color:var(--muted);transition:color .2s,background .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a.active{color:var(--accent);background:var(--accent-bg);}
+  .theme-btn{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:border-color .2s,transform .3s;}
+  .theme-btn:hover{border-color:var(--accent);transform:rotate(20deg);}
+  .theme-btn svg{width:15px;height:15px;}
+  .progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--accent);width:0;}
+  .status-pill{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--sage);display:flex;align-items:center;gap:7px;}
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);position:relative;}
+  .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
+  .nav-right{display:flex;align-items:center;gap:14px;}
 
-  /* running header, journal-style */
-  .masthead{
-    border-bottom:1px solid var(--line);
-    padding:18px 0;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--muted);
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
-  }
-  .masthead .tick{color:var(--accent);}
-
-  /* hero */
-  header{padding:76px 0 40px;}
-  .name{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:clamp(42px,7vw,74px);
-    letter-spacing:-0.01em;
-    color:var(--ink);
-    line-height:1.05;
-  }
+  /* ---------- hero ---------- */
+  header{padding:72px 0 30px;}
+  .meta-line{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;}
+  .name{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(46px,8vw,86px);letter-spacing:-0.015em;color:var(--ink);line-height:1;}
   .name i{font-style:italic;font-weight:400;color:var(--accent);}
-  .role-line{
-    margin-top:14px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:.02em;
-    color:var(--sage);
-  }
-  .tagline{
-    margin-top:26px;
-    font-size:17px;
-    font-weight:300;
-    max-width:620px;
-    color:var(--body);
-  }
+  .role-line{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--sage);min-height:22px;}
+  .role-line .cursor{display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0}}
+  .tagline{margin-top:24px;font-size:17.5px;max-width:640px;}
   .tagline strong{color:var(--ink);font-weight:500;}
+  .links-row{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+  .chip-link{border:1px solid var(--line);padding:7px 13px;border-radius:2px;display:inline-flex;align-items:center;gap:7px;transition:all .2s;}
+  .chip-link:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);}
+  .chip-link svg{width:13px;height:13px;}
+  .cv-btn{background:var(--ink);color:var(--paper)!important;border-color:var(--ink);}
+  .cv-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)!important;}
 
-  .links-row{
-    margin-top:28px;
-    display:flex;gap:22px;flex-wrap:wrap;
-    align-items:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-  }
-  .links-row a{border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s, color .2s;}
-  .links-row a:hover{color:var(--accent);border-color:var(--accent);}
-  .cv-btn{
-    display:inline-flex;align-items:center;gap:8px;
-    border:1px solid var(--ink)!important;
-    background:var(--ink);color:var(--paper)!important;
-    padding:8px 14px;border-radius:2px;
-    letter-spacing:.03em;
-  }
-  .cv-btn:hover{background:var(--accent);border-color:var(--accent)!important;color:var(--paper)!important;}
-  .cv-btn svg{width:12px;height:12px;}
+  /* waveform lab */
+  .wave-lab{margin-top:48px;border:1px solid var(--line);background:var(--card);border-radius:3px;box-shadow:var(--shadow);}
+  .wave-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+  .seg button{padding:5px 11px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);transition:all .2s;}
+  .seg button.on{background:var(--ink);color:var(--paper);}
+  .wave-stage{position:relative;height:150px;cursor:crosshair;}
+  .wave-stage canvas{position:absolute;inset:0;width:100%;height:100%;}
+  .zone{position:absolute;top:22px;bottom:12px;border:1px dashed var(--accent);border-radius:2px;transition:background .25s,border-style .2s;}
+  .zone span{position:absolute;top:-19px;left:-1px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.05em;color:var(--accent);white-space:nowrap;}
+  .zone:hover,.zone.on{background:var(--accent-bg);border-style:solid;}
+  .readout{position:absolute;right:12px;bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);pointer-events:none;}
+  .wave-info{padding:14px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:start;min-height:74px;}
+  .wave-info .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;padding-top:2px;}
+  .wave-info .v{font-size:14px;}
+  .wave-info .v b{font-weight:500;color:var(--ink);}
 
-  /* signature: annotated waveform */
-  .waveform-block{margin:44px 0 8px;}
-  .waveform-caption{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    color:var(--muted);
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    margin-top:8px;
-  }
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat{padding:22px 18px;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat-num{font-family:'Newsreader',serif;font-size:38px;color:var(--ink);line-height:1;font-weight:500;}
+  .stat-num small{font-size:18px;color:var(--accent);}
+  .stat-lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:8px;}
 
-  article{padding:52px 0;border-top:1px solid var(--line);}
-
-  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:32px;}
-  .section-tag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    color:var(--accent);
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    white-space:nowrap;
-  }
+  /* ---------- sections ---------- */
+  section.block{padding:72px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;flex-wrap:wrap;}
+  .section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;}
   .section-tag::before{content:"§ ";}
-  .section-title{
-    font-family:'Newsreader', serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:26px;
-    color:var(--ink);
-  }
+  .section-title{font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:32px;color:var(--ink);}
+  .section-sub{font-size:14px;color:var(--muted);margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;}
 
-  .about-text{font-size:16px;max-width:640px;}
-  .about-text p + p{margin-top:16px;}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
 
-  .stack-list{margin-top:30px;display:flex;flex-wrap:wrap;gap:9px;}
-  .stack-item{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--body);
-    border:1px solid var(--line);
-    background:var(--paper-2);
-    padding:6px 11px;
-    border-radius:2px;
-  }
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;}
+  .about-text{font-size:16px;}
+  .about-text p+p{margin-top:16px;}
+  .about-text strong{color:var(--ink);font-weight:500;}
+  .focus-card{border:1px solid var(--line);background:var(--card);padding:20px;border-radius:3px;}
+  .focus-card h4{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:400;margin-bottom:14px;}
+  .focus-item{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:13.5px;}
+  .focus-item:first-of-type{border-top:none;padding-top:0;}
+  .focus-item .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);padding-top:2px;}
+  .stack-groups{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .stack-group h5{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--sage);font-weight:400;margin-bottom:10px;}
+  .stack-list{display:flex;flex-wrap:wrap;gap:7px;}
+  .stack-item{font-family:'JetBrains Mono',monospace;font-size:11.5px;border:1px solid var(--line);background:var(--paper-2);padding:5px 10px;border-radius:2px;transition:all .2s;cursor:default;}
+  .stack-item:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
 
-  .xp{display:grid;grid-template-columns:190px 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--line);}
-  .xp:first-child{border-top:none;padding-top:0;}
-  .xp-role{font-family:'Newsreader', serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:3px;}
-  .xp-org{font-size:13px;color:var(--body);margin-bottom:6px;}
-  .xp-dates{font-family:'JetBrains Mono', monospace;font-size:10.5px;color:var(--muted);}
-  .xp-body ul{list-style:none;}
-  .xp-body li{position:relative;padding-left:18px;font-size:13.5px;font-weight:300;color:var(--body);line-height:1.7;margin-bottom:9px;}
-  .xp-body li::before{content:"–";position:absolute;left:0;color:var(--accent);}
+  /* projects */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
+  .filter{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);padding:6px 12px;border-radius:20px;color:var(--muted);transition:all .2s;}
+  .filter:hover{color:var(--ink);border-color:var(--ink);}
+  .filter.on{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .filter .ct{opacity:.6;margin-left:4px;}
 
-  .project{padding:24px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:12px 24px;align-items:start;}
-  .project:first-child{border-top:none;padding-top:0;}
-  .project-status{
-    font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--sage);
-    letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
-    border:1px solid var(--sage);border-radius:2px;padding:3px 8px;height:fit-content;
-  }
-  .project-status.review{color:var(--accent);border-color:var(--accent-soft);}
-  .project-main h3{font-family:'Newsreader', serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:7px;grid-column:1;}
-  .project-paper{font-family:'Newsreader', serif;font-style:italic;font-size:14px;color:var(--muted);margin-bottom:8px;max-width:600px;}
-  .project-main p{font-size:14px;font-weight:300;max-width:600px;margin-bottom:10px;grid-column:1;}
-  .project-tags{grid-column:1;display:flex;gap:8px;flex-wrap:wrap;}
-  .project-tags span{font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;}
-  .project-tags span::after{content:"·";color:var(--muted);margin-left:8px;}
-  .project-tags span:last-child::after{content:"";}
+  .projects{display:grid;gap:18px;}
+  .card{border:1px solid var(--line);background:var(--card);border-radius:3px;transition:border-color .25s,box-shadow .25s,transform .25s,opacity .3s;box-shadow:var(--shadow);overflow:hidden;}
+  .card:hover{border-color:var(--accent-soft);}
+  .card.hide{display:none;}
+  .card-top{padding:24px 26px 20px;display:grid;grid-template-columns:1fr auto;gap:10px 24px;}
+  .card-kicker{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+  .card h3{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:6px;}
+  .card .paper{font-family:'Newsreader',serif;font-style:italic;font-size:14.5px;color:var(--muted);margin-bottom:10px;}
+  .card p{font-size:14px;max-width:640px;}
+  .badge{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--sage);color:var(--sage);padding:4px 9px;border-radius:2px;white-space:nowrap;height:fit-content;display:inline-flex;align-items:center;gap:6px;transition:all .2s;}
+  a.badge:hover{background:var(--sage);color:var(--paper);}
+  .badge.review{color:var(--accent);border-color:var(--accent-soft);}
+  .badge.review::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite;}
+  .badge.ok::before{content:"✓";}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+  .tags span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);background:var(--accent-bg);padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:.03em;}
+  .metric-strip{display:flex;gap:26px;flex-wrap:wrap;margin-top:16px;}
+  .metric b{display:block;font-family:'Newsreader',serif;font-size:24px;color:var(--ink);font-weight:500;line-height:1.1;}
+  .metric span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+  .expand{grid-column:1/-1;justify-self:start;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--ink);padding-bottom:2px;}
+  .expand:hover{color:var(--accent);border-color:var(--accent);}
+  .expand .plus{transition:transform .3s;display:inline-block;}
+  .card.open .expand .plus{transform:rotate(45deg);}
+  .card-lab{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease;}
+  .card.open .card-lab{grid-template-rows:1fr;}
+  .card-lab > div{overflow:hidden;}
+  .lab-inner{border-top:1px dashed var(--line);padding:22px 26px 26px;background:var(--paper-2);}
+  .lab-title{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .lab-cols{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start;}
 
-  .pub{padding:20px 0;border-top:1px solid var(--line);}
+  /* bars */
+  .bars{display:grid;gap:12px;}
+  .bar-row{display:grid;grid-template-columns:120px 1fr 54px;gap:12px;align-items:center;font-size:12.5px;}
+  .bar-row .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--body);}
+  .bar-track{height:10px;background:var(--line);border-radius:1px;position:relative;overflow:hidden;}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--sage);transition:width 1s cubic-bezier(.2,.8,.2,1);}
+  .bar-fill.hl{background:var(--accent);}
+  .bar-row .val{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink);text-align:right;}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;font-style:italic;font-family:'Newsreader',serif;}
+
+  /* DTW widget */
+  .dtw-wrap svg{width:100%;height:auto;display:block;}
+  .slider-row{display:flex;align-items:center;gap:12px;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;}
+  input[type=range]{flex:1;accent-color:var(--accent);}
+  .dtw-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+  .dtw-stats div{border:1px solid var(--line);padding:8px 10px;background:var(--card);}
+  .dtw-stats b{display:block;font-family:'Newsreader',serif;font-size:20px;color:var(--ink);font-weight:500;}
+  .dtw-stats span{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);text-transform:uppercase;}
+
+  /* ASR before/after */
+  .ba-chart{display:flex;gap:28px;align-items:flex-end;height:170px;padding-top:10px;border-bottom:1px solid var(--line);}
+  .ba-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end;}
+  .ba-bars{display:flex;gap:8px;align-items:flex-end;height:100%;}
+  .ba-bar{width:34px;background:var(--muted);height:0;transition:height 1s cubic-bezier(.2,.8,.2,1);position:relative;opacity:.55;}
+  .ba-bar.after{background:var(--accent);opacity:1;}
+  .ba-bar em{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-style:normal;color:var(--ink);white-space:nowrap;}
+  .ba-lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);}
+  .legend{display:flex;gap:14px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;}
+  .legend i{display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:-1px;}
+  .ring-wrap{display:flex;gap:16px;align-items:center;}
+  .ring{width:96px;height:96px;flex-shrink:0;}
+  .confusions{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+  .conf{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:5px 9px;border:1px solid var(--line);background:var(--card);border-radius:2px;cursor:help;transition:all .2s;}
+  .conf:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* steering */
+  .bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .bench{border:1px solid var(--line);background:var(--card);padding:14px;text-align:left;transition:all .2s;}
+  .bench:hover,.bench.on{border-color:var(--accent);}
+  .bench .arrow{font-family:'Newsreader',serif;font-size:28px;line-height:1;}
+  .bench .arrow.up{color:var(--sage);}
+  .bench .arrow.flat{color:var(--muted);}
+  .bench .bn{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink);margin-top:6px;}
+  .bench .bd{font-size:11.5px;color:var(--muted);}
+  .bench-detail{margin-top:14px;font-size:13.5px;min-height:44px;}
+  .lang-dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .lang-dots span{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 7px;border-radius:2px;background:var(--sage-bg);color:var(--sage);}
+  .bug{margin-top:16px;border-left:2px solid var(--accent);padding:6px 12px;font-size:13px;}
+  .bug code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--card);padding:1px 5px;border:1px solid var(--line);}
+
+  /* publications */
+  .pub{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line);}
   .pub:first-child{border-top:none;padding-top:0;}
-  .pub-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
-  .pub-title{font-family:'Newsreader', serif;font-size:16px;font-weight:500;color:var(--ink);max-width:600px;}
-  .pub-venue{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);white-space:nowrap;}
-  .pub-authors{font-size:13px;color:var(--body);margin-top:4px;}
-  .pub-status{
-    display:inline-block;margin-top:8px;
-    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
-    padding:3px 8px;border-radius:2px;
+  .pub-year{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);padding-top:4px;}
+  .pub-title{font-family:'Newsreader',serif;font-size:19px;font-weight:500;color:var(--ink);line-height:1.35;}
+  .pub-authors{font-size:13px;margin-top:4px;}
+  .pub-authors u{text-decoration:none;border-bottom:1px solid var(--accent);color:var(--ink);font-weight:500;}
+  .pub-venue{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sage);margin-top:6px;}
+  .pub-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center;}
+  .mini-btn{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);padding:4px 10px;border-radius:2px;color:var(--body);transition:all .2s;}
+  .mini-btn:hover{border-color:var(--ink);color:var(--ink);}
+  .pub-note{font-size:13.5px;max-height:0;overflow:hidden;transition:max-height .45s ease,margin .3s;}
+  .pub.open .pub-note{max-height:400px;margin-top:12px;}
+  .extra{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);border:1px dashed var(--accent-soft);padding:4px 9px;border-radius:2px;}
+  .stego-viz{margin-top:14px;}
+
+  /* experience timeline */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .xp{position:relative;padding-bottom:36px;}
+  .xp:last-child{padding-bottom:0;}
+  .xp::before{content:"";position:absolute;left:-28px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--sage);}
+  .xp.now::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-bg);}
+  .xp-dates{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .xp-role{font-family:'Newsreader',serif;font-size:21px;font-weight:600;color:var(--ink);margin-top:2px;}
+  .xp-org{font-size:13.5px;color:var(--sage);margin-bottom:10px;}
+  .xp ul{list-style:none;max-width:700px;}
+  .xp li{position:relative;padding-left:18px;font-size:14px;margin-bottom:8px;}
+  .xp li::before{content:"–";position:absolute;left:0;color:var(--accent);}
+
+  /* education */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .edu{border:1px solid var(--line);background:var(--card);padding:22px;border-radius:3px;transition:transform .25s,border-color .25s;}
+  .edu:hover{transform:translateY(-3px);border-color:var(--accent-soft);}
+  .edu-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .edu-school{font-family:'Newsreader',serif;font-size:20px;color:var(--ink);margin-top:6px;font-weight:500;}
+  .edu-degree{font-size:13.5px;margin-top:2px;}
+  .cpi{margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;}
+  .cpi .bar-track{flex:1;}
+
+  /* contact */
+  .contact{padding:90px 0 80px;border-top:1px solid var(--line);}
+  .contact-title{font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:clamp(30px,5vw,50px);color:var(--ink);max-width:720px;line-height:1.2;}
+  .contact-title i{color:var(--accent);}
+  .contact-row{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap;}
+  .big-btn{font-family:'JetBrains Mono',monospace;font-size:13px;padding:12px 18px;border:1px solid var(--ink);border-radius:2px;display:inline-flex;align-items:center;gap:10px;transition:all .2s;}
+  .big-btn.solid{background:var(--ink);color:var(--paper);}
+  .big-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--paper);}
+
+  footer{padding:30px 0;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:12px;padding:10px 16px;border-radius:2px;transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:100;pointer-events:none;opacity:0;}
+  .toast.show{transform:translate(-50%,0);opacity:1;}
+
+  @media (max-width:820px){
+    .nav-links{display:none;}
+    .about-grid,.lab-cols,.edu-grid{grid-template-columns:1fr;}
+    .stack-groups{grid-template-columns:1fr;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;padding-left:0;}
+    .stat:nth-child(n+3){border-top:1px solid var(--line);}
   }
-  .pub-status.accepted{color:var(--sage);border:1px solid var(--sage);}
-  .pub-note{font-size:12.5px;color:var(--body);margin-top:8px;max-width:600px;}
-
-  .edu{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--line);flex-wrap:wrap;}
-  .edu:first-child{border-top:none;padding-top:0;}
-  .edu-school{font-family:'Newsreader', serif;font-size:16px;color:var(--ink);}
-  .edu-degree{font-size:13px;color:var(--body);margin-top:2px;}
-  .edu-meta{font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);text-align:right;}
-
-  .contact-title{
-    font-family:'Newsreader', serif;font-style:italic;font-weight:500;
-    font-size:clamp(28px,4.5vw,42px);color:var(--ink);max-width:600px;line-height:1.25;margin-bottom:20px;
+  @media (max-width:600px){
+    .wrap{padding:0 16px;}
+    header{padding-top:48px;}
+    .card-top{grid-template-columns:1fr;padding:20px 18px;}
+    .card-top .badge{order:-1;justify-self:start;}
+    .lab-inner{padding:18px;}
+    .wave-info{grid-template-columns:1fr;gap:4px;}
+    .pub{grid-template-columns:1fr;gap:4px;}
+    .bar-row{grid-template-columns:90px 1fr 46px;}
+    .bench-grid{grid-template-columns:1fr;}
+    .status-pill .txt{display:none;}
+    .zone span{font-size:8px;}
+    .section-sub{margin-left:0;width:100%;}
   }
-  .contact-sub{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);}
-
-  footer{padding:36px 0;border-top:1px solid var(--line);font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-
-  @media (max-width:700px){
-    .xp{grid-template-columns:1fr;gap:8px;}
-    .project{grid-template-columns:1fr;}
-    .project-status{justify-self:start;order:-1;}
-    .pub-top{flex-direction:column;align-items:flex-start;}
-    .edu{flex-direction:column;gap:4px;}
-    .edu-meta{text-align:left;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation:none!important;transition:none!important;}
+    .reveal{opacity:1;transform:none;}
   }
-  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <div class="masthead">
-    <span><span class="tick">●</span>&nbsp; Open to research &amp; AI/ML roles</span>
-    <span>Gandhinagar, IN · UTC+5:30</span>
-  </div>
-</div>
-
-<header>
+<nav class="top">
   <div class="wrap">
+    <a href="#top" class="logo">MS<i>.</i></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Projects</a>
+      <a href="#publications">Papers</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <span class="status-pill"><span class="pulse"></span><span class="txt">Open to research &amp; AI/ML roles</span></span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="meta-line">Gandhinagar, IN · UTC+5:30 · Speech Research Lab, DAU</div>
     <h1 class="name">Manya Singh<i>.</i></h1>
-    <div class="role-line">AI/ML RESEARCHER — SPEECH &amp; LANGUAGE</div>
+    <div class="role-line">&gt; <span id="typed"></span><span class="cursor"></span></div>
     <p class="tagline">
       I build <strong>clinically interpretable, linguistically-aware</strong> speech models for low-resource languages and atypical speech. Right now: interpretable PPG-DTW biomarkers for dysarthria, articulatory feature preservation in self-supervised models, and probing what frozen foundation models do and don't encode.
     </p>
     <div class="links-row">
-      <a href="mailto:manya230702@gmail.com">manya230702@gmail.com</a>
-      <a href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">linkedin</a>
-      <a href="https://github.com/manyasiingh" target="_blank" rel="noopener">github</a>
-      <a class="cv-btn" href="Manya_Singh_Resume.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
-        Download CV
+      <a class="chip-link cv-btn" href="Manya_Singh_Resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download CV
       </a>
+      <button class="chip-link copy-email" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>manya230702@gmail.com
+      </button>
+      <a class="chip-link" href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="chip-link" href="https://github.com/manyasiingh" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
 
-    <div class="waveform-block">
-      <svg viewBox="0 0 900 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Annotated speech waveform, styled to reflect articulatory feature analysis">
-        <line x1="0" y1="65" x2="900" y2="65" stroke="#d3d8cb" stroke-width="1"/>
-        <path d="M0,65 L14,60 L28,72 L42,50 L56,80 L70,58 L84,66 L98,40 L112,90 L126,62 L140,68
-                 L154,48 L168,78 L182,55 L196,72 L210,60 L224,88 L238,45 L252,66 L266,70
-                 L280,52 L294,74 L308,62 L322,40 L336,92 L350,58 L364,66 L378,50 L392,80
-                 L406,60 L420,68 L434,44 L448,86 L462,62 L476,70 L490,54 L504,76 L518,60
-                 L532,66 L546,42 L560,88 L574,58 L588,70 L602,64 L616,50 L630,80 L644,60
-                 L658,68 L672,46 L686,84 L700,62 L714,66 L728,52 L742,74 L756,60 L770,68
-                 L784,44 L798,86 L812,62 L826,70 L840,58 L854,66 L868,50 L882,78 L896,64"
-              fill="none" stroke="#48645a" stroke-width="1.3" opacity="0.85"/>
-        <rect x="98" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="100" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">PLACE / MANNER</text>
-        <rect x="322" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="324" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">VOICING</text>
-        <rect x="546" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="548" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">ASPIRATION</text>
-        <rect x="770" y="20" width="112" height="90" fill="none" stroke="#a83c2e" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="772" y="16" font-family="JetBrains Mono, monospace" font-size="9" fill="#a83c2e" letter-spacing="0.5">RETROFLEX/DENTAL</text>
-      </svg>
-      <div class="waveform-caption">fig. — articulatory contrasts probed across SSL representations, Hindi dysarthric speech</div>
+    <!-- Interactive waveform -->
+    <div class="wave-lab">
+      <div class="wave-head">
+        <span>fig. 1 — articulatory contrasts · hover the signal, click a region</span>
+        <div class="seg" role="group" aria-label="Speech type">
+          <button class="on" data-mode="typical">Typical</button>
+          <button data-mode="dysarthric">Dysarthric</button>
+        </div>
+      </div>
+      <div class="wave-stage" id="waveStage">
+        <canvas id="wave"></canvas>
+        <button class="zone" data-z="0" style="left:10%;width:13%"><span>PLACE / MANNER</span></button>
+        <button class="zone" data-z="1" style="left:33%;width:13%"><span>VOICING</span></button>
+        <button class="zone" data-z="2" style="left:56%;width:13%"><span>ASPIRATION</span></button>
+        <button class="zone" data-z="3" style="left:79%;width:13%"><span>RETROFLEX / DENTAL</span></button>
+        <div class="readout" id="readout">t = — ms</div>
+      </div>
+      <div class="wave-info">
+        <div class="k" id="zoneK">Probing SSL models</div>
+        <div class="v" id="zoneV">Layer-wise linear probes on <b>WavLM</b>, <b>XLS-R</b> and <b>IndicWav2Vec</b> ask which articulatory contrasts survive in Hindi dysarthric speech. Toggle the signal type, then click a region.</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-num" data-count="5">0</div><div class="stat-lbl">Papers authored</div></div>
+      <div class="stat"><div class="stat-num" data-count="3">0</div><div class="stat-lbl">Accepted · 2 in review</div></div>
+      <div class="stat"><div class="stat-num" data-count="0.952" data-dec="3">0</div><div class="stat-lbl">AUC · PPG-DTW biomarkers</div></div>
+      <div class="stat"><div class="stat-num"><span data-count="51.6" data-dec="1">0</span><small> pts</small></div><div class="stat-lbl">WER drop · Hindi Whisper</div></div>
     </div>
   </div>
 </header>
 
-<article id="about">
+<!-- ABOUT -->
+<section class="block" id="about">
   <div class="wrap">
-    <div class="section-head"><span class="section-tag">01</span><h2 class="section-title">About</h2></div>
-    <div class="about-text">
-      <p>I'm an MSc IT graduate at Dhirubhai Ambani University (DAU), working as a research intern at the Speech Research Lab, where I study how dysarthric speech can be represented in ways a clinician can actually interpret, from articulatory information in self-supervised models to biomarkers read directly off phoneme-posterior alignment paths. Most of my work sits at the intersection of clinical speech-language pathology and representation learning: building features that a speech-language pathologist could actually use, not just a benchmark number.</p>
-      <p>Alongside this, I probe what general-purpose pretrained models do and don't encode, from steganographic signal in frozen vision encoders to reproducing recent activation-steering work for multilingual LLM reasoning and tracking down the bugs that reproducibility studies tend to surface. Before DAU, I completed my BSc in Data Science at Navrachna University.</p>
+    <div class="section-head reveal"><span class="section-tag">01</span><h2 class="section-title">About</h2></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm an MSc IT graduate at Dhirubhai Ambani University (DAU), working as a research intern at the Speech Research Lab, where I study how <strong>dysarthric speech can be represented in ways a clinician can actually interpret</strong>, from articulatory information in self-supervised models to biomarkers read directly off phoneme-posterior alignment paths.</p>
+        <p>Most of my work sits at the intersection of clinical speech-language pathology and representation learning: building features that a speech-language pathologist could actually use, not just a benchmark number.</p>
+        <p>Alongside this, I probe what general-purpose pretrained models do and don't encode, from steganographic signal in frozen vision encoders to reproducing recent activation-steering work for multilingual LLM reasoning, and tracking down the bugs that reproducibility studies tend to surface. Before DAU, I completed my BSc in Data Science at Navrachna University.</p>
+      </div>
+      <div class="focus-card reveal">
+        <h4>Research questions I keep returning to</h4>
+        <div class="focus-item"><span class="n">Q1</span><span>Which articulatory contrasts survive in SSL representations when speech is atypical?</span></div>
+        <div class="focus-item"><span class="n">Q2</span><span>Can an alignment path itself be a clinically readable biomarker?</span></div>
+        <div class="focus-item"><span class="n">Q3</span><span>What do frozen foundation models encode that they were never trained to?</span></div>
+        <div class="focus-item"><span class="n">Q4</span><span>Do published results hold up when you rerun them carefully?</span></div>
+      </div>
     </div>
-    <div class="stack-list">
-      <span class="stack-item">Python</span>
-      <span class="stack-item">R</span>
-      <span class="stack-item">PyTorch</span>
-      <span class="stack-item">Hugging Face Transformers</span>
-      <span class="stack-item">TensorFlow</span>
-      <span class="stack-item">Scikit-learn / XGBoost</span>
-      <span class="stack-item">NumPy / Pandas</span>
-      <span class="stack-item">LoRA / PEFT</span>
-      <span class="stack-item">Linear Probing</span>
-      <span class="stack-item">DTW / Phonetic Posteriorgrams</span>
-      <span class="stack-item">AWS / Azure</span>
-      <span class="stack-item">MongoDB / MySQL / PostgreSQL</span>
-      <span class="stack-item">Git</span>
+    <div class="stack-groups reveal">
+      <div class="stack-group"><h5>Modelling</h5><div class="stack-list">
+        <span class="stack-item">PyTorch</span><span class="stack-item">HF Transformers</span><span class="stack-item">TensorFlow</span><span class="stack-item">LoRA / PEFT</span><span class="stack-item">Scikit-learn</span><span class="stack-item">XGBoost</span></div></div>
+      <div class="stack-group"><h5>Speech &amp; analysis</h5><div class="stack-list">
+        <span class="stack-item">Linear Probing</span><span class="stack-item">Phonetic Posteriorgrams</span><span class="stack-item">DTW</span><span class="stack-item">NumPy / Pandas</span><span class="stack-item">Python</span><span class="stack-item">R</span></div></div>
+      <div class="stack-group"><h5>Infra &amp; data</h5><div class="stack-list">
+        <span class="stack-item">AWS</span><span class="stack-item">Azure</span><span class="stack-item">MongoDB</span><span class="stack-item">MySQL</span><span class="stack-item">PostgreSQL</span><span class="stack-item">Git</span></div></div>
     </div>
   </div>
-</article>
+</section>
 
-<article id="experience">
+<!-- PROJECTS -->
+<section class="block" id="work">
   <div class="wrap">
-    <div class="section-head"><span class="section-tag">02</span><h2 class="section-title">Experience</h2></div>
+    <div class="section-head reveal"><span class="section-tag">02</span><h2 class="section-title">Research Projects</h2><span class="section-sub">open a card to explore it ↓</span></div>
 
-    <div class="xp">
+    <div class="filters reveal" id="filters">
+      <button class="filter on" data-f="all">All</button>
+      <button class="filter" data-f="speech">Speech</button>
+      <button class="filter" data-f="clinical">Clinical</button>
+      <button class="filter" data-f="llm">LLMs</button>
+      <button class="filter" data-f="vision">Vision</button>
+      <button class="filter" data-f="nlp">NLP</button>
+    </div>
+
+    <div class="projects">
+
+      <!-- PPG-DTW -->
+      <article class="card reveal" data-cat="speech clinical">
+        <div class="card-top">
+          <div>
+            <div class="card-kicker">Dysarthria · UA-Speech</div>
+            <h3>Interpretable Dysarthria Representation from PPG-DTW Paths</h3>
+            <div class="paper">“Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths”</div>
+            <p>Treats the frame-level DTW path over wav2vec2 phonetic posteriorgrams as the representation itself, deriving five interpretable temporal, topological and phonetic biomarkers. The non-duration biomarkers retain signal even after controlling for stretch ratio.</p>
+            <div class="metric-strip">
+              <div class="metric"><b>0.952</b><span>AUC</span></div>
+              <div class="metric"><b>5</b><span>biomarkers</span></div>
+              <div class="metric"><b>r = 0.95</b><span>vs. MFA duration</span></div>
+              <div class="metric"><b>d = 1.25</b><span>vs. 0.74 (MFA)</span></div>
+            </div>
+            <div class="tags"><span>Dysarthria</span><span>PPG</span><span>DTW</span><span>Interpretable ML</span></div>
+          </div>
+          <span class="badge review">Under review · ICASSP 2027</span>
+          <button class="expand" aria-expanded="false"><span class="plus">+</span> Explore the alignment path</button>
+        </div>
+        <div class="card-lab"><div><div class="lab-inner">
+          <div class="lab-cols">
+            <div class="dtw-wrap">
+              <div class="lab-title"><span>DTW path · reference phones × test frames</span><span>illustrative</span></div>
+              <svg id="dtwSvg" viewBox="0 0 420 220" aria-label="Illustrative DTW alignment path"></svg>
+              <div class="slider-row"><span>Typical</span><input type="range" id="sev" min="0" max="100" value="15" aria-label="Severity"><span>Severe</span></div>
+              <div class="dtw-stats">
+                <div><b id="dStretch">—</b><span>stretch ratio</span></div>
+                <div><b id="dDwell">—</b><span>max dwell</span></div>
+                <div><b id="dFrames">—</b><span>frames</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="lab-title"><span>Detection AUC · UA-Speech</span></div>
+              <div class="bars" data-bars>
+                <div class="bar-row"><span class="lbl">wav2vec2 1024-d</span><div class="bar-track"><div class="bar-fill" data-w="0.970"></div></div><span class="val">0.970</span></div>
+                <div class="bar-row"><span class="lbl">PPG-DTW (ours)</span><div class="bar-track"><div class="bar-fill hl" data-w="0.952"></div></div><span class="val">0.952</span></div>
+                <div class="bar-row"><span class="lbl">MFCC-SVM</span><div class="bar-track"><div class="bar-fill" data-w="0.917"></div></div><span class="val">0.917</span></div>
+              </div>
+              <p class="note">Five readable features land within 0.02 AUC of an opaque 1024-dimensional embedding.</p>
+              <div class="lab-title" style="margin-top:22px"><span>Group separation (Cohen's d)</span></div>
+              <div class="bars" data-bars data-max="1.5">
+                <div class="bar-row"><span class="lbl">PPG-DTW</span><div class="bar-track"><div class="bar-fill hl" data-w="1.25"></div></div><span class="val">1.25</span></div>
+                <div class="bar-row"><span class="lbl">Montreal FA</span><div class="bar-track"><div class="bar-fill" data-w="0.74"></div></div><span class="val">0.74</span></div>
+              </div>
+            </div>
+          </div>
+        </div></div></div>
+      </article>
+
+      <!-- Whisper -->
+      <article class="card reveal" data-cat="speech">
+        <div class="card-top">
+          <div>
+            <div class="card-kicker">Hindi ASR · FLEURS</div>
+            <h3>Hindi ASR Fine-Tuning and Articulatory Error Analysis</h3>
+            <div class="paper">Whisper-small · LoRA · FP16 · gradient checkpointing</div>
+            <p>Fine-tuned Whisper-small for Hindi with LoRA and mixed precision, adapting only 7.08M parameters. A character-alignment error analysis then tracks aspiration, voicing, retroflex–dental and vowel-length confusions before and after fine-tuning.</p>
+            <div class="metric-strip">
+              <div class="metric"><b>78.07 → 26.47%</b><span>WER</span></div>
+              <div class="metric"><b>44.33 → 9.52%</b><span>CER</span></div>
+              <div class="metric"><b>2.84%</b><span>params trained</span></div>
+            </div>
+            <div class="tags"><span>Whisper</span><span>LoRA</span><span>Hindi ASR</span></div>
+          </div>
+          <a class="badge" href="https://github.com/manyasiingh/Whisper_Hindi_Articulatory" target="_blank" rel="noopener">GitHub ↗</a>
+          <button class="expand" aria-expanded="false"><span class="plus">+</span> See before / after</button>
+        </div>
+        <div class="card-lab"><div><div class="lab-inner">
+          <div class="lab-cols">
+            <div>
+              <div class="lab-title"><span>Error rate · FLEURS Hindi test</span></div>
+              <div class="ba-chart" data-ba>
+                <div class="ba-group"><div class="ba-bars">
+                  <div class="ba-bar" data-h="78.07"><em>78.07</em></div>
+                  <div class="ba-bar after" data-h="26.47"><em>26.47</em></div>
+                </div><span class="ba-lbl">WER %</span></div>
+                <div class="ba-group"><div class="ba-bars">
+                  <div class="ba-bar" data-h="44.33"><em>44.33</em></div>
+                  <div class="ba-bar after" data-h="9.52"><em>9.52</em></div>
+                </div><span class="ba-lbl">CER %</span></div>
+              </div>
+              <div class="legend"><span><i style="background:var(--muted);opacity:.55"></i>Zero-shot</span><span><i style="background:var(--accent)"></i>LoRA fine-tuned</span></div>
+            </div>
+            <div>
+              <div class="lab-title"><span>Parameter efficiency</span></div>
+              <div class="ring-wrap">
+                <svg class="ring" viewBox="0 0 100 100" aria-label="2.84% of parameters trained">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="var(--line)" stroke-width="10"/>
+                  <circle id="ringArc" cx="50" cy="50" r="40" fill="none" stroke="var(--accent)" stroke-width="10" stroke-dasharray="0 251.3" transform="rotate(-90 50 50)" style="transition:stroke-dasharray 1.2s ease"/>
+                  <text x="50" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="var(--ink)">2.84%</text>
+                </svg>
+                <p style="font-size:13px">7.08M trainable LoRA parameters on top of a frozen Whisper-small backbone.</p>
+              </div>
+              <div class="lab-title" style="margin-top:20px"><span>Confusions analysed · hover</span></div>
+              <div class="confusions">
+                <span class="conf" title="Aspiration: unaspirated vs aspirated stop">क ↔ ख</span>
+                <span class="conf" title="Voicing: voiceless vs voiced stop">क ↔ ग</span>
+                <span class="conf" title="Retroflex vs dental place">ट ↔ त</span>
+                <span class="conf" title="Retroflex vs dental place">ड ↔ द</span>
+                <span class="conf" title="Vowel length: short vs long">ि ↔ ी</span>
+                <span class="conf" title="Vowel length: short vs long">ु ↔ ू</span>
+              </div>
+            </div>
+          </div>
+        </div></div></div>
+      </article>
+
+      <!-- Steering -->
+      <article class="card reveal" data-cat="llm">
+        <div class="card-top">
+          <div>
+            <div class="card-kicker">Reproducibility · MLRC 2026</div>
+            <h3>Activation Steering for Multilingual Reasoning</h3>
+            <div class="paper">“Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study”</div>
+            <p>Reproduced activation steering (Zhao et al., 2025) on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages and 3 benchmarks. Diagnosed and fixed a generation token-budget bug and regenerated missing steering vectors.</p>
+            <div class="metric-strip">
+              <div class="metric"><b>2</b><span>7B models</span></div>
+              <div class="metric"><b>11</b><span>languages</span></div>
+              <div class="metric"><b>3</b><span>benchmarks</span></div>
+            </div>
+            <div class="tags"><span>LLMs</span><span>Reproducibility</span><span>Multilingual</span></div>
+          </div>
+          <span class="badge review">Under review · TMLR</span>
+          <button class="expand" aria-expanded="false"><span class="plus">+</span> What held up?</button>
+        </div>
+        <div class="card-lab"><div><div class="lab-inner">
+          <div class="lab-title"><span>Does steering help? · click a benchmark</span></div>
+          <div class="bench-grid">
+            <button class="bench on" data-b="0"><div class="arrow up">↑</div><div class="bn">XWinograd</div><div class="bd">Improved</div></button>
+            <button class="bench" data-b="1"><div class="arrow up">↑</div><div class="bn">M-MMLU</div><div class="bd">Improved</div></button>
+            <button class="bench" data-b="2"><div class="arrow flat">→</div><div class="bn">MGSM</div><div class="bd">No benefit</div></button>
+          </div>
+          <p class="bench-detail" id="benchDetail"></p>
+          <div class="bug"><b style="font-weight:500;color:var(--ink)">The bug.</b> Reproducing the pipeline surfaced a generation token-budget bug and missing steering vectors. Both were diagnosed, fixed and regenerated before re-running the comparison.</div>
+        </div></div></div>
+      </article>
+
+      <!-- Stego -->
+      <article class="card reveal" data-cat="vision">
+        <div class="card-top">
+          <div>
+            <div class="card-kicker">Vision probing · ICVGIP 2026</div>
+            <h3>Hidden in the Pixels, Lost in the Embedding?</h3>
+            <div class="paper">Cross-architecture probing of steganographic detectability</div>
+            <p>Linear-probed five frozen vision encoders for implicit sensitivity to LSB replacement and LSB matching, with a Gaussian-noise control and SPAM / chi-square baselines. Embedding shift tracks perturbation magnitude, not message structure.</p>
+            <div class="metric-strip">
+              <div class="metric"><b>5</b><span>frozen encoders</span></div>
+              <div class="metric"><b>0.99–1.00</b><span>AUC · CLIP/SigLIP</span></div>
+              <div class="metric"><b>0.62</b><span>AUC · DINOv2</span></div>
+            </div>
+            <div class="tags"><span>CLIP</span><span>SigLIP</span><span>DINOv2</span><span>Linear Probing</span></div>
+          </div>
+          <span class="badge ok">Accepted</span>
+          <button class="expand" aria-expanded="false"><span class="plus">+</span> Compare encoders</button>
+        </div>
+        <div class="card-lab"><div><div class="lab-inner">
+          <div class="lab-cols">
+            <div>
+              <div class="lab-title"><span>Probe AUC · 4-bit full payload</span></div>
+              <div class="bars" data-bars>
+                <div class="bar-row"><span class="lbl">Lang-aligned</span><div class="bar-track"><div class="bar-fill hl" data-w="0.995"></div></div><span class="val">.99–1</span></div>
+                <div class="bar-row"><span class="lbl">DINOv2</span><div class="bar-track"><div class="bar-fill" data-w="0.62"></div></div><span class="val">0.62</span></div>
+                <div class="bar-row"><span class="lbl">Chance</span><div class="bar-track"><div class="bar-fill" data-w="0.5" style="background:var(--muted)"></div></div><span class="val">0.50</span></div>
+              </div>
+              <p class="note">Language-aligned = CLIP ViT-B/32, CLIP ViT-L/14, SigLIP.</p>
+            </div>
+            <div style="font-size:13.5px">
+              <div class="lab-title"><span>Takeaways</span></div>
+              <p style="margin-bottom:10px">Detectability depends on the <b style="font-weight:500;color:var(--ink)">training objective</b>, not just the architecture.</p>
+              <p style="margin-bottom:10px">At realistic <b style="font-weight:500;color:var(--ink)">1-bit payloads</b> every encoder stays near chance.</p>
+              <p>Replicated on CIFAR-10 with leakage-free grouped cross-validation.</p>
+            </div>
+          </div>
+        </div></div></div>
+      </article>
+
+      <!-- News -->
+      <article class="card reveal" data-cat="nlp">
+        <div class="card-top">
+          <div>
+            <div class="card-kicker">Text classification · AG News</div>
+            <h3>News Classification with PyTorch</h3>
+            <p>A custom neural text classifier with embedding layers, ReLU activations and the Adam optimizer, integrated with Hugging Face tokenizers.</p>
+            <div class="metric-strip"><div class="metric"><b>90%</b><span>accuracy</span></div><div class="metric"><b>4</b><span>classes</span></div></div>
+            <div class="tags"><span>PyTorch</span><span>NLP</span></div>
+          </div>
+          <a class="badge" href="https://github.com/manyasiingh/Pytorch_Text_Classification" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="block" id="publications">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="section-tag">03</span><h2 class="section-title">Publications</h2><span class="section-sub">3 accepted · 2 under review</span></div>
+
+    <div class="pub reveal">
+      <div class="pub-year">2026</div>
       <div>
-        <div class="xp-role">Research Intern</div>
-        <div class="xp-org">Speech Research Lab, DAU</div>
-        <div class="xp-dates">APR 2026 – PRESENT · GANDHINAGAR, IN</div>
-      </div>
-      <div class="xp-body">
-        <ul>
-          <li>Researched dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features — place, manner, voicing, aspiration — in Hindi speech.</li>
-          <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) for normal vs. dysarthric speech, reaching 84% accuracy and 0.92 AUC.</li>
-          <li>Developed DTW-based biomarkers over wav2vec2 phonetic posteriorgrams for interpretable dysarthria detection (under review at ICASSP 2027).</li>
-          <li>Authored five research papers (three accepted, two under review) across various conferences.</li>
-        </ul>
+        <div class="pub-title">Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech</div>
+        <div class="pub-authors"><u>Manya Singh</u>, Avantika Agarwal, Hemant A. Patil</div>
+        <div class="pub-venue">IEEE ISCSLP 2026 · Penang, Malaysia</div>
+        <div class="pub-actions">
+          <span class="badge ok">Accepted</span>
+          <span class="extra">+ WiML @ NeurIPS 2026</span>
+          <button class="mini-btn toggle-note">Summary</button>
+          <button class="mini-btn cite" data-cite="M. Singh, A. Agarwal, H. A. Patil, “Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech,” in Proc. IEEE ISCSLP, Penang, Malaysia, 2026.">Copy cite</button>
+        </div>
+        <p class="pub-note">Probed WavLM, XLS-R and IndicWav2Vec for articulatory feature encoding in Hindi dysarthric speech; voicing survives dysarthria best, while Hindi-specific contrasts (retroflex/dental, four-way aspiration) degrade measurably under pathology. Extended work accepted at the Women in Machine Learning (WiML) Workshop at NeurIPS 2026, Sydney. Supported by MeitY, Government of India, under BHASHINI.</p>
       </div>
     </div>
 
-    <div class="xp">
+    <div class="pub reveal">
+      <div class="pub-year">2026</div>
       <div>
+        <div class="pub-title">Prosodic Features for Classification of Normal vs. Dysarthric Speech</div>
+        <div class="pub-authors"><u>Manya Singh</u>, Avantika Agarwal, Hemant A. Patil</div>
+        <div class="pub-venue">SPECOM 2026 · Ohrid, North Macedonia</div>
+        <div class="pub-actions">
+          <span class="badge ok">Accepted</span>
+          <button class="mini-btn toggle-note">Summary</button>
+          <button class="mini-btn cite" data-cite="M. Singh, A. Agarwal, H. A. Patil, “Prosodic Features for Classification of Normal vs. Dysarthric Speech,” in Proc. SPECOM, Ohrid, North Macedonia, 2026.">Copy cite</button>
+        </div>
+        <p class="pub-note">Phoneme-level prosodic analysis (pitch, energy, duration, VSA) with a Random Forest / XGBoost pipeline, reaching 84% accuracy and 0.92 AUC. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission).</p>
+      </div>
+    </div>
+
+    <div class="pub reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability</div>
+        <div class="pub-authors"><u>Manya Singh</u>, Avantika Agarwal, Hemant A. Patil</div>
+        <div class="pub-venue">ICVGIP 2026 · Kolkata, India</div>
+        <div class="pub-actions">
+          <span class="badge ok">Accepted</span>
+          <button class="mini-btn toggle-note">Summary</button>
+          <button class="mini-btn cite" data-cite="M. Singh, A. Agarwal, H. A. Patil, “Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability,” in Proc. ICVGIP, Kolkata, India, 2026.">Copy cite</button>
+        </div>
+        <p class="pub-note">Linear-probed five frozen vision encoders (CLIP ViT-B/32 and ViT-L/14, SigLIP, DINOv2, ResNet-50) for implicit sensitivity to LSB replacement and LSB matching. Detectability varies with training objective (AUC 0.99–1.00 for language-aligned encoders vs. 0.62 for DINOv2 at 4-bit full payload); all encoders stay near chance at realistic 1-bit payloads.</p>
+      </div>
+    </div>
+
+    <div class="pub reveal">
+      <div class="pub-year">2027</div>
+      <div>
+        <div class="pub-title">Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths</div>
+        <div class="pub-authors"><u>Manya Singh</u> et al.</div>
+        <div class="pub-venue">ICASSP 2027</div>
+        <div class="pub-actions"><span class="badge review">Under review</span><a class="mini-btn" href="#work">See project ↑</a></div>
+      </div>
+    </div>
+
+    <div class="pub reveal">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study</div>
+        <div class="pub-authors"><u>Manya Singh</u> et al.</div>
+        <div class="pub-venue">TMLR · MLRC 2026</div>
+        <div class="pub-actions"><span class="badge review">Under review</span><a class="mini-btn" href="#work">See project ↑</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="section-tag">04</span><h2 class="section-title">Experience</h2></div>
+    <div class="timeline">
+      <div class="xp now reveal">
+        <div class="xp-dates">Apr 2026 – Present · Gandhinagar, IN</div>
+        <div class="xp-role">Research Intern</div>
+        <div class="xp-org">Speech Research Lab, DAU</div>
+        <ul>
+          <li>Researched dysarthric speech analysis using SSL models (WavLM, XLS-R, IndicWav2Vec), probing articulatory features (place, manner, voicing, aspiration) in Hindi speech.</li>
+          <li>Built phoneme-level prosodic analysis and classification pipelines (Random Forest, XGBoost) for normal vs. dysarthric speech, reaching 84% accuracy and 0.92 AUC.</li>
+          <li>Developed DTW-based biomarkers over wav2vec2 phonetic posteriorgrams for interpretable dysarthria detection (under review at ICASSP 2027).</li>
+          <li>Authored five research papers (three accepted, two under review).</li>
+        </ul>
+      </div>
+      <div class="xp reveal">
+        <div class="xp-dates">May 2025 – Jul 2025 · Hyderabad, IN</div>
         <div class="xp-role">AI/ML Intern</div>
         <div class="xp-org">Prokraya Tech Pvt. Ltd</div>
-        <div class="xp-dates">MAY 2025 – JUL 2025 · HYDERABAD, IN</div>
-      </div>
-      <div class="xp-body">
         <ul>
           <li>Engineered automated invoice extraction with Azure Document Intelligence (90% accuracy) and designed RESTful APIs for integration.</li>
           <li>Built an AI-powered bid insight system for supplier recommendation using XGBoost (86.4% accuracy).</li>
-          <li>Technologies: Python, React.js, Azure, XGBoost, MSSQL.</li>
+          <li>Python, React.js, Azure, XGBoost, MSSQL.</li>
         </ul>
       </div>
     </div>
   </div>
-</article>
+</section>
 
-<article id="research">
+<!-- EDUCATION -->
+<section class="block" id="education">
   <div class="wrap">
-    <div class="section-head"><span class="section-tag">03</span><h2 class="section-title">Publications</h2></div>
-
-    <div class="pub">
-      <div class="pub-top">
-        <div class="pub-title">Prosodic Features for Classification of Normal vs. Dysarthric Speech</div>
-        <div class="pub-venue mono">SPECOM 2026 · Ohrid, North Macedonia</div>
+    <div class="section-head reveal"><span class="section-tag">05</span><h2 class="section-title">Education</h2></div>
+    <div class="edu-grid">
+      <div class="edu reveal">
+        <div class="edu-meta">Jul 2024 – Jun 2026 · Gandhinagar</div>
+        <div class="edu-school">Dhirubhai Ambani University</div>
+        <div class="edu-degree">MSc, Information Technology</div>
+        <div class="cpi" data-bars data-max="10"><span>CPI</span><div class="bar-track"><div class="bar-fill hl" data-w="7.8"></div></div><span>7.8</span></div>
       </div>
-      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
-      <span class="pub-status accepted">Accepted</span>
-      <p class="pub-note">Phoneme-level prosodic analysis (pitch, energy, duration, VSA) with a Random Forest / XGBoost pipeline, reaching 84% accuracy and 0.92 AUC. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission).</p>
-    </div>
-
-    <div class="pub">
-      <div class="pub-top">
-        <div class="pub-title">Encoding Articulatory Features in SSL Models for Hindi Dysarthric Speech</div>
-        <div class="pub-venue mono">IEEE ISCSLP 2026 · Penang, Malaysia</div>
-      </div>
-      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
-      <span class="pub-status accepted">Accepted</span>
-      <p class="pub-note">Probed WavLM, XLS-R, and IndicWav2Vec for articulatory feature encoding in Hindi dysarthric speech; voicing survives dysarthria best, while Hindi-specific contrasts (retroflex/dental, four-way aspiration) degrade measurably under pathology. Supported by MeitY, Government of India, under BHASHINI (National Language Translation Mission). Extended work accepted at the Women in Machine Learning (WiML) Workshop at NeurIPS 2026, Sydney, Australia.</p>
-    </div>
-
-    <div class="pub">
-      <div class="pub-top">
-        <div class="pub-title">Hidden in the Pixels, Lost in the Embedding? Cross-Architecture Probing of Steganographic Detectability</div>
-        <div class="pub-venue mono">ICVGIP 2026 · Kolkata, India</div>
-      </div>
-      <div class="pub-authors">Manya Singh, Avantika Agarwal, Hemant A. Patil</div>
-      <span class="pub-status accepted">Accepted</span>
-      <p class="pub-note">Linear-probed five frozen vision encoders (CLIP ViT-B/32 and ViT-L/14, SigLIP, DINOv2, ResNet-50) for implicit sensitivity to LSB replacement and LSB matching, with a Gaussian-noise control and SPAM / chi-square classical baselines. Embedding shift tracks perturbation magnitude, not message structure, while detectability varies with training objective (AUC 0.99–1.00 for language-aligned encoders vs. 0.62 for DINOv2 at 4-bit full payload); all encoders stay near chance at realistic 1-bit payloads. Replicated on CIFAR-10 using leakage-free grouped cross-validation.</p>
-    </div>
-  </div>
-</article>
-
-<article id="work">
-  <div class="wrap">
-    <div class="section-head"><span class="section-tag">04</span><h2 class="section-title">Research Projects</h2></div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Hindi ASR Fine-Tuning and Articulatory Error Analysis</h3>
-        <div class="project-paper">Whisper-small, LoRA, PyTorch</div>
-        <p>Fine-tuned Whisper-small for Hindi automatic speech recognition using LoRA and mixed-precision training, reducing WER from 78.07% to 26.47% and CER from 44.33% to 9.52% on the FLEURS Hindi test split — adapting only 7.08M parameters (2.84%) via FP16 mixed precision and gradient checkpointing. Built a character-alignment-based error analysis to investigate Hindi aspiration, voicing, retroflex–dental, and vowel-length confusions before and after fine-tuning.</p>
-        <div class="project-tags"><span>Whisper</span><span>LoRA</span><span>Hindi ASR</span></div>
-      </div>
-      <a class="project-status" href="https://github.com/manyasiingh/Whisper_Hindi_Articulatory" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Interpretable Dysarthria Representation from PPG-DTW Paths</h3>
-        <div class="project-paper">“Beyond Phone Durations: Interpretable Dysarthria Representation from PPG-DTW Paths”</div>
-        <p>A novel approach that treats the frame-level DTW path over wav2vec2 phonetic posteriorgrams as the representation itself, deriving five interpretable temporal, topological, and phonetic biomarkers for dysarthria on the UA-Speech corpus. Achieved AUC 0.952, competitive with a 1024-d wav2vec2 embedding (0.970) and above an MFCC-SVM baseline (0.917), and showed the non-duration biomarkers retain duration-independent signal after controlling for stretch ratio. Against the Montreal Forced Aligner, duration agrees at the speaker level (r = 0.95) with a larger group-separation effect (d = 1.25 vs. 0.74).</p>
-        <div class="project-tags"><span>Dysarthria</span><span>Phonetic Posteriorgrams</span><span>DTW</span><span>Interpretable ML</span></div>
-      </div>
-      <span class="project-status review">Under review · ICASSP 2027</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>Activation Steering for Multilingual Reasoning (Reproducibility Study)</h3>
-        <div class="project-paper">“Language Steering Helps Some Reasoning More Than Others: A Reproducibility Study”</div>
-        <p>Reproduced activation-steering (Zhao et al., 2025) on DeepSeek-R1-Distill-Qwen-7B and Qwen2.5-7B-Instruct across 11 languages and 3 benchmarks (MGSM, XWinograd, M-MMLU). Diagnosed and fixed a generation token-budget bug and regenerated missing steering vectors; steering benefits turned out to be benchmark-dependent, with XWinograd and M-MMLU improving and MGSM not.</p>
-        <div class="project-tags"><span>LLMs</span><span>Reproducibility</span><span>Multilingual</span></div>
-      </div>
-      <span class="project-status review">Under review · TMLR (MLRC 2026)</span>
-    </div>
-
-    <div class="project">
-      <div class="project-main">
-        <h3>News Classification with PyTorch</h3>
-        <p>Built a custom neural text classifier on AG News (90% accuracy) with embedding layers, ReLU activations, and the Adam optimizer, and integrated Hugging Face tokenizers.</p>
-        <div class="project-tags"><span>PyTorch</span><span>NLP</span></div>
-      </div>
-      <a class="project-status" href="https://github.com/manyasiingh/Pytorch_Text_Classification" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-  </div>
-</article>
-
-<article id="education">
-  <div class="wrap">
-    <div class="section-head"><span class="section-tag">05</span><h2 class="section-title">Education</h2></div>
-
-    <div class="edu">
-      <div>
-        <div class="edu-school">Dhirubhai Ambani University (DAU)</div>
-        <div class="edu-degree">MSc, Information Technology · CPI 7.8</div>
-      </div>
-      <div class="edu-meta">Jul 2024 – Jun 2026<br>Gandhinagar, IN</div>
-    </div>
-
-    <div class="edu">
-      <div>
+      <div class="edu reveal">
+        <div class="edu-meta">Jul 2021 – Jun 2024 · Vadodara</div>
         <div class="edu-school">Navrachna University</div>
-        <div class="edu-degree">BSc, Data Science · CPI 8.42</div>
+        <div class="edu-degree">BSc, Data Science</div>
+        <div class="cpi" data-bars data-max="10"><span>CPI</span><div class="bar-track"><div class="bar-fill hl" data-w="8.42"></div></div><span>8.42</span></div>
       </div>
-      <div class="edu-meta">Jul 2021 – Jun 2024<br>Vadodara, IN</div>
     </div>
   </div>
-</article>
+</section>
 
-<article id="contact">
+<!-- CONTACT -->
+<section class="contact" id="contact">
   <div class="wrap">
-    <h2 class="contact-title">Building something at the edge of speech, language, and interpretability? Let's talk<i>.</i></h2>
-    <p class="contact-sub">manya230702@gmail.com</p>
+    <h2 class="contact-title reveal">Building something at the edge of speech, language, and interpretability? Let's talk<i>.</i></h2>
+    <div class="contact-row reveal">
+      <a class="big-btn solid" href="mailto:manya230702@gmail.com">Email me →</a>
+      <button class="big-btn copy-email" type="button">Copy address</button>
+      <a class="big-btn" href="https://linkedin.com/in/manyasiingh" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
   </div>
-</article>
+</section>
 
 <div class="wrap">
   <footer>
-    <span>Manya Singh</span>
-    <span>Updated Oct 2026</span>
+    <span>© Manya Singh</span>
+    <span>Updated Nov 2026</span>
   </footer>
 </div>
 
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+  /* theme */
+  const root = document.documentElement;
+  try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  $('#themeBtn').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+
+  /* toast + copy */
+  const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1800); };
+  const copy = (text, msg) => {
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+      .then(() => toast(msg)).catch(() => toast(text));
+  };
+  $$('.copy-email').forEach(b => b.addEventListener('click', () => copy('manya230702@gmail.com', 'Email copied ✓')));
+  $$('.cite').forEach(b => b.addEventListener('click', () => copy(b.dataset.cite, 'Citation copied ✓')));
+  $$('.toggle-note').forEach(b => b.addEventListener('click', () => {
+    const p = b.closest('.pub'); p.classList.toggle('open');
+    b.textContent = p.classList.contains('open') ? 'Hide' : 'Summary';
+  }));
+
+  /* typed role */
+  const roles = ['AI/ML researcher, speech & language', 'probing SSL models for articulation', 'interpretable dysarthria biomarkers', 'multilingual reasoning in LLMs', 'reproducing what others report'];
+  const typed = $('#typed');
+  if (reduce) typed.textContent = roles[0];
+  else {
+    let ri = 0, ci = 0, del = false;
+    (function tick() {
+      const w = roles[ri];
+      typed.textContent = w.slice(0, ci);
+      if (!del && ci === w.length) { del = true; return setTimeout(tick, 1800); }
+      if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+      ci += del ? -1 : 1;
+      setTimeout(tick, del ? 28 : 55);
+    })();
+  }
+
+  /* nav progress + active section */
+  const links = $$('.nav-links a');
+  const secs = links.map(a => $(a.getAttribute('href')));
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    $('#progress').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    let cur = -1;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('active', i === cur));
+  }, { passive: true });
+
+  /* bars, rings, counters on view */
+  const fillBars = el => {
+    const max = parseFloat(el.dataset.max || 1);
+    $$('.bar-fill', el).forEach(b => b.style.width = (parseFloat(b.dataset.w) / max * 100) + '%');
+  };
+  const fillBA = el => $$('.ba-bar', el).forEach(b => b.style.height = (parseFloat(b.dataset.h) / 80 * 100) + '%');
+  const countUp = el => {
+    const target = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || 0);
+    if (reduce) { el.textContent = target.toFixed(dec); return; }
+    const t0 = performance.now(), dur = 1400;
+    (function f(now) {
+      const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * e).toFixed(dec);
+      if (p < 1) requestAnimationFrame(f);
+    })(t0);
+  };
+  const io = new IntersectionObserver(ents => ents.forEach(en => {
+    if (!en.isIntersecting) return;
+    const t = en.target;
+    if (t.classList.contains('reveal')) t.classList.add('in');
+    if (t.hasAttribute('data-count')) countUp(t);
+    if (t.hasAttribute('data-bars')) fillBars(t);
+    io.unobserve(t);
+  }), { threshold: 0.15 });
+  $$('.reveal, [data-count]').forEach(el => io.observe(el));
+  $$('.edu [data-bars]').forEach(el => io.observe(el));
+
+  /* project expand */
+  $$('.card .expand').forEach(btn => btn.addEventListener('click', () => {
+    const card = btn.closest('.card');
+    const open = card.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    if (open) {
+      $$('[data-bars]', card).forEach(fillBars);
+      $$('[data-ba]', card).forEach(fillBA);
+      const arc = $('#ringArc', card); if (arc) arc.setAttribute('stroke-dasharray', (251.3 * 0.0284).toFixed(1) + ' 251.3');
+      if (card.contains($('#dtwSvg'))) drawDTW();
+    }
+  }));
+
+  /* filters */
+  const cards = $$('.projects .card');
+  $$('.filter').forEach(f => {
+    const k = f.dataset.f;
+    const n = k === 'all' ? cards.length : cards.filter(c => c.dataset.cat.includes(k)).length;
+    f.insertAdjacentHTML('beforeend', `<span class="ct">${n}</span>`);
+    f.addEventListener('click', () => {
+      $$('.filter').forEach(x => x.classList.toggle('on', x === f));
+      cards.forEach(c => c.classList.toggle('hide', !(k === 'all' || c.dataset.cat.includes(k))));
+    });
+  });
+
+  /* steering benchmarks */
+  const benchText = [
+    '<b style="font-weight:500;color:var(--ink)">XWinograd</b> — commonsense coreference. Steering improved results.',
+    '<b style="font-weight:500;color:var(--ink)">M-MMLU</b> — multilingual knowledge QA. Steering improved results here too.',
+    '<b style="font-weight:500;color:var(--ink)">MGSM</b> — multi-step math word problems. Steering did not improve results: the benefit is benchmark-dependent, not universal.'
+  ];
+  const bd = $('#benchDetail'); bd.innerHTML = benchText[0];
+  $$('.bench').forEach(b => b.addEventListener('click', () => {
+    $$('.bench').forEach(x => x.classList.toggle('on', x === b));
+    bd.innerHTML = benchText[b.dataset.b];
+  }));
+
+  /* ---------- DTW illustrative widget ---------- */
+  const phones = ['n', 'ə', 'm', 'ə', 's', 't̪', 'e'];
+  const svg = $('#dtwSvg'), sev = $('#sev');
+  function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+  function drawDTW() {
+    const s = sev.value / 100, r = rng(7);
+    const durs = phones.map(() => 1 + Math.round((0.6 + r() * 1.4) * (1 + s * 4)));
+    // typical reference ~ 2 frames per phone
+    const total = durs.reduce((a, b) => a + b, 0);
+    const W = 420, H = 220, L = 26, T = 8, B = 20;
+    const cw = (W - L - 6) / total, ch = (H - T - B) / phones.length;
+    const ink = css('--ink'), line = css('--line'), acc = css('--accent'), mut = css('--muted'), sage = css('--sage');
+    let out = '';
+    phones.forEach((p, i) => {
+      const y = T + (phones.length - 1 - i) * ch;
+      out += `<line x1="${L}" x2="${W - 6}" y1="${y}" y2="${y}" stroke="${line}"/>`;
+      out += `<text x="${L - 8}" y="${y + ch / 2 + 4}" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" fill="${mut}">${p}</text>`;
+    });
+    out += `<line x1="${L}" x2="${W - 6}" y1="${T + phones.length * ch}" y2="${T + phones.length * ch}" stroke="${line}"/>`;
+    out += `<text x="${(W + L) / 2}" y="${H - 4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="${mut}">TEST FRAMES →</text>`;
+    // diagonal reference
+    out += `<line x1="${L}" y1="${T + phones.length * ch}" x2="${W - 6}" y2="${T}" stroke="${sage}" stroke-dasharray="3 3" opacity=".7"/>`;
+    let x = 0, pts = [];
+    durs.forEach((d, i) => {
+      const y = T + (phones.length - 1 - i) * ch;
+      for (let k = 0; k < d; k++) {
+        const px = L + x * cw;
+        out += `<rect x="${px + 0.5}" y="${y + 1}" width="${Math.max(1, cw - 1)}" height="${ch - 2}" fill="${acc}" opacity="${0.25 + 0.6 * (d > 4 ? 1 : d / 4)}" rx="1"><title>/${phones[i]}/ · frame ${x + 1}</title></rect>`;
+        pts.push(`${px + cw / 2},${y + ch / 2}`);
+        x++;
+      }
+    });
+    out += `<polyline points="${pts.join(' ')}" fill="none" stroke="${ink}" stroke-width="1.2" opacity=".8"/>`;
+    svg.innerHTML = out;
+    $('#dStretch').textContent = (total / (phones.length * 2)).toFixed(2) + '×';
+    $('#dDwell').textContent = Math.max(...durs);
+    $('#dFrames').textContent = total;
+  }
+  sev.addEventListener('input', drawDTW);
+  drawDTW();
+  new MutationObserver(drawDTW).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  /* ---------- hero waveform ---------- */
+  const cv = $('#wave'), ctx = cv.getContext('2d'), stage = $('#waveStage');
+  let mode = 'typical', mx = -1, t = 0, active = -1, blend = 0;
+  const zones = [
+    ['Place / Manner', 'Where and how the vocal tract constricts: bilabial vs. velar, stop vs. fricative. Probed layer-by-layer across <b>WavLM</b>, <b>XLS-R</b> and <b>IndicWav2Vec</b>.'],
+    ['Voicing', 'Vocal-fold vibration during a consonant. Of all features probed, <b>voicing survives dysarthria best</b> in SSL representations.'],
+    ['Aspiration', 'Hindi\'s <b>four-way stop contrast</b> (k / kʰ / g / gʱ), rare across languages. It <b>degrades measurably</b> under pathology.'],
+    ['Retroflex / Dental', 'ट vs. त: a Hindi-specific place contrast made by tongue-tip position. Another contrast that <b>blurs in dysarthric speech</b>.']
+  ];
+  const zoneEls = $$('.zone');
+  zoneEls.forEach((z, i) => z.addEventListener('click', () => {
+    active = active === i ? -1 : i;
+    zoneEls.forEach((x, j) => x.classList.toggle('on', j === active));
+    $('#zoneK').textContent = active < 0 ? 'Probing SSL models' : zones[i][0];
+    $('#zoneV').innerHTML = active < 0 ? 'Click a region to see what each contrast tells us.' : zones[i][1] + (mode === 'dysarthric' ? ' <span style="color:var(--accent)">· viewing dysarthric signal</span>' : '');
+  }));
+  $$('.seg button').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('.seg button').forEach(x => x.classList.toggle('on', x === b));
+    if (active >= 0) zoneEls[active].click(), zoneEls[active].click();
+  }));
+  stage.addEventListener('mousemove', e => { const r = stage.getBoundingClientRect(); mx = (e.clientX - r.left) / r.width; });
+  stage.addEventListener('mouseleave', () => { mx = -1; $('#readout').textContent = 't = — ms'; });
+
+  function resize() { const r = stage.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+  addEventListener('resize', resize); resize();
+  const noise = Array.from({ length: 2048 }, (_, i) => Math.sin(i * 12.9898) * 43758.5453 % 1);
+
+  function frame() {
+    const w = stage.clientWidth, h = stage.clientHeight, mid = h / 2 + 6;
+    blend += ((mode === 'dysarthric' ? 1 : 0) - blend) * 0.06;
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = css('--line'); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(w, mid); ctx.stroke();
+    ctx.strokeStyle = css('--sage'); ctx.lineWidth = 1.2; ctx.globalAlpha = .9;
+    ctx.beginPath();
+    for (let x = 0; x <= w; x += 1.5) {
+      const u = x / w;
+      // syllabic envelope: typical crisp, dysarthric slower + smeared + irregular
+      const rate = 9 - blend * 4.5;
+      let env = Math.pow(Math.max(0, Math.sin(u * Math.PI * rate + t * 0.6)), 1.6 - blend * 1.1);
+      env = env * (0.55 + 0.45 * Math.sin(u * 5 + t * .3)) * (1 - blend * 0.3) + 0.04;
+      const jitter = 1 + blend * 0.35 * noise[(x | 0) % 2048];
+      const carrier = Math.sin(x * 0.55 * jitter + t * 6) * 0.6 + Math.sin(x * 1.3 + t * 9) * 0.3 + noise[((x * 3) | 0 + (t * 50 | 0)) % 2048] * (0.25 + blend * 0.35);
+      let y = mid + carrier * env * (h * 0.38);
+      if (mx >= 0) { const d = Math.abs(u - mx); if (d < .05) y = mid + (y - mid) * (1 + (0.05 - d) * 10); }
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+    if (mx >= 0) {
+      ctx.strokeStyle = css('--accent'); ctx.setLineDash([2, 3]);
+      ctx.beginPath(); ctx.moveTo(mx * w, 0); ctx.lineTo(mx * w, h); ctx.stroke(); ctx.setLineDash([]);
+      $('#readout').textContent = `t = ${(mx * 1200).toFixed(0)} ms · frame ${(mx * 60 | 0)}`;
+    }
+    if (!reduce) t += 0.016;
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
 </body>
 </html>
